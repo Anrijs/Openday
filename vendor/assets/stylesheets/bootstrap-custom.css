@@ -1,0 +1,9 @@
+.form-openday {
+  max-width: 800px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+fieldset {
+  margin-bottom: 12px;
+}
