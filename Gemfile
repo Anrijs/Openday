@@ -11,6 +11,9 @@ gem 'mysql2'
 gem 'haml'
 gem 'simple_form'
 gem 'devise'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'validates_timeliness', '~> 3.0'
 
 group :development do
   gem "capistrano"

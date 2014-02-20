@@ -1,0 +1,28 @@
+%html
+  %head
+    %title= @site_title || 'OpenDay'
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+
+  %body
+    .navbar.navbar-default.navbar-static-top{role: "navigation"}
+      .container
+        .navbar-header
+          %button{type: "button", class: "navbar-toggle", 'data-toggle' => "collapse", 'data-target' => ".navbar-collapse"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to CONFIG['od_site_title'], root_path, class: "navbar-brand"
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            %li.active= link_to t('nav_opendays'), root_path
+            %li= link_to t('nav_reports'), root_path
+            %li= link_to t('nav_faculties'), faculties_path
+            %li.dropdown
+    .container
+      %noscript
+        .alert.alert-warning
+          %strong= t('warning')
+          = t('javascript_warning')
+      = yield

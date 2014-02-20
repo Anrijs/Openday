@@ -1,0 +1,31 @@
+.col-sm-8.col-sm-offset-2
+  = simple_form_for @openday, html:{class: 'form-openday'} do |f|
+    %h1.page-header= t('openday_edit')
+    .form-group.openday-form
+      %fieldset
+        = f.label :name, t('name') 
+        = f.text_field :name, class: 'form-control'
+
+        = f.input :registration_open, :as => :string, :input_html => {:class => 'datetimepicker form-control col-sm-6'}
+
+        = f.input :registration_end, :as => :string, :input_html => {:class => 'datetimepicker form-control col-sm-6'}
+
+        = f.input :date, :as => :string, :input_html => {:class => 'datepicker form-control col-sm-6'}  
+
+      = f.submit t('btn_save'), disable_with: t('btn_saving'), class: 'btn btn-primary pull-right'
+      
+  :javascript
+    $('.datepicker').datepicker({
+      dateFormat: "yy-mm-dd",
+      todayHighlight: true,
+      todayBtn: 'linked',
+      autoclose: true
+    }); ;
+
+    $('.datetimepicker').datetimepicker({
+      dateFormat: "yy-mm-dd",
+      timeFormat: "HH:mm",
+      todayHighlight: true,
+      todayBtn: 'linked',
+      autoclose: true
+    }); ;

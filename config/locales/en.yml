@@ -1,23 +1,38 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
+#     I18n.t 'hello'#
 #     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
 #     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  # openday new, edit
+  openday_name: "Name"
+  openday_date: "Openday Date"
+  openday_registration_open: "Registration starts at"
+  openday_registration_end: "Registration ends at"
+  # openday index
+  openday_list: "Openday List"
+  openday_panel: "Openday Panel"
+  openday_add: "Add new Openday"
+  openday_edit: "Edit Openday"
+  # buttons
+  btn_submit: "Submit"
+  btn_submiting: "Submiting"
+  btn_delete: "Delete"
+  btn_deleteing: "Deleteing"
+  btn_save: "Save"
+  btn_saving: "Saving"
+  # faculties add, edit
+  add_faculty: "Add Faculty"
+  # navbar
+  nav_opendays: "Opendays"
+  nav_reports: "Reports"
+  nav_faculties: "Faculties"
+  #validation messages
+  validation_registration_end_early: "Registration can't end before it starts"
+  validation_date_too_early: "Date can't be before registration opening"
+  validation_date_format: "Date format must be yyyy-mm-dd"
+  validation_datetime_format: "DateTime format must be yyyy-mm-dd HH:mm"
+  validation_name_presence: "Name is required"
+  validation_name_uniqueness: "Name must be unique"
+  # warnings
+  warning: "Warning!"
+  javascript_warning: "This site requires JavaScript, to operate properly"
