@@ -1,0 +1,20 @@
+%li.list-group-item
+  .list-group-head
+    .list-group-child
+      %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-down{onclick: 'toggleChildren(this)'}
+      %span
+        =openday.name
+        %small.gray
+      = link_to '' ,edit_openday_path(openday), remote: true, class: 'clickable glyphicon glyphicon-pencil pull-right', onclick: "$('#myModal').modal('toggle');"
+
+    /.list-group-child.list-expandable
+    /  - openday.faculties.each do |faculty|
+    /    .list-group-head.sub
+    /    %span.spacer
+    /    %span.clickable.glyphicon.glyphicon-left.glyphicon-th-large
+    /    %span= faculty.name
+    /    = link_to '' ,edit_faculty_programme_path(faculty, faculty), remote: true, class: 'clickable glyphicon glyphicon-pencil pull-right', onclick: "$('#myModal').modal('toggle');"
+    /  .list-group-head.sub
+    /    %span.spacer
+    /    = link_to '' ,new_faculty_programme_path(faculty), faculty_id: faculty,remote: true, class: 'clickable glyphicon glyphicon-left glyphicon-plus', onclick: "$('#myModal').modal('toggle');"
+    /    %span= t('programme_add')

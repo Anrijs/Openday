@@ -43,11 +43,11 @@ class OpendaysController < ApplicationController
 
   end
 
-  def delete
+  def destroy
     @openday = Openday.find_by_slug(params[:id])
     @openday = Openday.find(params[:id]) if @openday.nil?
 
-    if @openday.delete
+    if @openday.destroy
       flash[:success] = t('delete_openday_success')
       redirect_to opendays_path
     else

@@ -1,33 +1,22 @@
 %h1= t('openday_panel')
 
-.panel.panel-default
-  .panel-heading= t('openday_list')
-  %table.table.table-striped
-    %tr
-      %th.table_id #
-      %th= t('openday_name')
-      %th= t('openday_date')
-      %th
-    - @opendays.each do |openday|
-      %tr.openday_item{onclick: 'toggleChildren(this)'}
-        %td= openday.id
-        %td  
-          %a{ :href => "/charts/#{openday.slug}" } 
-            =openday.name
-        %td= openday.date
-        %td
-          =link_to 'Edit', edit_openday_path(openday.slug)
-      %tr.openday_item_child{style: 'display: none;'}
-        %td{colspan:'4'}
-          .col-xs-12.openday_item_faculty Foo
-          .col-xs-12.openday_item_faculty Bar
-          .col-xs-12.openday_item_faculty ONE
+%ul.list-group#faculty_list
+  - @opendays.each do |openday|
+    = render partial: 'list', :locals => {:openday => openday }
+
+= link_to t('openday_add'), new_openday_path, remote: true, class: 'btn btn-success pull-right', onclick: "$('#myModal').modal('toggle');"
+#res
 
 
-= link_to t('openday_add'), new_openday_path, class: 'btn btn-success pull-right'
 
+.modal.fade#myModal{tabindex: "-1", role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
 
 :javascript
   function toggleChildren(element) {
-    $(element).next().toggle();
+    $(element).parent().next().toggle();
+    $(element).toggleClass('glyphicon-chevron-down');
+    $(element).toggleClass('glyphicon-chevron-up');
   };
+
+  $(function(){$('.list-expandable').addClass('jsEnabled');});
+

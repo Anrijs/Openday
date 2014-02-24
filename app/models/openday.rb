@@ -1,6 +1,6 @@
 class Openday < ActiveRecord::Base
 
-  has_many :timeslots
+  has_many :timeslots, :dependent => :delete_all
   has_many :faculties
   has_many :programmes
   
