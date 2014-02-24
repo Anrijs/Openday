@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140224075310) do
+ActiveRecord::Schema.define(version: 20140224153003) do
 
   create_table "admins", force: true do |t|
     t.string   "username",               default: "", null: false
@@ -40,6 +40,30 @@ ActiveRecord::Schema.define(version: 20140224075310) do
     t.string   "slug"
     t.text     "description"
     t.string   "url"
+  end
+
+  create_table "openday_faculties", force: true do |t|
+    t.integer  "faculty_id"
+    t.integer  "openday_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "openday_programmes", force: true do |t|
+    t.integer  "faculty_id"
+    t.integer  "openday_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "openday_timeslots", force: true do |t|
+    t.integer  "programme_id"
+    t.integer  "openday_id"
+    t.time     "time_from"
+    t.time     "time_till"
+    t.integer  "capacity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "opendays", force: true do |t|
@@ -82,16 +106,6 @@ ActiveRecord::Schema.define(version: 20140224075310) do
   create_table "registrations", force: true do |t|
     t.integer  "registrant_id"
     t.integer  "timeslot_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "timeslots", force: true do |t|
-    t.integer  "programme_id"
-    t.integer  "openday_id"
-    t.time     "time_from"
-    t.time     "time_till"
-    t.integer  "capacity"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
