@@ -3,6 +3,8 @@
 #     I18n.locale = :es
 
 en:
+  optional: "Optional"
+  confirm_delete: "Are you sure?"
   # openday
   openday_name: "Name"
   openday_date: "Openday Date"
@@ -22,6 +24,8 @@ en:
   faculty_short: "Short name"
   faculty_panel: "Faculty panel"
   faculty_list: "Faculty list"
+  faculty_description: "Description"
+  faculty_url: "Faculty website"
   faculty_add: "Add new faculty"
   ## Flash
   create_faculty_success: "Faculty created"
@@ -29,10 +33,10 @@ en:
   edit_faculty_success: "Faculty updated"
   edit_faculty_failure: "Could not update faculty"
   # programme
-  programme_name: "Programme name"
-  programme_short: "Short name"
-  programme_list: "Faculty list"
-  programme_add: "Add new faculty"
+  programme_name: "Name"
+  programme_description: "Description"
+  programme_url: "Programme website"
+  programme_add: "Add new programme"
   ## Flash
   create_programme_success: "Faculty created"
   create_programme_error: "Could not create new faculty"

@@ -38,6 +38,11 @@ th.table_id {
 	padding: 0;	
 }
 
+.list-group-head .description {
+	font-size: 16px;
+	padding: 0;	
+}
+
 .list-group-head .glyphicon {
 	color: #555;
 	font-size: 0.8em;
