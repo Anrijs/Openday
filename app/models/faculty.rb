@@ -1,5 +1,5 @@
 class Faculty < ActiveRecord::Base
-  has_many :programmes
+  has_many :programmes, dependent: :destroy
 
   validates_presence_of :name, message: I18n.t('validation_name_presence')
   validates_uniqueness_of :name, message: I18n.t('validation_name_uniqueness')

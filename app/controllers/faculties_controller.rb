@@ -5,10 +5,6 @@ class FacultiesController < ApplicationController
 
   def new
   	@faculty = Faculty.new
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def create
@@ -44,8 +40,7 @@ class FacultiesController < ApplicationController
   def destroy
   	@faculty = Faculty.find_by_slug(params[:id])
     @faculty = Faculty.find(params[:id]) if @faculty.nil?
-
-    @faculty.delete
+    @faculty.destroy
     redirect_to faculties_path
   end
 
