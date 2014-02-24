@@ -15,7 +15,7 @@ class ProgrammesController < ApplicationController
     end
   end
 
-  def edit
+  def edit   
     @programme = Programme.find_by_slug(params[:id])
     @programme = Programme.find(params[:id]) if @programme.nil?
   end
@@ -32,6 +32,14 @@ class ProgrammesController < ApplicationController
       flash[:error] = t('edit_programme_error')
       render 'edit'
     end
+  end
+
+  def destroy
+    @programme = Programme.find_by_slug(params[:id])
+    @programme = Programme.find(params[:id]) if @programme.nil?
+
+    @programme.destroy
+    redirect_to faculties_path
   end
 
 private

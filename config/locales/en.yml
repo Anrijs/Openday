@@ -5,6 +5,7 @@
 en:
   optional: "Optional"
   confirm_delete: "Are you sure?"
+  delete: "Delete"
   # openday
   openday_name: "Name"
   openday_date: "Openday Date"
@@ -14,6 +15,7 @@ en:
   openday_panel: "Openday Panel"
   openday_add: "Add new Openday"
   openday_edit: "Edit Openday"
+  delete_openday_success: "Openday deleted successfully"
   ## Flash
   create_openday_success: "Openday created"
   create_openday_error: "Could not create new openday"

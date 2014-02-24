@@ -1,11 +1,9 @@
 .modal-dialog
   .modal-content
     .modal-header
-      %h4
-        = t('programme_edit')
-        = link_to t('delete'), programme_path(@programme), method: 'delete', :confirm => t('confirm_delete'), class: "btn btn-danger btn-sm pull-right"
+      %h4= t('programme_edit')
     .modal-body
-      = simple_form_for @programme, html:{class: 'form-openday'} do |f|
+      = simple_form_for([@programme.faculty, @programme], html:{class: 'form-openday'}) do |f|
         .form-group.openday-form
           %fieldset
             = f.label :name, t('faculty_name') 
@@ -18,4 +16,5 @@
             = f.input :url, :as => :string, :label => false, :input_html => {:placeholder => t('optional'), :autocomplete => :off,:class => 'form-control col-sm-6'}
 
         = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right'
-    .modal-footer
+        
+      = button_to(t('delete'), [@programme.faculty, @programme], confirm: t('confirm_delete'), method: 'delete', class: "btn btn-danger")

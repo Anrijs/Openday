@@ -118,3 +118,7 @@ th.table_id {
 .list-expandable.jsEnabled {
 	display: none;
 }
+
+.modal-body {
+	padding-bottom: 48px;
+}

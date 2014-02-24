@@ -17,10 +17,21 @@
           = link_to CONFIG['od_site_title'], root_path, class: "navbar-brand"
         .navbar-collapse.collapse
           %ul.nav.navbar-nav
-            %li.active= link_to t('nav_opendays'), root_path
-            %li= link_to t('nav_reports'), root_path
-            %li= link_to t('nav_faculties'), faculties_path
-            %li.dropdown
+            - if params[:controller] == 'opendays'
+              %li.active=link_to t('nav_opendays'), opendays_path
+            - else
+              %li=link_to t('nav_opendays'), opendays_path
+
+            - if params[:controller] == 'a'
+              %li.active=link_to t('nav_reports'), root_path
+            - else
+              %li=link_to t('nav_reports'), root_path
+
+            - if params[:controller] == 'faculties'
+              %li.active=link_to t('nav_faculties'), faculties_path
+            - else
+              %li=link_to t('nav_faculties'), faculties_path
+
     .container
       %noscript
         .alert.alert-warning
