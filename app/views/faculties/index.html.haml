@@ -1,0 +1,22 @@
+%h1= t('faculty_panel')
+
+%ul.list-group#faculty_list
+  - @faculties.each do |faculty|
+    = render partial: 'list', :locals => {:faculty => faculty }
+
+= link_to t('faculty_add'), new_faculty_path, remote: true, class: 'btn btn-success pull-right', onclick: "$('#myModal').modal('toggle');"
+#res
+
+
+
+.modal.fade#myModal{tabindex: "-1", role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
+
+:javascript
+  function toggleChildren(element) {
+    $(element).parent().next().toggle();
+    $(element).toggleClass('glyphicon-chevron-down');
+    $(element).toggleClass('glyphicon-chevron-up');
+  };
+
+  $(function(){$('.list-expandable').addClass('jsEnabled');});
+

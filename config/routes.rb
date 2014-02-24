@@ -1,7 +1,10 @@
 Od::Application.routes.draw do
   devise_for :admins
   resources :opendays
-  resources :faculties
+  resources :faculties do
+    resources :programmes
+  end
+
   
   root 'opendays#index'
 

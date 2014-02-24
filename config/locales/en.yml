@@ -3,16 +3,41 @@
 #     I18n.locale = :es
 
 en:
-  # openday new, edit
+  # openday
   openday_name: "Name"
   openday_date: "Openday Date"
   openday_registration_open: "Registration starts at"
   openday_registration_end: "Registration ends at"
-  # openday index
   openday_list: "Openday List"
   openday_panel: "Openday Panel"
   openday_add: "Add new Openday"
   openday_edit: "Edit Openday"
+  ## Flash
+  create_openday_success: "Openday created"
+  create_openday_error: "Could not create new openday"
+  edit_openday_success: "Openday updated"
+  edit_openday_error: "Could not update openday"
+  # faculty
+  faculty_name: "Full name"
+  faculty_short: "Short name"
+  faculty_panel: "Faculty panel"
+  faculty_list: "Faculty list"
+  faculty_add: "Add new faculty"
+  ## Flash
+  create_faculty_success: "Faculty created"
+  create_faculty_error: "Could not create new faculty"
+  edit_faculty_success: "Faculty updated"
+  edit_faculty_failure: "Could not update faculty"
+  # programme
+  programme_name: "Programme name"
+  programme_short: "Short name"
+  programme_list: "Faculty list"
+  programme_add: "Add new faculty"
+  ## Flash
+  create_programme_success: "Faculty created"
+  create_programme_error: "Could not create new faculty"
+  edit_programme_success: "Faculty updated"
+  edit_programme_failure: "Could not update faculty"
   # buttons
   btn_submit: "Submit"
   btn_submiting: "Submiting"
@@ -33,6 +58,9 @@ en:
   validation_datetime_format: "DateTime format must be yyyy-mm-dd HH:mm"
   validation_name_presence: "Name is required"
   validation_name_uniqueness: "Name must be unique"
+  validation_short_name_presence: "Short name is required"
+  validation_short_name_uniqueness: "Short name must be unique"
+
   # warnings
   warning: "Warning!"
   javascript_warning: "This site requires JavaScript, to operate properly"

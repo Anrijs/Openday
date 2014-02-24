@@ -1,0 +1,54 @@
+%li.list-group-item
+  .list-group-head
+    .list-group-child
+      %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-down{onclick: 'toggleChildren(this)'}
+      %span
+        =faculty.name
+        %small.gray= "(#{faculty.short_name})"
+      = link_to '' ,edit_faculty_path(faculty), remote: true, class: 'clickable glyphicon glyphicon-pencil pull-right', onclick: "$('#myModal').modal('toggle');"
+
+    .list-group-child.list-expandable
+      - faculty.programmes.each do |programme|
+        .list-group-head.sub
+        %span.spacer
+        %span.clickable.glyphicon.glyphicon-left.glyphicon-th-large
+        %span= programme.name
+        = link_to '' ,edit_faculty_programme_path(faculty, programme), remote: true, class: 'clickable glyphicon glyphicon-pencil pull-right', onclick: "$('#myModal').modal('toggle');"
+      .list-group-head.sub
+        %span.spacer
+        = link_to '' ,new_faculty_programme_path(faculty), faculty_id: faculty,remote: true, class: 'clickable glyphicon glyphicon-left glyphicon-plus', onclick: "$('#myModal').modal('toggle');"
+        %span= t('programme_add')
+    /  .list-group-head.sub
+    /    %span.spacer
+    /    %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-right{onclick: '/toggleChildren(this)'}
+    /    %span Child A
+    /  .list-group-child.list-expandable
+    /    .list-group-head.sub
+    /      %span.spacer
+    /      %span.spacer
+    /      %span SUB 1
+    /    .list-group-head.sub
+    /      %span.spacer
+    /      %span.spacer
+    /      %span SUB 2
+    /    .list-group-head.sub
+    /      %span.spacer
+    /      %span.spacer
+    /      %span SUB 3
+    /  .list-group-head.sub
+    /    %span.spacer
+    /    %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-right{onclick: '/toggleChildren(this)'}
+    /    %span Child B
+    /  .list-group-child.list-expandable
+    /    .list-group-head.sub
+    /      %span.spacer
+    /      %span.spacer
+    /      %span SUB 1
+    /    .list-group-head.sub
+    /      %span.spacer
+    /      %span.spacer
+    /      %span SUB 2
+    /    .list-group-head.sub
+    /      %span.spacer
+    /      %span.spacer
+    /      %span SUB 3

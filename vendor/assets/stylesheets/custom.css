@@ -10,10 +10,6 @@
 	padding-left: 60px;
 }
 
-.openday_item {
-	cursor: hand;
-}
-
 th.table_id {
 	width: 54px;
 }
@@ -35,4 +31,85 @@ th.table_id {
 
 .icon_32 {
 	font-size: 32px;
+}
+
+.list-group-head {
+	font-size: 24px;
+	padding: 0;	
+}
+
+.list-group-head .glyphicon {
+	color: #555;
+	font-size: 0.8em;
+	padding: 9px;
+	width: 38px;
+	text-align: center;
+	top: 0;
+}
+
+.clickable {
+	cursor: hand;
+}
+
+.list-group-head .glyphicon-left.glyphicon {
+	border-right: solid 1px #ccc;
+}
+
+.list-group-head.sub {
+	border-top: 1px solid #ccc;
+}
+
+.list-group-head .glyphicon-chevron-down:hover {
+	color: #FF8800;
+	font-size: 0.8em;
+}
+
+.list-group-head .glyphicon-chevron-up {
+	color: #aaaaaa;
+	font-size: 0.8em;
+}
+
+.list-group-head .glyphicon-chevron-up:hover {
+	color: #FF8800;
+	font-size: 0.8em;
+}
+
+.list-group-head .glyphicon-th-large {
+	color: #999;
+}
+
+.gray {
+	color: #777;
+}
+
+.list-group-head .glyphicon-th-large:hover {
+	color: #ffbb33;
+}
+
+.list-group-head .glyphicon-pencil:hover {
+	color: #cc0000;
+}
+
+.list-group-head .glyphicon-plus {
+	color: #aaa;
+}
+
+.list-group-head .glyphicon-plus:hover {
+	color: #99cc00;
+}
+
+.list-group-child {
+	margin: 0;
+	padding: 0;
+}
+
+.spacer {
+	margin-left: 37px;
+	margin-right: 7px;
+	padding: 5px 0;
+	border-right: solid 1px #ccc;
+}
+
+.list-expandable.jsEnabled {
+	display: none;
 }

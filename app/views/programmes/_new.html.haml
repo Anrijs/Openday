@@ -1,0 +1,15 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %h4 Programme add
+    .modal-body
+
+      = simple_form_for([@faculty, @programme], html:{class: 'form-openday'}) do |f|
+        .form-group.openday-form
+          %fieldset
+            = f.label :name, t('faculty_name') 
+            = f.input :name, :as => :string, :label => false, :input_html => {:autocomplete => :off,:class => 'form-control col-sm-6'}
+            = f.hidden_field :faculty_id, :value => params[:faculty_id]
+
+        = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right'
+    .modal-footer
