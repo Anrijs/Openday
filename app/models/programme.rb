@@ -1,5 +1,6 @@
 class Programme < ActiveRecord::Base
 	belongs_to :faculty
+	has_many :openday_programmes
 
 	before_validation :create_slug
 

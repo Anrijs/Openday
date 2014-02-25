@@ -3,6 +3,7 @@ class Openday < ActiveRecord::Base
   has_many :timeslots, :dependent => :delete_all
   has_many :faculties
   has_many :programmes
+  has_many :openday_faculties
   
   validates_datetime :registration_open
   validates_datetime :registration_end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140224153003) do
+ActiveRecord::Schema.define(version: 20140225075219) do
 
   create_table "admins", force: true do |t|
     t.string   "username",               default: "", null: false
@@ -43,27 +43,20 @@ ActiveRecord::Schema.define(version: 20140224153003) do
   end
 
   create_table "openday_faculties", force: true do |t|
-    t.integer  "faculty_id"
-    t.integer  "openday_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "openday_id"
+    t.integer "faculty_id"
   end
 
   create_table "openday_programmes", force: true do |t|
-    t.integer  "faculty_id"
-    t.integer  "openday_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "openday_faculty_id"
+    t.integer "programme_id"
   end
 
   create_table "openday_timeslots", force: true do |t|
-    t.integer  "programme_id"
-    t.integer  "openday_id"
-    t.time     "time_from"
-    t.time     "time_till"
-    t.integer  "capacity"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "openday_programme_id"
+    t.time    "time_from"
+    t.time    "time_till"
+    t.integer "capacity"
   end
 
   create_table "opendays", force: true do |t|
