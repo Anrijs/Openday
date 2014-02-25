@@ -14,9 +14,6 @@ class OpendaysController < ApplicationController
     @openday = Openday.new openday_params
     if @openday.save
       flash[:success] = t('add_openday_success')
-      unless ajax?
-        redirect_to opendays_path
-      end
     else
       flash[:error] = t('add_openday_failure')
       render 'new'
