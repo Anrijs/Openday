@@ -1,6 +1,11 @@
 Od::Application.routes.draw do
   devise_for :admins
-  resources :opendays
+  resources :opendays do
+    resources :openday_faculties
+    resources :openday_programmes
+    resources :openday_timeslots
+  end
+
   resources :faculties do
     resources :programmes
   end
