@@ -1,12 +1,15 @@
-%h2 Sign in
+.panel.panel-default.col-sm-6.col-sm-offset-3
+  %h4= t('sign_in')
+  = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+    .form-group.openday-form
+      %fieldset
+        = f.label :username, t('username') 
+        = f.input :username, :label => false, :input_html => {:class => 'form-control col-sm-6'}
+        = f.label :password, t('password')
+        = f.input :password, :label => false, :input_html => {:class => ' form-control col-sm-6'}
 
-= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  .form-inputs
-    = f.input :username, :required => false, :autofocus => true
-    = f.input :password, :required => false
-    = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
-  
-  .form-actions
-    = f.button :submit, "Sign in"
+        = f.input :remember_me, :as => :boolean
+
+        = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right'
 
 = render "devise/shared/links"
