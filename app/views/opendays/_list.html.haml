@@ -23,21 +23,21 @@
               %span.spacer
               %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-right{onclick: 'toggleChildren(  this)'}
               %span= od_programme.programme.name
-            .list-group-child.list-expandable
-              .list-group-head.sub
-                %span.spacer
-                %span.spacer
-                %span.spacer
-                %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-right{onclick: 'toggleChildren(  this)'}
-                %span= t('openday_timeslots')
-              .list-group-child.list-expandable
+            - od_programme.openday_timeslots.each do |od_timeslots|
+              .list-group-child
                 .list-group-head.sub
                   %span.spacer
                   %span.spacer
                   %span.spacer
-                  %span.spacer
-                  %span.clickable.glyphicon-left.glyphicon.glyphicon-plus
-                  %span= t('openday_add_timeslots')
+                  %span.clickable.glyphicon-left.glyphicon.glyphicon-time
+                  %span= "#{od_timeslots.time_from.strftime('%H:%M') } - #{od_timeslots.time_till.strftime('%H:%M')}"
+            .list-group-child
+              .list-group-head.sub
+                %span.spacer
+                %span.spacer
+                %span.spacer
+                %span.clickable.glyphicon-left.glyphicon.glyphicon-plus
+                %span= t('openday_add_timeslots')
           .list-group-head.sub
             %span.spacer
             %span.spacer

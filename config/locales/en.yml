@@ -34,6 +34,10 @@ en:
   faculty_description: "Description"
   faculty_url: "Faculty website"
   faculty_add: "Add new faculty"
+  faculty_programmes:
+    count:
+      one: 'programme'
+      other: 'programmes'
   ## Flash
   create_faculty_success: "Faculty created"
   create_faculty_error: "Could not create new faculty"
@@ -71,7 +75,6 @@ en:
   validation_name_uniqueness: "Name must be unique"
   validation_short_name_presence: "Short name is required"
   validation_short_name_uniqueness: "Short name must be unique"
-
   # warnings
   warning: "Warning!"
   javascript_warning: "This site requires JavaScript, to operate properly"
