@@ -1,37 +1,37 @@
-.col-sm-8.col-sm-offset-2
-  = simple_form_for @openday, html:{class: 'form-openday'} do |f|
-    %h1.page-header= t('openday_new')
-    .form-group.openday-form
-      %fieldset
+.modal-dialog
+  .modal-content
+    .modal-header
+      %h4= t('openday_new')
+    .modal-body
+      = simple_form_for @openday, html:{class: 'form-openday'} do |f|
+        .form-group.openday-form
+          %fieldset
+            = f.label :name, t('openday_name') 
+            = f.input :name, :as => :string, :label => false, :input_html => {:autocomplete => :off,:class => 'form-control col-sm-6'}
 
-        = f.label :name, t('openday_name') 
-        = f.input :name, :as => :string, :label => false, :input_html => {:autocomplete => :off,:class => 'form-control col-sm-6'}
+            = f.label :registration_open, t('openday_registration_open')
+            = f.input :registration_open, :as => :string, :label => false, :input_html => {:placeholder => "yyyy-mm-dd HH:mm", :autocomplete => :off,:class => 'datetimepicker form-control col-sm-6'}
 
-        = f.label :registration_open, t('openday_registration_open')
-        = f.input :registration_open, :as => :string, :label => false, :input_html => {:placeholder => "yyyy-mm-dd HH:mm", :autocomplete => :off,:class => 'datetimepicker form-control col-sm-6'}
+            = f.label :registration_end, t('openday_registration_end')
+            = f.input :registration_end, :as => :string, :label => false, :input_html => {:placeholder => "yyyy-mm-dd HH:mm", :autocomplete => :off,:class => 'datetimepicker form-control col-sm-6'}
 
-        = f.label :registration_end, t('openday_registration_end')
-        = f.input :registration_end, :as => :string, :label => false, :input_html => {:placeholder => "yyyy-mm-dd HH:mm", :autocomplete => :off,:class => 'datetimepicker form-control col-sm-6'}
+            = f.label :date, t('openday_date')
+            = f.input :date, :as => :string, :label => false, :input_html => {:placeholder => "yyyy-mm-dd", :autocomplete => :off,:class => 'datepicker form-control col-sm-6'}  
 
-        = f.label :date, t('openday_date')
-        = f.input :date, :as => :string, :label => false, :input_html => {:placeholder => "yyyy-mm-dd", :autocomplete => :off,:class => 'datepicker form-control col-sm-6'}  
+        = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right'  
+   
+:javascript
+  $('.datepicker').datepicker({
+    dateFormat: "yy-mm-dd",
+    todayHighlight: true,
+    todayBtn: 'linked',
+    autoclose: true
+  }); ;
 
-      = f.submit t('btn_submit'), disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right'
-
-      =flash[:error]
-      
-  :javascript
-    $('.datepicker').datepicker({
-      dateFormat: "yy-mm-dd",
-      todayHighlight: true,
-      todayBtn: 'linked',
-      autoclose: true
-    }); ;
-
-    $('.datetimepicker').datetimepicker({
-      dateFormat: "yy-mm-dd",
-      timeFormat: "HH:mm",
-      todayHighlight: true,
-      todayBtn: 'linked',
-      autoclose: true
-    }); ;
+  $('.datetimepicker').datetimepicker({
+    dateFormat: "yy-mm-dd",
+    timeFormat: "HH:mm",
+    todayHighlight: true,
+    todayBtn: 'linked',
+    autoclose: true
+  }); ;

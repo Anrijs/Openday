@@ -2,7 +2,7 @@ class OpendaysController < ApplicationController
   before_filter :authenticate_admin!
 
   def index
-    @opendays = Openday.all
+    @opendays = Openday.all.order('date DESC')
     @faculties = Faculty.all
   end
 
@@ -14,6 +14,7 @@ class OpendaysController < ApplicationController
     @openday = Openday.new openday_params
     if @openday.save
       flash[:success] = t('add_openday_success')
+      redirect_to opendays_path
     else
       flash[:error] = t('add_openday_failure')
       render 'new'
