@@ -84,30 +84,31 @@ class OpendaysController < ApplicationController
   end
 
   def programmes
-    @programmes = Faculty.find(params[:id]).programmes
+    faculty = Openday.find(params[:openday_id]).openday_faculties.find(params[:id])
+    @programmes = Faculty.find(faculty.faculty_id).programmes
     @active_programmes = {}
-    Openday.find(params[:openday_id]).openday_programmes.each do |programme|
+    faculty.openday_programmes.each do |programme|
       @active_programmes[programme.programme_id] = '1'
     end
-    pry
   end
 
   def add_programmes
-    pry
-    programmes = Faculty.find(params[:faculty_id]).programmes
     openday = Openday.find(params[:openday_id])
+    faculty = openday.openday_faculties.find(params[:faculty_id])
+    programmes = Faculty.find(faculty.faculty_id).programmes.all
+
     get_programmes = {}
     get_programmes = params[:programme] unless params[:programme].nil?
 
     programmes.each do |programme|
       if get_programmes.has_key?(programme.id.to_s)
-        unless OpendayProgramme.exists?(programme_id: programme.id, openday_id: openday.id)
-          programme = OpendayProgramme.new(programme_id: programme.id, openday_id: openday.id)
+        unless OpendayProgramme.exists?(programme_id: programme.id, openday_faculty_id: faculty.id)
+          programme = OpendayProgramme.new(programme_id: programme.id, openday_faculty_id: faculty.id)
           programme.save
         end
       else
-        if OpendayProgramme.exists?(programme_id: programme.id, openday_id: openday.id)
-          programme = OpendayProgramme.find_by(programme_id: programme.id, openday_id: openday.id)
+        if OpendayProgramme.exists?(programme_id: programme.id, openday_faculty_id: faculty.id)
+          programme = OpendayProgramme.find_by(programme_id: programme.id, openday_faculty_id: faculty.id)
           programme.destroy
         end
       end

@@ -11,7 +11,11 @@
         .list-group-head.sub
           %span.spacer
           %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-right{onclick: 'toggleChildren(this)'}
-          %span= od_faculty.faculty.name
+          %span
+            = od_faculty.faculty.name
+            %small{:class => ("error-text" unless od_faculty.openday_programmes.count > 0)}
+              = "(#{od_faculty.openday_programmes.count}"
+              = "#{t('faculty_programmes.count', :count => od_faculty.openday_programmes.count)})"
         .list-group-child.list-expandable
           - od_faculty.openday_programmes.each do |od_programme|
             .list-group-head.sub
@@ -37,10 +41,10 @@
           .list-group-head.sub
             %span.spacer
             %span.spacer
-            = link_to '', openday_programmes_path(openday, od_faculty.faculty_id), class: 'clickable glyphicon-left glyphicon glyphicon-plus'
+            = link_to '', openday_programmes_path(openday, od_faculty),remote: true,onclick: "$('#myModal').modal('toggle');", class: 'clickable glyphicon-left glyphicon glyphicon-plus'
             %span= t('openday_select_programmes')
       .list-group-head.sub
         %span.spacer
-        = link_to '', openday_faculties_path(openday), class: 'clickable glyphicon-left glyphicon glyphicon-plus'
+        = link_to '', openday_faculties_path(openday),remote: true, onclick: "$('#myModal').modal('toggle');", class: 'clickable glyphicon-left glyphicon glyphicon-plus'
         %span= t('openday_select_faculties')
     

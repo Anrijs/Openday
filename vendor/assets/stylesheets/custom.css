@@ -122,3 +122,7 @@ th.table_id {
 .modal-body {
 	padding-bottom: 48px;
 }
+
+.error-text {
+	color: #cc0000;
+}

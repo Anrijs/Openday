@@ -3,15 +3,15 @@
     .modal-header
       %h4= t('faculty_select')
     .modal-body
-     / =form_tag({controller: "opendays", action: "add_faculties"}, method: "post", class: "form-group")
-     / - @faculties.each do |faculty|
-     /   .checkbox
-     /     - if @active_faculties.has_key?(faculty.id)
-     /       =check_box_tag('faculty['+faculty.id.to_s+']', "1", checked: 'true')
-     /     - else
-     /       =check_box_tag('faculty['+faculty.id.to_s+']')
-     /
-     /     =label_tag('faculty['+faculty.id.to_s+']', faculty.name)
-     / =submit_tag('Save', class: 'btn btn-primary pull-right')
+      =form_tag({controller: "opendays", action: "add_faculties"}, method: "post", class: "form-group")
+      - @faculties.each do |faculty|
+        .checkbox
+          - if @active_faculties.has_key?(faculty.id)
+            =check_box_tag('faculty['+faculty.id.to_s+']', "1", checked: 'true')
+          - else
+            =check_box_tag('faculty['+faculty.id.to_s+']')
 
+          =label_tag('faculty['+faculty.id.to_s+']', faculty.name)
+      =submit_tag('Save', class: 'btn btn-primary pull-right')
 
+      %a{href: 'javascript:void(0)', onclick: '$("input").attr("checked", "checked");'}= t('select_all')
