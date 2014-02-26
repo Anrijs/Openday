@@ -1,15 +1,20 @@
 Od::Application.routes.draw do
   devise_for :admins
   resources :opendays do
-    resources :openday_faculties
-    resources :openday_programmes
-    resources :openday_timeslots
+    #resources :openday_faculties
+    #resources :openday_programmes
+    #resources :openday_timeslots
+
+    get 'faculties' => 'opendays#faculties'
+    get 'programmes/:id/' => "opendays#programmes", as: :programmes
+
+    post 'add_faculties' => 'opendays#add_faculties'
+    post 'add_programmes' => 'opendays#add_programmes'
   end
 
   resources :faculties do
     resources :programmes
   end
-
   
   root 'opendays#index'
 

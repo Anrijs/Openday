@@ -16,12 +16,17 @@ en:
   openday_add: "Add new Openday"
   openday_edit: "Edit Openday"
   delete_openday_success: "Openday deleted successfully"
+  openday_select_programmes: "Select programmes"
+  openday_select_faculties: "Select faculties"
+  openday_add_timeslots: "Add timeslots"
+  openday_timeslots: "Time slots"
   ## Flash
   create_openday_success: "Openday created"
   create_openday_error: "Could not create new openday"
   edit_openday_success: "Openday updated"
   edit_openday_error: "Could not update openday"
   # faculty
+  faculty_select: "Select faculties"
   faculty_name: "Full name"
   faculty_short: "Short name"
   faculty_panel: "Faculty panel"

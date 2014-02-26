@@ -1,0 +1,17 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %h4= t('programme_select')
+    .modal-body
+      =form_tag({controller: "opendays", action: "add_programmes"}, method: "post", class: "form-group")
+      - @programmes.each do |programme|
+        .checkbox
+          - if @active_programmes.has_key?(programme.id)
+            =check_box_tag('programme['+programme.id.to_s+']', "1", checked: 'true')
+          - else
+            =check_box_tag('programme['+programme.id.to_s+']')
+
+          =label_tag('programme['+programme.id.to_s+']', programme.name)
+      =submit_tag('Save', class: 'btn btn-primary pull-right')
+
+

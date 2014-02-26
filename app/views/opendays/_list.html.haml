@@ -6,8 +6,8 @@
         =openday.name
         %small.gray
       = link_to '' ,edit_openday_path(openday), remote: true, class: 'clickable glyphicon glyphicon-pencil pull-right', onclick: "$('#myModal').modal('toggle');"
-    - openday.openday_faculties.each do |od_faculty|
-      .list-group-child.list-expandable
+    .list-group-child.list-expandable
+      - openday.openday_faculties.each do |od_faculty|
         .list-group-head.sub
           %span.spacer
           %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-right{onclick: 'toggleChildren(this)'}
@@ -17,44 +17,30 @@
             .list-group-head.sub
               %span.spacer
               %span.spacer
-              %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-right{onclick: 'toggleChildren(this)'}
+              %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-right{onclick: 'toggleChildren(  this)'}
               %span= od_programme.programme.name
             .list-group-child.list-expandable
               .list-group-head.sub
                 %span.spacer
                 %span.spacer
                 %span.spacer
-                %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-right{onclick: 'toggleChildren(this)'}
-                %span Timesloti
+                %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-right{onclick: 'toggleChildren(  this)'}
+                %span= t('openday_timeslots')
               .list-group-child.list-expandable
                 .list-group-head.sub
                   %span.spacer
                   %span.spacer
                   %span.spacer
                   %span.spacer
-                  %span.clickable.glyphicon-left.glyphicon.glyphicon-time
-                  %span Slot 1
-                .list-group-head.sub
-                  %span.spacer
-                  %span.spacer
-                  %span.spacer
-                  %span.spacer
-                  %span.clickable.glyphicon-left.glyphicon.glyphicon-time
-                  %span Slot 2
-                .list-group-head.sub
-                  %span.spacer
-                  %span.spacer
-                  %span.spacer
-                  %span.spacer
                   %span.clickable.glyphicon-left.glyphicon.glyphicon-plus
-                  %span jauns slots
+                  %span= t('openday_add_timeslots')
           .list-group-head.sub
             %span.spacer
             %span.spacer
-            %span.clickable.glyphicon-left.glyphicon.glyphicon-plus
-            %span jauna progra
-        .list-group-head.sub
-          %span.spacer
-          %span.clickable.glyphicon-left.glyphicon.glyphicon-plus
-          %span jauna kultate
+            = link_to '', openday_programmes_path(openday, od_faculty.faculty_id), class: 'clickable glyphicon-left glyphicon glyphicon-plus'
+            %span= t('openday_select_programmes')
+      .list-group-head.sub
+        %span.spacer
+        = link_to '', openday_faculties_path(openday), class: 'clickable glyphicon-left glyphicon glyphicon-plus'
+        %span= t('openday_select_faculties')
     
