@@ -14,4 +14,5 @@
             = f.input :url, :as => :string, :label => false, :input_html => {:placeholder => t('optional'), :autocomplete => :off,:class => 'form-control col-sm-6'}
             = f.hidden_field :faculty_id, :value => params[:faculty_id]
 
-        = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right'
+        = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right modal-btn'
+        %button.btn.btn-default.pull-right.modal-btn{'data-dismiss' => "modal"}= t('cancel')

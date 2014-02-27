@@ -11,6 +11,7 @@
             = f.input :name, :as => :string, :label => false, :input_html => {:autocomplete => :off,:class => 'form-control col-sm-6'}
             = f.label :short_name, t('faculty_short')
             = f.input :short_name, :as => :string, :label => false, :input_html => {:autocomplete => :off,:class => ' form-control col-sm-6'}
-        = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right'
+        = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right modal-btn'
+        = link_to t('cancel'), faculties_path, class: 'btn btn-default pull-right modal-btn' 
 
       = button_to(t('delete'), @faculty, confirm: t('confirm_delete'), method: 'delete', class: "btn btn-danger")
