@@ -117,9 +117,43 @@ class OpendaysController < ApplicationController
     redirect_to opendays_path
   end
 
+  def timeslots 
+    programme = OpendayProgramme.find(params[:id])
+    @timeslot = programme.openday_timeslots.new
+  end
+
+  def add_timeslots 
+    programme = OpendayProgramme.find(params[:id])
+    @timeslot = programme.openday_timeslots.new(timeslot_params)
+    if @timeslot.save
+      redirect_to opendays_path
+    else 
+      raise ArgumentError
+    end
+  end
+
+  def edit_timeslots
+    @timeslot = OpendayTimeslot.find(params[:id])
+  end
+
+  def update_timeslots
+    @timeslot = OpendayTimeslot.find(params[:id])
+    @timeslot.update_attributes(timeslot_params)
+    if @timeslot.save
+      redirect_to opendays_path
+    else 
+      raise ArgumentError
+    end
+  end
+
+
 private
   def openday_params
     params.require(:openday).permit(:name, :date, :registration_open, :registration_end)
+  end
+
+  def timeslot_params
+    params.require(:openday_timeslot).permit(:time_from, :time_till, :capacity)
   end
 
 end

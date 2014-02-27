@@ -7,9 +7,16 @@ Od::Application.routes.draw do
 
     get 'faculties' => 'opendays#faculties'
     get 'programmes/:id/' => "opendays#programmes", as: :programmes
+    get 'timeslots/:id' => "opendays#timeslots", as: :timeslots
+    get 'timeslots/edit/:id' => "opendays#edit_timeslots", as: :edit_timeslots
 
     post 'add_faculties' => 'opendays#add_faculties'
     post 'add_programmes' => 'opendays#add_programmes'
+    post 'timeslots/:id' => "opendays#add_timeslots"
+    post 'timeslots/update/:id' => "opendays#update_timeslots", as: :update_timeslots
+    put 'timeslots/update/:id' => "opendays#update_timeslots"
+    patch 'timeslots/update/:id' => "opendays#update_timeslots"
+
   end
 
   resources :faculties do

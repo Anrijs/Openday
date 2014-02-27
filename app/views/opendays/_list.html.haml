@@ -23,28 +23,32 @@
               %span.spacer
               %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-right{onclick: 'toggleChildren(  this)'}
               %span= od_programme.programme.name
-            - od_programme.openday_timeslots.each do |od_timeslots|
+            .list-group-child.list-expandable
+              - od_programme.openday_timeslots.each do |od_timeslot|
+                .list-group-child
+                  .list-group-head.sub
+                    %span.spacer
+                    %span.spacer
+                    %span.spacer
+                    = link_to '' ,openday_edit_timeslots_path(openday, od_timeslot), remote: true, class: 'clickable glyphicon-left glyphicon glyphicon-time', onclick: "$('#myModal').modal('toggle');"
+                    %span
+                      = "#{od_timeslot.time_from.strftime('%H:%M')} - #{od_timeslot.time_till.strftime('%H:%M')}"
+                      %small="(Capacity: #{od_timeslot.capacity})"
+                    = link_to '' ,openday_edit_timeslots_path(openday, od_timeslot), remote: true, class: 'clickable glyphicon glyphicon-pencil pull-right', onclick: "$('#myModal').modal('toggle');"
               .list-group-child
                 .list-group-head.sub
                   %span.spacer
                   %span.spacer
                   %span.spacer
-                  %span.clickable.glyphicon-left.glyphicon.glyphicon-time
-                  %span= "#{od_timeslots.time_from.strftime('%H:%M') } - #{od_timeslots.time_till.strftime('%H:%M')}"
-            .list-group-child
-              .list-group-head.sub
-                %span.spacer
-                %span.spacer
-                %span.spacer
-                %span.clickable.glyphicon-left.glyphicon.glyphicon-plus
-                %span= t('openday_add_timeslots')
+                  = link_to '', openday_timeslots_path(openday, od_programme), remote: true, onclick: "$('#myModal').modal('toggle');", class: 'clickable glyphicon-left glyphicon glyphicon-plus'
+                  %small= t('openday_add_timeslots')
           .list-group-head.sub
             %span.spacer
             %span.spacer
-            = link_to '', openday_programmes_path(openday, od_faculty),remote: true,onclick: "$('#myModal').modal('toggle');", class: 'clickable glyphicon-left glyphicon glyphicon-plus'
-            %span= t('openday_select_programmes')
+            = link_to '', openday_programmes_path(openday, od_faculty), remote: true, onclick: "$('#myModal').modal('toggle');", class: 'clickable glyphicon-left glyphicon glyphicon-plus'
+            %small= t('openday_select_programmes')
       .list-group-head.sub
         %span.spacer
         = link_to '', openday_faculties_path(openday),remote: true, onclick: "$('#myModal').modal('toggle');", class: 'clickable glyphicon-left glyphicon glyphicon-plus'
-        %span= t('openday_select_faculties')
+        %small= t('openday_select_faculties')
     

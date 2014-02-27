@@ -54,6 +54,16 @@ th.table_id {
 
 .clickable {
 	cursor: hand;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.clickable:hover {
+	text-decoration: none;
 }
 
 .list-group-head .glyphicon-left.glyphicon {
@@ -64,18 +74,16 @@ th.table_id {
 	border-top: 1px solid #ccc;
 }
 
-.list-group-head .glyphicon-chevron-down:hover {
+.list-group-head .glyphicon-chevron-down:hover,
+.list-group-head .glyphicon-chevron-right:hover,
+.list-group-head .glyphicon-chevron-up:hover  {
 	color: #FF8800;
 	font-size: 0.8em;
 }
 
+.list-group-head .glyphicon-time:hover,
 .list-group-head .glyphicon-chevron-up {
 	color: #aaaaaa;
-	font-size: 0.8em;
-}
-
-.list-group-head .glyphicon-chevron-up:hover {
-	color: #FF8800;
 	font-size: 0.8em;
 }
 
@@ -113,6 +121,12 @@ th.table_id {
 	margin-right: 7px;
 	padding: 5px 0;
 	border-right: solid 1px #ccc;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .list-expandable.jsEnabled {

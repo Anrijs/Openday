@@ -1,0 +1,21 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %h4= t('timeslot_new')
+    .modal-body
+      = simple_form_for @timeslot, html:{class: 'form-openday'} do |f|
+        .form-group.openday-form
+          %fieldset
+            = f.label :time_from, t('timeslot_from')
+            = f.input :time_from, :as => :string, :label => false, :input_html => {:placeholder => "HH:mm", :autocomplete => :off,:class => 'timepicker form-control col-sm-6'}
+
+            = f.label :time_till, t('timeslot_till')
+            = f.input :time_till, :as => :string, :label => false, :input_html => {:placeholder => "HH:mm", :autocomplete => :off,:class => 'timepicker form-control col-sm-6'}
+
+            = f.label :capacity, t('timeslot_capacity')
+            = f.input :capacity, :label => false, :input_html => {:autocomplete => :off,:class => 'form-control col-sm-6'}
+
+        = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right'  
+
+:javascript
+  $('.timepicker').timepicker();
