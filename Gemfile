@@ -14,6 +14,7 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'validates_timeliness', '~> 3.0'
+gem 'pony'
 
 group :development do
   gem "capistrano"
