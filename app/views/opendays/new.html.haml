@@ -18,8 +18,9 @@
             = f.label :date, t('openday_date')
             = f.input :date, :as => :string, :label => false, :input_html => {:placeholder => "yyyy-mm-dd", :autocomplete => :off,:class => 'datepicker form-control col-sm-6'}  
 
-        = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right'  
-   
+        = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right modal-btn'  
+        = link_to t('cancel'), opendays_path, class: 'btn btn-default pull-right modal-btn' 
+
 :javascript
   $('.datepicker').datepicker({
     dateFormat: "yy-mm-dd",
