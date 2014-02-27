@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :programme do
-    name "MyString"
-    faculty_id 1
+    name {"Programme ##{rand(99999)}"}
+    faculty_id {rand(99999)}
   end
 end

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :faculty do
-    name "MyString"
-    shortname "MyString"
+    name {"Faculty of #{rand(99999)}"}
+    short_name {"Fox #{rand(99999)}"}
   end
 end
