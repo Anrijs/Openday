@@ -49,17 +49,16 @@
       clicks.push(newvalue);
       $('#' + prev).attr('value', newvalue);
   
-      index = clicks.indexOf("");
       reloadTimes();
   });
   
   function reloadTimes() {
     $("input.time").each(function (index) {
-          $(this).prop("disabled", false);
+          $(this).prop("disabled", false);;
       });
   
-      clicks.forEach(function (index) {
-          time = (index.split("-"));
+      $.each(clicks, function (index, value) {
+          time = (value.split("-"));
           diableTimeslots(time[0], time[1]);
       });
   
@@ -77,7 +76,7 @@
   }
   
   function dropTime(time) {
-      index = clicks.indexOf(time);
+      index = $.inArray(time, clicks);
       if (index > -1) {
           clicks.splice(index, 1);
       }
