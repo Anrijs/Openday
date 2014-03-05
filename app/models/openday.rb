@@ -1,6 +1,8 @@
 class Openday < ActiveRecord::Base
 
   has_many :openday_faculties
+  has_many :registrants
+  has_many :registrations
   
   validates_datetime :registration_open
   validates_datetime :registration_end
@@ -14,6 +16,19 @@ class Openday < ActiveRecord::Base
 
 
   before_validation :create_slug
+
+  def self.find_active
+    Openday.where('registration_open <= :time AND registration_end >= :time', {:time =>  DateTime.now})
+  end
+
+  def active?
+    time = DateTime.now
+    if (self.registration_open <= time && self.registration_end >= time)
+      return true
+    else
+      return false
+    end
+  end
 
 private
   def create_slug

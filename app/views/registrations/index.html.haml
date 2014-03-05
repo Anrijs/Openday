@@ -1,21 +1,64 @@
-%h1 Registration form
-
-%h2.page-header Personal informations
-%input
-%h2.page-header Faculties
-- Openday.first.openday_faculties.each do |faculty|
-  %h3-faculty.faculty.name
-  - faculty.openday_programmes.each do |programme|
-    %input.time_enable{id: 'programme'+programme.id.to_s+'-enable', type: 'checkbox', 'programme' => 'programme'+programme.id.to_s}
-    %span.page-header=programme.programme.name
-    %div{id: 'programme'+programme.id.to_s+'-block'}
-      - programme.openday_timeslots.each do |timeslot|
-        %input.time{id: 'timeslot['+timeslot.id.to_s+']', value: '1', type: 'radio', 'time_from' => timeslot.time_from.strftime('%H%M'), 'time_till' => timeslot.time_till.strftime('%H%M'), name: 'programme'+programme.id.to_s}
-        %label{for: 'timeslot['+timeslot.id.to_s+']'}
-          ="#{timeslot.time_from.strftime('%H:%M')} - #{timeslot.time_till.strftime('%H:%M')}"
-        %input{type: "hidden", id: "programme"+programme.id.to_s+"-previous"}
-
-        %br
+%h1
+  =t('registration.for')
+  =@openday.name
+.form-reg
+  =form_for @registrant do |f|
+    %h2.page-header=t('registration.presonal_inforamtion.title')
+    .form-group.row
+      = f.label :name, t('registration.personal_information.name'), class: 'col-sm-2 col-xs-12'
+      = f.text_field :name, class: 'form-custom col-sm-6 col-xs-12'
+    .form-group.row
+      = f.label :prefix, t('registration.personal_information.prefix'), class: 'col-sm-2 col-xs-12'
+      = f.text_field :prefix, class: 'form-custom col-sm-6 col-xs-12'
+    .form-group.row
+      = f.label :surname, t('registration.personal_information.surname'), class: 'col-sm-2 col-xs-12'
+      = f.text_field :surname, class: 'form-custom col-sm-6 col-xs-12'
+  
+    %h2.page-header=t('registration.contact_information.title')  
+    .form-group.row
+      = f.label :email, t('registration.personal_information.email'), class: 'col-sm-2 col-xs-12'
+      = f.text_field :email, class: 'form-custom col-sm-6 col-xs-12'
+    .form-group.row
+      = f.label :address1, t('registration.personal_information.address1'), class: 'col-sm-2 col-xs-12'
+      = f.text_field :address1, class: 'form-custom col-sm-6 col-xs-12'
+    .form-group.row
+      = f.label :address2, t('registration.personal_information.address2'), class: 'col-sm-2 col-xs-12'
+      = f.text_field :address2, class: 'form-custom col-sm-6 col-xs-12'
+    .form-group.row
+      = f.label :city, t('registration.personal_information.city'), class: 'col-sm-2 col-xs-12'
+      = f.text_field :city, class: 'form-custom col-sm-6 col-xs-12'
+    .form-group.row
+      = f.label :state, t('registration.personal_information.state'), class: 'col-sm-2 col-xs-12'
+      = f.text_field :state, class: 'form-custom col-sm-6 col-xs-12'
+    .form-group.row
+      = f.label :country, t('registration.personal_information.country'), class: 'col-sm-2 col-xs-12'
+      = f.text_field :country, class: 'form-custom col-sm-6 col-xs-12'
+    .form-group.row
+      = f.label :postal_code, t('registration.personal_information.postal_code'), class: 'col-sm-2 col-xs-12'
+      = f.text_field :postal_code, class: 'form-custom col-sm-6 col-xs-12'
+    .form-group.row
+      = f.label :year, t('registration.personal_information.year'), class: 'col-sm-2 col-xs-12'
+      = f.text_field :year, class: 'form-custom col-sm-6 col-xs-12'
+    %h2.page-header=t('registration.register.title')
+    %p=t('registration.registrer.description')
+    %p=t('registration.registrer.limit', min: 1.to_s, max: 3.to_s)
+    %p=t('registration.registrer.notice')
+    - @openday.openday_faculties.each do |faculty|
+      %h3=faculty.faculty.name
+      - faculty.openday_programmes.each do |programme|
+        %h4
+          %input.time_enable{id: 'programme'+programme.id.to_s+'-enable', type: 'checkbox', 'programme' => 'programme'+programme.id.to_s, name: 'programme['+programme.id.to_s+']', value: '0'}
+          =programme.programme.name
+        %div.programme-block{id: 'programme'+programme.id.to_s+'-block'}
+          - programme.openday_timeslots.each do |timeslot|
+            %input.time{id: 'timeslot['+timeslot.id.to_s+']', value: '1', type: 'radio', 'time_from' => timeslot.time_from.    strftime('%H%M'), 'time_till' => timeslot.time_till.strftime('%H%M'), 'programme' => 'programme'+programme.id.to_s ,name: 'programme['+programme.id.to_s+']', value: timeslot.id.to_s}
+            %label{for: 'timeslot['+timeslot.id.to_s+']'}
+              ="#{timeslot.time_from.strftime('%H:%M')} - #{timeslot.time_till.strftime('%H:%M')}"
+            %input{type: "hidden", id: "programme"+programme.id.to_s+"-previous"}
+    
+            %br
+    = hidden_field_tag :openday_id, @openday.id 
+    = f.submit "Submit"
 
 :javascript
   var clicks = new Array();
@@ -37,12 +80,11 @@
       btn = $(this);
       from = btn.attr('time_from');
       till = btn.attr('time_till');
-  
-      enable = $(this).attr("name") + "-enable"
-      $('#' + enable).prop('checked', true);;
-      prev = $(this).attr("name") + "-previous"
-      oldvalue = $('#' + prev).attr('value');
       
+      enable = $(this).attr("programme") + "-enable"
+      $('#' + enable).prop('checked', true);;
+      prev = $(this).attr("programme") + "-previous"
+      oldvalue = $('#' + prev).attr('value');
       dropTime(oldvalue);
   
       newvalue = from + '-' + till;

@@ -1,0 +1,13 @@
+- params.each do |key, value|
+  %b=key
+  %pre=value
+
+
+- params[:programme].each do |value|
+  %h5=value.first
+
+.panel.panel-default
+  - params[:programme].each do |key, value|
+    %h5
+      =key
+      =value

@@ -7,6 +7,8 @@ en:
   confirm_delete: "Are you sure?"
   delete: "Delete"
   # openday
+  openday:
+    register: "Register"
   openday_name: "Name"
   openday_date: "Openday Date"
   openday_registration_open: "Registration starts at"
@@ -80,3 +82,33 @@ en:
   # warnings
   warning: "Warning!"
   javascript_warning: "This site requires JavaScript, to operate properly"
+  registration:
+    for: "Register for "
+    selection:
+      title: "There are %{count} registrations active."
+      paragraph: "Choose Open Day from list below and click Register"
+    closed:
+      title: "Registration has been closed"
+      paragraph: "Registration closed on:"
+    presonal_inforamtion: 
+      title: "Personal information"
+      name: "Name"
+      surname: "Surname"
+      prefix: "Prefix"
+    contact_information: 
+      title: "Contact information"
+      address1: "Address 1"
+      address2: "Address 2"
+    companions: 
+      title: "Companions"
+      description: "Family members or friends are welcome to join you to the Open Day. Please note that during busy sessions, only one of those accompanying you will be allowed to attend."
+    register: 
+      title: "Registration"
+      description: "I wish to register for the following programmes:"
+      limit: "(Select at least %{min} option and %{max} at the most)"
+      notice: "Please note: When a session is fully booked, you can’t register anymore. Please choose another time slot."
+      year: "I'll start studying:"
+      terms_1: "I have read the "
+      terms_2: "terms and conditions"
+      terms_3: "Of Test University and agree to receive information about studying in Test University"
+    information: "-"
