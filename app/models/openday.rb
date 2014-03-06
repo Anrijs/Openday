@@ -1,6 +1,6 @@
 class Openday < ActiveRecord::Base
 
-  has_many :openday_faculties
+  has_many :openday_faculties, dependent: :destroy
   has_many :registrants
   has_many :registrations
   

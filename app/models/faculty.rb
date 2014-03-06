@@ -1,6 +1,6 @@
 class Faculty < ActiveRecord::Base
   has_many :programmes, dependent: :destroy
-  has_many :openday_faculties
+  has_many :openday_faculties, dependent: :destroy
 
   validates_presence_of :name, message: I18n.t('validation.name_presence')
   validates_uniqueness_of :name, message: I18n.t('validation.name_uniqueness')
