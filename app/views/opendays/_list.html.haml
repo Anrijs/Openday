@@ -1,29 +1,34 @@
 %li.list-group-item
   .list-group-head
     .list-group-child
-      %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-down{onclick: 'toggleChildren(this)'}
+      %span.clickable.glyphicon-left.glyphicon{onclick: 'toggleChildren(this)', class: (openday.ready? ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up')}
       %span
         =openday.name
-        %small.gray
+        - unless openday.ready?
+          %small.red=t('openday.missing_data')
       = link_to '' ,edit_openday_path(openday), remote: true, class: 'clickable glyphicon glyphicon-pencil pull-right', onclick: "$('#myModal').modal('toggle');"
-    .list-group-child.list-expandable
+    .list-group-child{:class => ('list-expandable' if openday.ready?) }
       - openday.openday_faculties.each do |od_faculty|
         .list-group-head.sub
           %span.spacer
-          %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-right{onclick: 'toggleChildren(this)'}
+          %span.clickable.glyphicon-left.glyphicon{onclick: 'toggleChildren(this)', class: (od_faculty.ready? ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up')}
           %span
             = od_faculty.faculty.name
             %small{:class => ("error-text" unless od_faculty.openday_programmes.count > 0)}
               = "(#{od_faculty.openday_programmes.count}"
               = "#{t('faculty_programmes.count', :count => od_faculty.openday_programmes.count)})"
-        .list-group-child.list-expandable
+              - unless od_faculty.ready?
+                %small.red=t('openday.missing_timeslots')
+        .list-group-child{:class => ('list-expandable' if od_faculty.ready?) }
           - od_faculty.openday_programmes.each do |od_programme|
             .list-group-head.sub
               %span.spacer
               %span.spacer
-              %span.clickable.glyphicon-left.glyphicon.glyphicon-chevron-right{onclick: 'toggleChildren(  this)'}
+              %span.clickable.glyphicon-left.glyphicon{onclick: 'toggleChildren(  this)', class: (od_programme.ready? ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up')}
               %span= od_programme.programme.name
-            .list-group-child.list-expandable
+              - unless od_programme.ready?
+                %small.red=t('openday.missing_timeslots')
+            .list-group-child{:class => ('list-expandable' if od_programme.ready?) }
               - od_programme.openday_timeslots.each do |od_timeslot|
                 .list-group-child
                   .list-group-head.sub

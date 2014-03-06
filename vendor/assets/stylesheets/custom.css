@@ -75,6 +75,10 @@
 	color: #777;
 }
 
+.red {
+	color: #dd0000;
+}
+
 .list-group-head .glyphicon-th-large:hover {
 	color: #ffbb33;
 }
@@ -111,6 +115,10 @@
 
 .list-expandable.jsEnabled {
 	display: none;
+}
+
+.list-error {
+	background-color: #fcf;
 }
 
 .modal-body {

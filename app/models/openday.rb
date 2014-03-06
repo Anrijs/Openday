@@ -30,6 +30,20 @@ class Openday < ActiveRecord::Base
     end
   end
 
+  def ready?
+    self.openday_faculties.each do |faculty|
+      if faculty.openday_programmes.count < 1
+        return false
+      end
+      faculty.openday_programmes.each do |programme|
+        if programme.openday_timeslots.count < 1
+          return false
+        end
+      end
+    end
+    return true
+  end
+
 private
   def create_slug
     self.slug = self.name.to_s.parameterize
