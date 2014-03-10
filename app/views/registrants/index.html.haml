@@ -61,17 +61,23 @@
 
       %h2.page-header=t('registration.register.title')
       %p=t('registration.register.description')
-      %p=t('registration.register.limit', min: 1.to_s, max: 3.to_s)
+      %p=t('registration.register.limit', min: CONFIG['registration']['limit_min'].to_s, max: CONFIG['registration']['limit_max'].to_s)
       %p=t('registration.register.notice')
       - @openday.openday_faculties.each do |faculty|
         %h3=faculty.faculty.name
         - faculty.openday_programmes.each do |programme|
           %h4
-            %input.time_enable{id: 'programme'+programme.id.to_s+'-enable', type: 'checkbox', 'programme' => 'programme'+programme.id.to_s, name: 'programme['+programme.id.to_s+']', value: '0'}
+            - if(params["programme"])
+              %input.time_enable{id: 'programme'+programme.id.to_s+'-enable', type: 'checkbox', 'programme' => 'programme'+programme.id.to_s, name: 'programme['+programme.id.to_s+']', value: '0', :checked => ('true' unless params['programme'][programme.id.to_s].nil?)}
+            - else
+              %input.time_enable{id: 'programme'+programme.id.to_s+'-enable', type: 'checkbox', 'programme' => 'programme'+programme.id.to_s, name: 'programme['+programme.id.to_s+']', value: '0'}  
             =programme.programme.name
           %div.programme-block{id: 'programme'+programme.id.to_s+'-block'}
             - programme.openday_timeslots.each do |timeslot|
-              %input.time{id: 'timeslot['+timeslot.id.to_s+']', value: '1', type: 'radio', 'time_from' => timeslot.time_from.    strftime('%H%M'), 'time_till' => timeslot.time_till.strftime('%H%M'), 'programme' => 'programme'+programme.id.to_s ,name: 'programme['+programme.id.to_s+']', value: timeslot.id.to_s}
+              - if(params["programme"])
+                %input.time{id: 'timeslot['+timeslot.id.to_s+']', type: 'radio', 'time_from' => timeslot.time_from.    strftime('%H%M'), 'time_till' => timeslot.time_till.strftime('%H%M'), 'programme' => 'programme'+programme.id.to_s ,name: 'programme['+programme.id.to_s+']', value: timeslot.id.to_s, :checked => ('true' if params["programme"][programme.id.to_s] == timeslot.id.to_s)}
+              - else
+                %input.time{id: 'timeslot['+timeslot.id.to_s+']', type: 'radio', 'time_from' => timeslot.time_from.    strftime('%H%M'), 'time_till' => timeslot.time_till.strftime('%H%M'), 'programme' => 'programme'+programme.id.to_s ,name: 'programme['+programme.id.to_s+']', value: timeslot.id.to_s}
               %label{for: 'timeslot['+timeslot.id.to_s+']'}
                 ="#{timeslot.time_from.strftime('%H:%M')} - #{timeslot.time_till.strftime('%H:%M')}"
               %input{type: "hidden", id: "programme"+programme.id.to_s+"-previous"}
