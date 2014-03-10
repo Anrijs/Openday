@@ -110,6 +110,8 @@ en:
     short_name_presence: "Short name is required"
     short_name_uniqueness: "Short name must be unique"
     slug_uniqueness: "Similar open day name is already in use"
+    email_format: "Email format is not valid"
+    email_name: "Email is required"
   # warnings
   warning: "Warning!"
   javascript_warning: "This site requires JavaScript, to operate properly"
@@ -145,6 +147,7 @@ en:
       limit: "(Select at least %{min} option and %{max} at the most)"
       notice: "Please note: When a session is fully booked, you can’t register anymore. Please choose another time slot."
       year: "I'll start studying:"
+      contains_errors: "Registration contains %{count} errors:"
       terms_1: "I have read the "
       terms_2: "terms and conditions"
       terms_3: "Of Test University and agree to receive information about studying in Test University"

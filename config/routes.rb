@@ -25,7 +25,7 @@ Od::Application.routes.draw do
   
   resources :registrants
 
-  root 'registrations#index'
+  root 'registrants#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
