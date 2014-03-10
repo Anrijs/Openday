@@ -3,73 +3,104 @@
 #     I18n.locale = :es
 
 en:
+  password: "Password"
+  username: "Username"
+  sign_in: "Sign in"
+  sign_out: "Sign out"
+  select_all: "Select all"
   optional: "Optional"
   confirm_delete: "Are you sure?"
   delete: "Delete"
   # openday
   openday:
     register: "Register"
-  openday_name: "Name"
-  openday_date: "Openday Date"
-  openday_registration_open: "Registration starts at"
-  openday_registration_end: "Registration ends at"
-  openday_list: "Openday List"
-  openday_panel: "Openday Panel"
-  openday_add: "Add new Openday"
-  openday_edit: "Edit Openday"
-  delete_openday_success: "Openday deleted successfully"
-  openday_select_programmes: "Select programmes"
-  openday_select_faculties: "Select faculties"
-  openday_add_timeslots: "Add timeslots"
-  openday_timeslots: "Time slots"
-  ## Flash
-  create_openday_success: "Openday created"
-  create_openday_error: "Could not create new openday"
-  edit_openday_success: "Openday updated"
-  edit_openday_error: "Could not update openday"
+    name: "Name"
+    date: "Openday Date"
+    registration_open: "Registration starts at"
+    registration_end: "Registration ends at"
+    list: "Openday List"
+    panel: "Openday Panel"
+    add: "Add new Openday"
+    edit: "Edit Openday"
+    select_programmes: "Select programmes"
+    select_faculties: "Select faculties"
+    add_timeslots: "Add timeslots"
+    timeslots: "Time slots"
+    # Flash
+    flash:
+      create_success: "Openday created"
+      create_error: "Could not create new openday"
+      edit_success: "Openday updated"
+      edit_error: "Could not update openday"
+      delete_success: "Openday deleted successfully"
+      delete_error: "Could delete openday"
+    # Errors
+    errors:
+      not_complete:
+        title: "It looks like someone hasn't done his job."
+        reason: "Registration form is not completed or contains errors."
+        contact: "Please contact us at: %{email}"
+      missing_data: "Missing data"
+      missing_timeslots: "Missing timeslots"
   # faculty
-  faculty_select: "Select faculties"
-  faculty_name: "Full name"
-  faculty_short: "Short name"
-  faculty_panel: "Faculty panel"
-  faculty_list: "Faculty list"
-  faculty_description: "Description"
-  faculty_url: "Faculty website"
-  faculty_add: "Add new faculty"
-  faculty_programmes:
-    count:
-      one: 'programme'
-      other: 'programmes'
-  ## Flash
-  create_faculty_success: "Faculty created"
-  create_faculty_error: "Could not create new faculty"
-  edit_faculty_success: "Faculty updated"
-  edit_faculty_failure: "Could not update faculty"
+  faculty:
+    select: "Select faculties"
+    name: "Full name"
+    short: "Short name"
+    panel: "Faculty panel"
+    list: "Faculty list"
+    description: "Description"
+    url: "Faculty website"
+    add: "Add new faculty"
+    edit: "Edit faculty"
+    programmes:
+      count:
+        one: 'programme'
+        other: 'programmes'
+    ## Flash
+    flash:
+      create_success: "Faculty created"
+      create_error: "Could not create new faculty"
+      edit_success: "Faculty updated"
+      edit_error: "Could not update faculty"
   # programme
-  programme_name: "Name"
-  programme_description: "Description"
-  programme_url: "Programme website"
-  programme_add: "Add new programme"
-  ## Flash
-  create_programme_success: "Faculty created"
-  create_programme_error: "Could not create new faculty"
-  edit_programme_success: "Faculty updated"
-  edit_programme_failure: "Could not update faculty"
+  programme:
+    name: "Name"
+    description: "Description"
+    url: "Programme website"
+    add: "Add new programme"
+    edit: "Edit programme"
+    select: "Select programmes"
+    # Flash
+    flash:
+      create_success: "Faculty created"
+      create_error: "Could not create new faculty"
+      edit_success: "Faculty updated"
+      edit_error: "Could not update faculty"
+  #timeslot
+  timeslot:
+    new: "Add timeslot"
+    edit: "Edit timeslot"
+    till: "Till"
+    from: "From"
+    capacity: "Capacity"
   # buttons
-  btn_submit: "Submit"
-  btn_submiting: "Submiting"
-  btn_delete: "Delete"
-  btn_deleteing: "Deleteing"
-  btn_save: "Save"
-  btn_saving: "Saving"
-  # faculties add, edit
-  add_faculty: "Add Faculty"
+  btn:
+    cancel: "Cancel"
+    submit: "Submit"
+    submiting: "Submiting"
+    delete: "Delete"
+    deleteing: "Deleteing"
+    save: "Save"
+    saving: "Saving"
   # navbar
-  nav_opendays: "Opendays"
-  nav_reports: "Reports"
-  nav_faculties: "Faculties"
+  nav:
+    opendays: "Opendays"
+    reports: "Reports"
+    faculties: "Faculties"
   #validation messages
   validation:
+    time_presence: "Time is required"
     registration_end_early: "Registration can't end before it starts"
     date_too_early: "Date can't be before registration opening"
     date_format: "Date format must be yyyy-mm-dd"
@@ -90,7 +121,7 @@ en:
     closed:
       title: "Registration has been closed"
       paragraph: "Registration closed on:"
-    presonal_inforamtion: 
+    personal_information: 
       title: "Personal information"
       name: "Name"
       surname: "Surname"
@@ -99,6 +130,12 @@ en:
       title: "Contact information"
       address1: "Address 1"
       address2: "Address 2"
+      city: "City"
+      country: "Country"
+      email: "Email"
+      state: "State"
+      year: "Year"
+      postal_code: "Postal code"
     companions: 
       title: "Companions"
       description: "Family members or friends are welcome to join you to the Open Day. Please note that during busy sessions, only one of those accompanying you will be allowed to attend."

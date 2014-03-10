@@ -10,10 +10,10 @@ class FacultiesController < ApplicationController
   def create
     @faculty = Faculty.new(faculty_params)
     if @faculty.save
-    	flash[:success] = I18n.t('create_faculty_success')
+    	flash[:success] = I18n.t('faculty.flash.create_success')
       redirect_to faculties_path
     else
-    	flash[:error] = I18n.t('create_faculty_error')
+    	flash[:error] = I18n.t('faculty.flash.create_error')
       render 'new'
     end
   end
@@ -29,10 +29,10 @@ class FacultiesController < ApplicationController
 
     @faculty.update_attributes(faculty_params)
     if @faculty.save
-      flash[:success] = t('edit_faculty_success')
+      flash[:success] = t('faculty.flash.edit_success')
       redirect_to faculties_path
     else
-      flash[:error] = t('edit_faculty_error')
+      flash[:error] = t('faculty.flash.edit_error')
       render 'edit'
     end
   end

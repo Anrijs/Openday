@@ -5,7 +5,7 @@
       %span
         =openday.name
         - unless openday.ready?
-          %small.red=t('openday.missing_data')
+          %small.red=t('openday.errors.missing_data')
       = link_to '' ,edit_openday_path(openday), remote: true, class: 'clickable glyphicon glyphicon-pencil pull-right', onclick: "$('#myModal').modal('toggle');"
     .list-group-child{:class => ('list-expandable' if openday.ready?) }
       - openday.openday_faculties.each do |od_faculty|
@@ -16,9 +16,9 @@
             = od_faculty.faculty.name
             %small{:class => ("error-text" unless od_faculty.openday_programmes.count > 0)}
               = "(#{od_faculty.openday_programmes.count}"
-              = "#{t('faculty_programmes.count', :count => od_faculty.openday_programmes.count)})"
+              = "#{t('faculty.programmes.count', :count => od_faculty.openday_programmes.count)})"
               - unless od_faculty.ready?
-                %small.red=t('openday.missing_timeslots')
+                %small.red=t('openday.errors.missing_timeslots')
         .list-group-child{:class => ('list-expandable' if od_faculty.ready?) }
           - od_faculty.openday_programmes.each do |od_programme|
             .list-group-head.sub
@@ -27,7 +27,7 @@
               %span.clickable.glyphicon-left.glyphicon{onclick: 'toggleChildren(  this)', class: (od_programme.ready? ? 'glyphicon-chevron-down' : 'glyphicon-chevron-up')}
               %span= od_programme.programme.name
               - unless od_programme.ready?
-                %small.red=t('openday.missing_timeslots')
+                %small.red=t('openday.errors.missing_timeslots')
             .list-group-child{:class => ('list-expandable' if od_programme.ready?) }
               - od_programme.openday_timeslots.each do |od_timeslot|
                 .list-group-child
@@ -46,14 +46,14 @@
                   %span.spacer
                   %span.spacer
                   = link_to '', openday_timeslots_path(openday, od_programme), remote: true, onclick: "$('#myModal').modal('toggle');", class: 'clickable glyphicon-left glyphicon glyphicon-plus'
-                  %small= t('openday_add_timeslots')
+                  %small= t('openday.add_timeslots')
           .list-group-head.sub
             %span.spacer
             %span.spacer
             = link_to '', openday_programmes_path(openday, od_faculty), remote: true, onclick: "$('#myModal').modal('toggle');", class: 'clickable glyphicon-left glyphicon glyphicon-plus'
-            %small= t('openday_select_programmes')
+            %small= t('openday.select_programmes')
       .list-group-head.sub
         %span.spacer
         = link_to '', openday_faculties_path(openday),remote: true, onclick: "$('#myModal').modal('toggle');", class: 'clickable glyphicon-left glyphicon glyphicon-plus'
-        %small= t('openday_select_faculties')
+        %small= t('openday.select_faculties')
     

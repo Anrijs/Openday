@@ -11,7 +11,7 @@
     =@openday.name
   .form-reg
     =form_for @registrant do |f|
-      %h2.page-header=t('registration.presonal_inforamtion.title')
+      %h2.page-header=t('registration.personal_information.title')
       .form-group.row
         = f.label :name, t('registration.personal_information.name'), class: 'col-sm-2 col-xs-12'
         = f.text_field :name, class: 'form-custom col-sm-6 col-xs-12'
@@ -24,33 +24,31 @@
     
       %h2.page-header=t('registration.contact_information.title')  
       .form-group.row
-        = f.label :email, t('registration.personal_information.email'), class: 'col-sm-2 col-xs-12'
+        = f.label :email, t('registration.contact_information.email'), class: 'col-sm-2 col-xs-12'
         = f.text_field :email, class: 'form-custom col-sm-6 col-xs-12'
       .form-group.row
-        = f.label :address1, t('registration.personal_information.address1'), class: 'col-sm-2 col-xs-12'
+        = f.label :address1, t('registration.contact_information.address1'), class: 'col-sm-2 col-xs-12'
         = f.text_field :address1, class: 'form-custom col-sm-6 col-xs-12'
       .form-group.row
-        = f.label :address2, t('registration.personal_information.address2'), class: 'col-sm-2 col-xs-12'
+        = f.label :address2, t('registration.contact_information.address2'), class: 'col-sm-2 col-xs-12'
         = f.text_field :address2, class: 'form-custom col-sm-6 col-xs-12'
       .form-group.row
-        = f.label :city, t('registration.personal_information.city'), class: 'col-sm-2 col-xs-12'
+        = f.label :city, t('registration.contact_information.city'), class: 'col-sm-2 col-xs-12'
         = f.text_field :city, class: 'form-custom col-sm-6 col-xs-12'
       .form-group.row
-        = f.label :state, t('registration.personal_information.state'), class: 'col-sm-2 col-xs-12'
+        = f.label :state, t('registration.contact_information.state'), class: 'col-sm-2 col-xs-12'
         = f.text_field :state, class: 'form-custom col-sm-6 col-xs-12'
       .form-group.row
-        = f.label :country, t('registration.personal_information.country'), class: 'col-sm-2 col-xs-12'
+        = f.label :country, t('registration.contact_information.country'), class: 'col-sm-2 col-xs-12'
         = f.text_field :country, class: 'form-custom col-sm-6 col-xs-12'
       .form-group.row
-        = f.label :postal_code, t('registration.personal_information.postal_code'), class: 'col-sm-2 col-xs-12'
+        = f.label :postal_code, t('registration.contact_inforamtion.postal_code'), class: 'col-sm-2 col-xs-12'
         = f.text_field :postal_code, class: 'form-custom col-sm-6 col-xs-12'
-      .form-group.row
-        = f.label :year, t('registration.personal_information.year'), class: 'col-sm-2 col-xs-12'
-        = f.text_field :year, class: 'form-custom col-sm-6 col-xs-12'
+      
       %h2.page-header=t('registration.register.title')
-      %p=t('registration.registrer.description')
-      %p=t('registration.registrer.limit', min: 1.to_s, max: 3.to_s)
-      %p=t('registration.registrer.notice')
+      %p=t('registration.register.description')
+      %p=t('registration.register.limit', min: 1.to_s, max: 3.to_s)
+      %p=t('registration.register.notice')
       - @openday.openday_faculties.each do |faculty|
         %h3=faculty.faculty.name
         - faculty.openday_programmes.each do |programme|
@@ -65,6 +63,9 @@
               %input{type: "hidden", id: "programme"+programme.id.to_s+"-previous"}
       
               %br
+      .form-group.row
+        = f.label :year, t('registration.contact_information.year'), class: 'col-sm-2 col-xs-12'
+        = f.text_field :year, class: 'form-custom col-sm-6 col-xs-12'      
       = hidden_field_tag :openday_id, @openday.id 
       = f.submit "Submit"
 

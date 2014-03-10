@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225075219) do
+ActiveRecord::Schema.define(version: 20140305145408) do
 
   create_table "admins", force: true do |t|
     t.string   "username",               default: "", null: false
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(version: 20140225075219) do
     t.string   "slug"
     t.text     "description"
     t.string   "url"
+  end
+
+  create_table "images", force: true do |t|
+    t.string   "image_uid"
+    t.string   "image_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "openday_faculties", force: true do |t|
@@ -94,11 +101,21 @@ ActiveRecord::Schema.define(version: 20140225075219) do
     t.integer  "year"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "openday_id"
   end
 
   create_table "registrations", force: true do |t|
     t.integer  "registrant_id"
     t.integer  "timeslot_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "openday_id"
+  end
+
+  create_table "settings", force: true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.string   "image"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

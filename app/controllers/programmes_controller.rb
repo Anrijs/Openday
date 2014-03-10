@@ -7,10 +7,10 @@ class ProgrammesController < ApplicationController
    def create
     @programme = Programme.new(programme_params)
     if @programme.save
-      flash[:success] = I18n.t('create_programme_success')
+      flash[:success] = I18n.t('programme.flash.create_success')
       redirect_to faculties_path
     else
-      flash[:error] = I18n.t('create_programme_error')
+      flash[:error] = I18n.t('programme.flash.create_error')
       render 'new'
     end
   end
@@ -26,10 +26,10 @@ class ProgrammesController < ApplicationController
 
     @programme.update_attributes(programme_params)
     if @programme.save
-      flash[:success] = t('edit_programme_success')
+      flash[:success] = t('programme.flash.edit_success')
       redirect_to faculties_path
     else
-      flash[:error] = t('edit_programme_error')
+      flash[:error] = t('programme.flash.edit_error')
       render 'edit'
     end
   end

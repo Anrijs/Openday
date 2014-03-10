@@ -1,7 +1,7 @@
 .modal-dialog
   .modal-content
     .modal-header
-      %h4= t('programme_select')
+      %h4= t('programme.select')
     .modal-body
       =form_tag({controller: "opendays", action: "add_programmes"}, method: "post", class: "form-group")
       - @programmes.each do |programme|
@@ -13,6 +13,6 @@
           =label_tag('programme['+programme.id.to_s+']', programme.name)
       =hidden_field_tag( 'faculty_id', params[:id] )   
       =submit_tag('Save', class: 'btn btn-primary pull-right modal-btn')
-      = link_to t('cancel'), opendays_path, class: 'btn btn-default pull-right modal-btn' 
+      = link_to t('btn.cancel'), opendays_path, class: 'btn btn-default pull-right modal-btn' 
 
       %a{href: 'javascript:void(0)', onclick: '$("input").attr("checked", "checked");'}= t('select_all')

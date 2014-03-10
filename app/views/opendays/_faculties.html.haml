@@ -1,7 +1,7 @@
 .modal-dialog
   .modal-content
     .modal-header
-      %h4= t('faculty_select')
+      %h4= t('faculty.select')
     .modal-body
       =form_tag({controller: "opendays", action: "add_faculties"}, method: "post", class: "form-group")
       - @faculties.each do |faculty|
@@ -13,6 +13,6 @@
 
           =label_tag('faculty['+faculty.id.to_s+']', faculty.name)
       =submit_tag('Save', class: 'btn btn-primary pull-right modal-btn')
-      %button.btn.btn-default.pull-right.modal-btn{'data-dismiss' => "modal"}= t('cancel')
+      %button.btn.btn-default.pull-right.modal-btn{'data-dismiss' => "modal"}= t('btn.cancel')
 
       %a{href: 'javascript:void(0)', onclick: '$("input").attr("checked", "checked");'}= t('select_all')

@@ -7,10 +7,17 @@ class RegistrantsController < ApplicationController
       #TODO
     #else create new
 
-    @openday = Openday.find(params[:openday_id])
 
+    @openday = Openday.find(params[:openday_id])
+    @registrant = Registrant.find_by_openday_id_and_email(@openday, params[:registrant]['email'])
+
+    if @registrant
+      @registrant.destroy
+    end
+    
     if @openday.active?
       @registrant = Registrant.new(registrant_params)
+      @registrant.openday_id = @openday.id
       @registrant.save
   
       programmes = params[:programme]

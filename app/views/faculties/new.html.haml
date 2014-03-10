@@ -1,14 +1,14 @@
 .modal-dialog
   .modal-content
     .modal-header
-      %h4= t('faculty_add')
+      %h4= t('faculty.add')
     .modal-body
       = simple_form_for @faculty, html:{class: 'form-openday'} do |f|
         .form-group.openday-form
           %fieldset
-            = f.label :name, t('faculty_name') 
+            = f.label :name, t('faculty.name') 
             = f.input :name, :as => :string, :label => false, :input_html => {:autocomplete => :off,:class => 'form-control col-sm-6'}
-            = f.label :short_name, t('faculty_short')
+            = f.label :short_name, t('faculty.short')
             = f.input :short_name, :as => :string, :label => false, :input_html => {:autocomplete => :off,:class => ' form-control col-sm-6'}
-        = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right modal-btn'
-        = link_to t('cancel'), faculties_path, class: 'btn btn-default pull-right modal-btn'
+        = f.submit t('btn.submit'),remote: true, disable_with: t('btn.submiting'), class: 'btn btn-primary pull-right modal-btn'
+        = link_to t('btn.cancel'), faculties_path, class: 'btn btn-default pull-right modal-btn'

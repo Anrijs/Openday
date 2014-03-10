@@ -7,16 +7,16 @@ class OpendaysController < ApplicationController
   end
 
   def new
-    @openday = Openday.new
+    @openday = openday.add
   end
 
   def create
-    @openday = Openday.new openday_params
+    @openday = openday.add openday_params
     if @openday.save
-      flash[:success] = I18n.t('add_openday_success')
+      flash[:success] = I18n.t('openday.flash.create_success')
       redirect_to opendays_path
     else
-      flash[:error] = I18n.t('add_openday_failure')
+      flash[:error] = I18n.t('openday.flash.create_error')
       render 'new'
     end
   end
@@ -32,10 +32,10 @@ class OpendaysController < ApplicationController
 
     @openday.update_attributes(openday_params)
     if @openday.save
-      flash[:success] = I18n.t('edit_openday_success')
+      flash[:success] = I18n.t('openday.flash.edit_success')
       redirect_to opendays_path
     else
-      flash[:error] = I18n.t('edit_openday_failure')
+      flash[:error] = I18n.t('openday.flash.edit_error')
       render 'edit'
     end
 
@@ -46,10 +46,10 @@ class OpendaysController < ApplicationController
     @openday = Openday.find(params[:id]) if @openday.nil?
 
     if @openday.destroy
-      flash[:success] = I18n.t('delete_openday_success')
+      flash[:success] = I18n.t('openday.flash.delete_success')
       redirect_to opendays_path
     else
-      flash[:error] = I18n.t('delete__openday_failure')
+      flash[:error] = I18n.t('openday.flash.delete_error')
       render 'edit'
     end
   end

@@ -44,4 +44,6 @@ group :development, :test do
   gem 'simplecov-badge', :require => false
   gem 'pry'
   gem 'pry-nav'
+  gem 'i18n_tools'
+  gem 'i18n-tasks'
 end

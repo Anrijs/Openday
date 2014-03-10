@@ -19,19 +19,19 @@
           .navbar-collapse.collapse
             %ul.nav.navbar-nav
               - if params[:controller] == 'opendays'
-                %li.active=link_to t('nav_opendays'), opendays_path
+                %li.active=link_to t('nav.opendays'), opendays_path
               - else
-                %li=link_to t('nav_opendays'), opendays_path
+                %li=link_to t('nav.opendays'), opendays_path
   
               - if params[:controller] == 'a'
-                %li.active=link_to t('nav_reports'), root_path
+                %li.active=link_to t('nav.reports'), root_path
               - else
-                %li=link_to t('nav_reports'), root_path
+                %li=link_to t('nav.reports'), root_path
   
               - if params[:controller] == 'faculties'
-                %li.active=link_to t('nav_faculties'), faculties_path
+                %li.active=link_to t('nav.faculties'), faculties_path
               - else
-                %li=link_to t('nav_faculties'), faculties_path
+                %li=link_to t('nav.faculties'), faculties_path
             %ul.nav.navbar-nav.navbar-right
               %li=link_to t('sign_out'), destroy_admin_session_path, method: :delete
 

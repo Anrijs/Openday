@@ -1,21 +1,21 @@
 .modal-dialog
   .modal-content
     .modal-header
-      %h4= t('timeslot_edit')
+      %h4= t('timeslot.edit')
     .modal-body
       = simple_form_for @timeslot, :url => openday_update_timeslots_path(params[:openday_id], @timeslot), html:{class: 'form-openday'} do |f|
         .form-group.openday-form
           %fieldset
-            = f.label :time_from, t('timeslot_from')
+            = f.label :time_from, t('timeslot.from')
             = f.input :time_from, :as => :string, :label => false, :input_html => {:placeholder => "HH:mm", :autocomplete => :off,:class => 'timepicker form-control col-sm-6'}
 
-            = f.label :time_till, t('timeslot_till')
+            = f.label :time_till, t('timeslot.till')
             = f.input :time_till, :as => :string, :label => false, :input_html => {:placeholder => "HH:mm", :autocomplete => :off,:class => 'timepicker form-control col-sm-6'}
 
-            = f.label :capacity, t('timeslot_capacity')
+            = f.label :capacity, t('timeslot.capacity')
             = f.input :capacity, :label => false, :input_html => {:autocomplete => :off,:class => 'form-control col-sm-6'}
 
-        = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right modal-btn'  
-        = link_to t('cancel'), opendays_path, class: 'btn btn-default pull-right modal-btn' 
+        = f.submit t('btn.submit'),remote: true, disable_with: t('btn.submiting'), class: 'btn btn-primary pull-right modal-btn'  
+        = link_to t('btn.cancel'), opendays_path, class: 'btn btn-default pull-right modal-btn' 
 :javascript
   $('.timepicker').timepicker();

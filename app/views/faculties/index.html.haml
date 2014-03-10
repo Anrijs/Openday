@@ -1,10 +1,10 @@
-%h1= t('faculty_panel')
+%h1= t('faculty.panel')
 
 %ul.list-group#faculty_list
   - @faculties.each do |faculty|
     = render partial: 'list', :locals => {:faculty => faculty }
 
-= link_to t('faculty_add'), new_faculty_path, remote: true, class: 'btn btn-success pull-right', onclick: "$('#myModal').modal('toggle');"
+= link_to t('faculty.add'), new_faculty_path, remote: true, class: 'btn btn-success pull-right', onclick: "$('#myModal').modal('toggle');"
 #res
 
 

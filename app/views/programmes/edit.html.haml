@@ -1,21 +1,21 @@
 .modal-dialog
   .modal-content
     .modal-header  
-      %h4= t('programme_edit')
+      %h4= t('programme.edit')
     .modal-body
       = simple_form_for([@programme.faculty, @programme], html:{class: 'form-openday'}) do |f|
         .form-group.openday-form
           %fieldset
-            = f.label :name, t('faculty_name') 
+            = f.label :name, t('faculty.name') 
             = f.input :name, :as => :string, :label => false, :input_html => {:autocomplete => :off,:class => 'form-control col-sm-6'}
 
-            = f.label :description, t('programme_description') 
+            = f.label :description, t('programme.description') 
             = f.input :description, :as => :text, :label => false, :input_html => {:placeholder => t('optional'), :autocomplete => :off,:class => 'form-control col-sm-6'}
 
-            = f.label :url, t('programme_url') 
+            = f.label :url, t('programme.url') 
             = f.input :url, :as => :string, :label => false, :input_html => {:placeholder => t('optional'), :autocomplete => :off,:class => 'form-control col-sm-6'}
 
-        = f.submit t('btn_submit'),remote: true, disable_with: t('btn_submiting'), class: 'btn btn-primary pull-right modal-btn', :confirm => "An email to reset your password has been sent"
-        = link_to t('cancel'), faculties_path, class: 'btn btn-default pull-right modal-btn' 
+        = f.submit t('btn.submit'),remote: true, disable_with: t('btn.submiting'), class: 'btn btn-primary pull-right modal-btn', :confirm => "An email to reset your password has been sent"
+        = link_to t('btn.cancel'), faculties_path, class: 'btn btn-default pull-right modal-btn' 
 
-      = button_to(t('delete'), [@programme.faculty, @programme], confirm: t('confirm_delete'), method: 'delete', class: "btn btn-danger")
+      = button_to(t('btn.delete'), [@programme.faculty, @programme], confirm: t('confirm_delete'), method: 'delete', class: "btn btn-danger")

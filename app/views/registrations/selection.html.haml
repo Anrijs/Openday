@@ -7,15 +7,15 @@
       =link_to openday.name, root_path+'?openday='+openday.slug 
     %div
       %b
-        =t('openday_registration_open')
+        =t('openday.registration_open')
       =openday.registration_open.strftime('%H:%M, %b %d, %Y')
     %div
       %b
-        =t('openday_registration_end')
+        =t('openday.registration_end')
       =openday.registration_end.strftime('%H:%M, %b %d, %Y')
     %div
       %b
-        =t('openday_date')
+        =t('openday.date')
       =openday.date.strftime('%b %d, %Y')
     %div
       =link_to t('openday.register'), root_path+'?openday='+openday.slug, class: "btn btn-success button-span"
