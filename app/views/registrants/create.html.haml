@@ -1,0 +1,11 @@
+%h1=t('registration.success.title', name: @openday.name)
+
+%p.lead.lead-list
+  =t('registration.success.registred_for', count: @programmes.count)
+  %ul.lead-list
+    - @programmes.each do |key, programme|
+      %li.lead.lead-list=OpendayProgramme.find(key).programme.name
+- if @recreated
+  %p.lead.lead-notice=t("registration.success.changed")
+%p.lead=t('registration.success.register_change')
+%p.lead=t('registration.success.email_sent', email: @registrant.email)
