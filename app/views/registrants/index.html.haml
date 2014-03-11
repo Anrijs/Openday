@@ -68,9 +68,9 @@
         - faculty.openday_programmes.each do |programme|
           %h4
             - if(params["programme"])
-              %input.time_enable{id: 'programme'+programme.id.to_s+'-enable', type: 'checkbox', 'programme' => 'programme'+programme.id.to_s, name: 'programme['+programme.id.to_s+']', value: '0', :checked => ('true' unless params['programme'][programme.id.to_s].nil?)}
+              %input.time_enable{id: 'programme'+programme.id.to_s+'-enable', type: 'checkbox', 'programme' => 'programme'+programme.id.to_s, name: 'programme['+programme.id.to_s+']', value: '0', :checked => ('true' unless params['programme'][programme.id.to_s].nil?), :class => ("error" unless @registrant.errors["programme[#{programme.id.to_s}]"].nil?)}
             - else
-              %input.time_enable{id: 'programme'+programme.id.to_s+'-enable', type: 'checkbox', 'programme' => 'programme'+programme.id.to_s, name: 'programme['+programme.id.to_s+']', value: '0'}  
+              %input.time_enable{id: 'programme'+programme.id.to_s+'-enable', type: 'checkbox', 'programme' => 'programme'+programme.id.to_s, name: 'programme['+programme.id.to_s+']', value: '0', :class => ("error" unless @registrant.errors["programme[#{programme.id.to_s}]"].nil?)}  
             =programme.programme.name
           %div.programme-block{id: 'programme'+programme.id.to_s+'-block'}
             - programme.openday_timeslots.each do |timeslot|
@@ -144,7 +144,7 @@
   
   function diableTimeslots(from, till) {
     $("input.time").each(function (index) {
-      if ((from <= $(this).attr('time_from') && $(this).attr('time_from') <= till)       || (from <= $(this).attr('time_till') && $(this).attr('time_till') <= till))       {
+      if ( ($(this).attr('time_from') < till && ($(this).attr('time_till') > from))) {
           $(this).prop("disabled", true);
       }
     });
@@ -155,4 +155,20 @@
       if (index > -1) {
           clicks.splice(index, 1);
       }
-  }      
+  } 
+
+  $( document ).ready(function() {
+    $("input.time").each(function (index) {
+      btn = $(this);
+      if(btn.prop("checked") == true) {
+        from = btn.attr('time_from');
+        till = btn.attr('time_till');
+  
+        prev = $(this).attr("programme") + "-previous"
+        newvalue = from + '-' + till;
+        clicks.push(newvalue);
+        $('#' + prev).attr('value', newvalue);
+  	  }
+    });
+    reloadTimes();
+  });     
