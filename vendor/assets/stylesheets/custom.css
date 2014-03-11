@@ -199,5 +199,12 @@ ul.error_list {
 	margin-bottom: 0;
 }
 
-li.lead.lead-left: 16px;
+li.lead.lead-left: {
+	margin-left: 8px;
+}
+
+.page-break { 
+  clear: both !important;
+  display: block !important;
+  page-break-before: always !important;
 }

@@ -40,12 +40,18 @@ class RegistrantsController < ApplicationController
           Registration.create(registrant_id: @registrant.id, openday_id: @openday.id, timeslot_id: programme)
         end
         email = render_to_string  partial: '/email/index'
+        pdf_text = render_to_string  partial: '/email/pdf'
+
+        kit = PDFKit.new(pdf_text)
+        # Get an inline PDF
+        pdf = kit.to_pdf
+
         Pony.mail(
-          :to => @registrant.email
+          :to => @registrant.email,
           :subject => t('mail.subject'),
           :body => 'test',
           :html_body => email,
-          #:attachments => {"foo.txt" => "content of foo.txt"}, pending
+          :attachments => {"foo.pdf" => pdf},
           :body_part_header => { content_disposition: "inline" }
         )
         render 'create'

@@ -17,6 +17,8 @@ gem 'validates_timeliness', '~> 3.0'
 gem 'pony'
 gem 'country_select'
 gem 'validates_email_format_of'
+gem 'wkhtmltopdf-binary'
+gem 'pdfkit'
 
 group :development do
   gem "capistrano"
