@@ -14,8 +14,9 @@
       %p.lead.error
         %strong=t('registration.register.contains_errors', count: @registrant.errors.count)
       %ul.lead.error_list
-        - @registrant.errors.full_messages.each do |msg|
-          %li=msg
+        - @registrant.errors.messages.each do |msg|
+          - unless msg.last.first.blank? 
+            %li=msg.last.first
 
     =form_for @registrant, :url => { :action => "create" } do |f|
 
@@ -48,21 +49,22 @@
         = f.text_field :state, class: 'form-custom col-sm-6 col-xs-12'
       .form-group.row
         = f.label :country, t('registration.contact_information.country'), class: 'col-sm-2 col-xs-12'
-        = f.text_field :country, class: 'form-custom col-sm-6 col-xs-12'
+        = country_select("registrant", "country", [ "NL", "BE", "DE", "PL", "GB", "TR", "CN", "IN" ], {iso_codes: true}, { :class => 'form-custom col-sm-6 col-xs-12' })
+
       .form-group.row
         = f.label :postal_code, t('registration.contact_inforamtion.postal_code'), class: 'col-sm-2 col-xs-12'
         = f.text_field :postal_code, class: 'form-custom col-sm-6 col-xs-12'
       
       %h2.page-header=t('registration.companions.title')
+      %p.lead=t('registration.companions.description')  
       .form-group.row
-        %p=t('registration.companions.description')  
         = f.label :companions, t('registration.companions.title'), class: 'col-sm-2 col-xs-12'
         = f.select :companions, options_for_select((0..(CONFIG['registration']['companions_max'])).step(1).to_a.map{|s| ["#{s}", s]},  :selected => (params['registrant']['companions'] unless params['registrant'].nil?)), { include_blank: false }, class: 'form-custom col-sm-6 col-xs-12'    
 
       %h2.page-header=t('registration.register.title')
-      %p=t('registration.register.description')
-      %p=t('registration.register.limit', min: CONFIG['registration']['limit_min'].to_s, max: CONFIG['registration']['limit_max'].to_s)
-      %p=t('registration.register.notice')
+      %p.lead.lead-compact=t('registration.register.description')
+      %p.lead.lead-compact=t('registration.register.limit', min: CONFIG['registration']['limit_min'].to_s, max: CONFIG['registration']['limit_max'].to_s)
+      %p.lead.lead-compact.lead-notice=t('registration.register.notice')
       - @openday.openday_faculties.each do |faculty|
         %h3=faculty.faculty.name
         - faculty.openday_programmes.each do |programme|

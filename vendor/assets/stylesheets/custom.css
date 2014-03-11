@@ -186,3 +186,18 @@ ul.error_list {
   padding-left: 32px;
   margin-left: 24px;
 }
+
+.lead-compact {
+	margin-bottom: 0px;
+}
+
+.lead-notice {
+	color: #0000cc;
+}
+
+.lead-list {
+	margin-bottom: 0;
+}
+
+li.lead.lead-left: 16px;
+}

@@ -15,6 +15,8 @@ gem 'jquery-rails', "~> 3.1.0"
 gem 'jquery-ui-rails'
 gem 'validates_timeliness', '~> 3.0'
 gem 'pony'
+gem 'country_select'
+gem 'validates_email_format_of'
 
 group :development do
   gem "capistrano"

@@ -1,5 +1,6 @@
 class RegistrantsController < ApplicationController
   def index
+
     @registrant = Registrant.new
     unless params[:openday]
       @openday = Openday.find_active
@@ -23,21 +24,33 @@ class RegistrantsController < ApplicationController
     @openday = Openday.find(params[:openday_id])
     @registrant = Registrant.find_by_openday_id_and_email(@openday, params[:registrant]['email'])
     
+    @recreated = false
     if @registrant
       @registrant.destroy
+      @recreated = true
     end
     
     if @openday.active?
-      programmes = params[:programme]
+      @programmes = params[:programme]
       @registrant = Registrant.new(registrant_params)
       @registrant.openday_id = @openday.id
-      @registrant.save
-      if(@registrant.valid?)
-        programmes.each do |key, programme|
+      if(@registrant.valid? and @programmes)
+        @registrant.save
+        @programmes.each do |key, programme|
           Registration.create(registrant_id: @registrant.id, openday_id: @openday.id, timeslot_id: programme)
         end
+        email = render_to_string  partial: '/email/index'
+        Pony.mail(
+          :to => @registrant.email
+          :subject => t('mail.subject'),
+          :body => 'test',
+          :html_body => email,
+          #:attachments => {"foo.txt" => "content of foo.txt"}, pending
+          :body_part_header => { content_disposition: "inline" }
+        )
+        render 'create'
       else
-        @registrant.check_programmes programmes
+      @registrant.check_programmes @programmes
         render 'index'  
       end
     end
