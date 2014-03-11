@@ -7,11 +7,11 @@ class OpendaysController < ApplicationController
   end
 
   def new
-    @openday = openday.add
+    @openday = Openday.new
   end
 
   def create
-    @openday = openday.add openday_params
+    @openday = Openday.new openday_params
     if @openday.save
       flash[:success] = I18n.t('openday.flash.create_success')
       redirect_to opendays_path
