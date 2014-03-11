@@ -23,6 +23,10 @@ config/initializers/pony.rb
 rspec-test.html
 rspec_ci-test.html
 /coverage
+Gemfile.save
+Gemfile.lock
+db/schema.rb
+explicit.pdf
 
 */.DS_Store
 .DS_Store

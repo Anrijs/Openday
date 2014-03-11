@@ -19,6 +19,9 @@ gem 'country_select'
 gem 'validates_email_format_of'
 gem 'wkhtmltopdf-binary'
 gem 'pdfkit'
+gem 'cairo'
+gem 'barby'
+gem 'chunky_png'
 
 group :development do
   gem "capistrano"

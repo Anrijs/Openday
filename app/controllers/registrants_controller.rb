@@ -21,6 +21,10 @@ class RegistrantsController < ApplicationController
   end
 
   def create
+    require 'barby'
+    require 'barby/barcode/code_128'
+    require 'barby/outputter/svg_outputter'
+
     @openday = Openday.find(params[:openday_id])
     @registrant = Registrant.find_by_openday_id_and_email(@openday, params[:registrant]['email'])
     
@@ -39,9 +43,9 @@ class RegistrantsController < ApplicationController
         @programmes.each do |key, programme|
           Registration.create(registrant_id: @registrant.id, openday_id: @openday.id, timeslot_id: programme)
         end
+        @barcode = Barby::Code128B.new(@registrant.id)
         email = render_to_string  partial: '/email/index'
         pdf_text = render_to_string  partial: '/email/pdf'
-
         kit = PDFKit.new(pdf_text)
         # Get an inline PDF
         pdf = kit.to_pdf
@@ -60,6 +64,11 @@ class RegistrantsController < ApplicationController
         render 'index'  
       end
     end
+  end
+
+
+  def to_pdf
+   render :pdf  => 'file_name'      
   end
 
 private
