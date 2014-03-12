@@ -1,28 +1,75 @@
-%div{ style: 'float: right; width:230px; text-align: center;'}
-  %img{:width => 220, height: 64, :src=> "data:image/svg+xml;base64,#{Base64.encode64(@barcode.to_svg)}"}
-  = @registrant.id
+- @programmes.each do |programme, timeslot|
+  %div
+    %h3
+      %img{src: "#{CONFIG['page_http_url']}/university/pdf_logo.png", style: "height: 26px;"}
+      Test University
+    
+    %hr.alt{style: "display: block; border-top: solid 1px #dddddd"}
+    %div{ style: 'float: right; width:230px; text-align: center;'}
+      %img{:width => 220, height: 64, :src=> "data:image/svg+xml;base64,#{Base64.encode64(@barcode.to_svg)}"}
+      = @registrant.id
+    
+    %div{style: "width:100%; height: 128px;"}
+    
+    %table{style: "width:70%; margin: 0 auto; border-collapse:collapse;"}
+      %tr
+        %td{style: "padding-left: 4px; padding-right: 4px; border: solid 1px #ccc;"} 
+          %span{style: "font-size:10px;"} Event
+          %br
+          %span{style: "display: block; font-size: 18px; text-align: center;"}=@openday.name
+      %tr
+        %td{style: "padding-left: 4px; padding-right: 4px; border: solid 1px #ccc;"} 
+          %span{style: "font-size:10px;"} Date
+          %br
+          %span{style: "display: block; font-size: 18px; text-align: center;"}=@openday.date.strftime('%A, %d %B %Y')
+      %tr
+        %td{style: "padding-left: 4px; padding-right: 4px; border: solid 1px #ccc;"} 
+          %span{style: "font-size:10px;"} Programme + Time
+          %br
+          %span{style: "display: block; font-size: 18px; text-align: center;"}
+            =OpendayProgramme.find(programme).programme.name
+            - time = OpendayTimeslot.find(timeslot)
+            = "#{time.time_from.strftime('%H:%m')}: #{time.time_till.strftime('%H:%m')}"
+    
+    
+    %p
+      Dear
+      %b="#{@registrant.name} #{@registrant.surname},"
+    
+    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, quod, deleniti iure quae soluta   distinctio vero rem nostrum molestias velit vel architecto accusamus cum dolore fugit id mollitia! Doloribus,   necessitatibus!
+    
+    %table{style: "width:100%; margin: 0 auto; font-size:12px; border-collapse:collapse;"}
+      %tr
+        %td{style: "padding-left: 4px; padding-right: 4px; width:40%; border: solid 1px #ccc;", rowspan: '2'} 
+          %b Free stuff
+          %p
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus eos quam quo voluptatum optio fuga a quibusdam dolorem. Mollitia eaque similique laudantium voluptas quod nostrum magni totam maiores atque pariatur.
+        %td{style: "padding-left: 4px; padding-right: 4px; width:40%; border: solid 1px #ccc;"} 
+          %b Theres more
+          %p
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, error nam reprehenderit facilis quas a sunt culpa doloremque ullam repudiandae aperiam dolores accusamus animi.
+      %tr
+        %td{style: "padding-left: 4px; padding-right: 4px; border: solid 1px #ccc;"} 
+          %b Run rabbit
+          %p 
+            More randomness for this all.  
+     
+    %p
+      Warmest regards,
+      %br
+      Test University team 
+  
+    %div{style: "height: 150px; width: 100%;"}
+      %div{style: "float:left; text-align: middle;"}
+        %span{style: "font-size: 12px;"} github.com
+        %br
+        %img{src: "#{CONFIG['page_http_url']}/university/qr_1.png", style: "height: 120px;"}
+  
+      %div{style: "float: right; text-align: middle;"}
+        %span{style: "font-size: 12px;"} github.com/Anrijs
+        %br
+        %img{src: "#{CONFIG['page_http_url']}/university/qr_2.png", style: "height: 120px;"}
+    
+    - unless @programmes.to_a.last[1] == timeslot
+      %div{style: "clear: both !important; display: block !important; page-break-before: always !important;"}
 
-%div{style: "width:100%; height: 128px;"}
-%table{style: "width:60%; margin: 0 auto; border: solid 1px #dddddd;"}
-  %tr
-    %td OD 2014 March
-  %tr
-    %td Date saturday ....
-  %tr
-    %td Programme
-
-
-%p
-  Dear
-  %b name surname,
-
-%p % Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, quod, deleniti iure quae soluta distinctio vero rem nostrum molestias velit vel architecto accusamus cum dolore fugit id mollitia! Doloribus, necessitatibus!
-
-%table{style: "width:60%; margin: 0 auto;"}
-  %tr
-    %td{colspan: '2'} Free parking & shuttle busses
-  %tr
-    %td Those accompanying you 
-    %td Time
-
-%p regards
