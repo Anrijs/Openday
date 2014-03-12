@@ -32,7 +32,7 @@
             = "#{time.time_from.strftime('%H:%m')}: #{time.time_till.strftime('%H:%m')}"
     
     
-    %p
+    %p{style: "margin-top:40px;"}
       =t('pdf.heading')
       %b="#{@registrant.name} #{@registrant.surname},"
     
@@ -63,7 +63,7 @@
         %br
         %img{src: "#{CONFIG['page_http_url']}/university/qr_1.png", style: "height: 120px;"}
   
-      %div{style: "float: right; text-align: middle;"}
+      %div{style: "float: right; text-align: center;"}
         %span{style: "font-size: 12px;"}=t('pdf.qr2')
         %br
         %img{src: "#{CONFIG['page_http_url']}/university/qr_2.png", style: "height: 120px;"}
