@@ -170,6 +170,7 @@
 
 .programme-block {
 	margin-left: 18px;
+	margin-bottom: 18px;
 }
 
 .field_with_errors {
@@ -201,10 +202,4 @@ ul.error_list {
 
 li.lead.lead-left: {
 	margin-left: 8px;
-}
-
-.page-break { 
-  clear: both !important;
-  display: block !important;
-  page-break-before: always !important;
 }

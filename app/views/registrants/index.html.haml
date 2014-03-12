@@ -96,8 +96,11 @@
       .form-group.row
         = f.label :year, t('registration.register.year'), class: 'col-sm-2 col-xs-12'
         = f.select :year, options_for_select((DateTime.now.year..(DateTime.now.year+3)).step(1).to_a.push("other").map{|s| ["in #{s}", s.to_i]}, :selected => (params['registrant']['year'] unless params['registrant'].nil?)), { include_blank: true }, class: 'form-custom col-sm-6 col-xs-12'
+      
+      %input.time_enable{id: 'confirm-terms', type: 'checkbox', name: 'confirm-terms'}
+        missing:terms_and_conditions
 
-
+     
       = hidden_field_tag :openday_id, @openday.id 
       = f.submit t('btn.register'), class: "btn btn-primary btn-lg"
 
