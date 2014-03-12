@@ -95,6 +95,7 @@ en:
     deleteing: "Deleteing"
     save: "Save"
     saving: "Saving"
+    register: "Register"
   # navbar
   nav:
     opendays: "Opendays"
@@ -178,14 +179,17 @@ en:
       terms_1: "I have read the "
       terms_2: "terms and conditions"
       terms_3: "Of Test University and agree to receive information about studying in Test University"
+      full: "Full"
+      availability:
+        one: "%{count} available"
+        other: "%{count} available"
   mail:
     subject: "Confirmation registration Bachelor’s Open Day, Test University"
     heading: "Dear %{name},"
     thanks:  "Thank you for registering for the Bachelor’s Open Day on %{date}!"
     registred_for: "You have registered for the following sessions:"
-    download_card_1: "Please click here for " 
-    download_card_2: "your registration cards. "
-    download_card_3: "Don’t forget to print it and bring it with you to the Bachelor’s Open Day."
+    download_card_1: "Please download your registration cards from attachemts." 
+    download_card_2: "Don’t forget to print it and bring it with you to the Bachelor’s Open Day."
     body_1: "Random info - Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, animi, a, eligendi, nemo modi mollitia eos possimus incidunt ipsam esse voluptas omnis quia optio voluptatibus sequi error architecto quam adipisci."
     body_2: "More random info about Openday. Like info links, suggestions or other."
     meetup: "We're looking forward to meeting you on %{date} and hope you enjoy your day at Test university"
