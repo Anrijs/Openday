@@ -1,7 +1,7 @@
 %table
   %tr
     %td{style: "width:15%"}
-    %td{style: "width:70%; height: 72px; border: solid 1px #dddddd;"}
+    %td{style: "width:70%; min-width: 480px; height: 72px; border: solid 1px #dddddd;"}
       %div{style: "height: 64px; background-color: #eeeeee;"}
       %div{style: "padding:16px;"}
         %b=t('mail.heading', name: @registrant.name)
@@ -12,9 +12,9 @@
             - @programmes.each do |key, programme|
               %li=OpendayProgramme.find(key).programme.name
         %p
-          =t('mail.download_card_1')
-          %a{href: "#"}=t('mail.download_card_2')
-          =t('mail.download_card_3')
+          %b=t('mail.download_card_1')
+          %br
+          =t('mail.download_card_2')
         
         %p=t('mail.body_1')
         %p=t('mail.body_2')
