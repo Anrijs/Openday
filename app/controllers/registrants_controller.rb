@@ -1,6 +1,5 @@
 class RegistrantsController < ApplicationController
   def index
-
     @registrant = Registrant.new
     unless params[:openday]
       @openday = Openday.find_active
