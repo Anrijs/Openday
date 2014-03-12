@@ -11,6 +11,8 @@ en:
   optional: "Optional"
   confirm_delete: "Are you sure?"
   delete: "Delete"
+  university:
+    name: "Test University"
   # openday
   openday:
     register: "Register"
@@ -191,3 +193,22 @@ en:
     regards_2: "Test university team"
     ps1: "P.S. Please ensure you are in time for registred session"
     ps2: "Family members or friends coming with you to this event do not have to register."
+  pdf:
+    event: "Event"
+    date: "Date"
+    programme_time: "Programme + time"
+    heading: 'Dear'
+    body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo placeat numquam natus beatae voluptate rem? Maiores, quisquam, dolore, laborum, a odio molestiae natus impedit blanditiis amet ipsum quo aliquid alias.'
+    table_1:
+      title: 'Free stuff'
+      body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus eos quam quo voluptatum optio fuga a quibusdam dolorem. Mollitia eaque similique laudantium voluptas quod nostrum magni totam maiores atque pariatur.'
+    table_2:
+      title: 'Theres more'
+      body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, error nam reprehenderit facilis quas a sunt culpa doloremque ullam repudiandae aperiam dolores accusamus animi.'
+    table_3:
+      title: 'Run rabbit'
+      body: 'More randomness!.'
+    regards_1: "Warm regards,"
+    regards_2: "Test university team"
+    qr1: 'github.com'
+    qr2: 'github.com/Anrijs'

@@ -2,7 +2,7 @@
   %div
     %h3
       %img{src: "#{CONFIG['page_http_url']}/university/pdf_logo.png", style: "height: 26px;"}
-      Test University
+      =t('university.name')
     
     %hr.alt{style: "display: block; border-top: solid 1px #dddddd"}
     %div{ style: 'float: right; width:230px; text-align: center;'}
@@ -14,17 +14,17 @@
     %table{style: "width:70%; margin: 0 auto; border-collapse:collapse;"}
       %tr
         %td{style: "padding-left: 4px; padding-right: 4px; border: solid 1px #ccc;"} 
-          %span{style: "font-size:10px;"} Event
+          %span{style: "font-size:10px;"}=t('pdf.event')
           %br
           %span{style: "display: block; font-size: 18px; text-align: center;"}=@openday.name
       %tr
         %td{style: "padding-left: 4px; padding-right: 4px; border: solid 1px #ccc;"} 
-          %span{style: "font-size:10px;"} Date
+          %span{style: "font-size:10px;"}=t('pdf.date')
           %br
           %span{style: "display: block; font-size: 18px; text-align: center;"}=@openday.date.strftime('%A, %d %B %Y')
       %tr
         %td{style: "padding-left: 4px; padding-right: 4px; border: solid 1px #ccc;"} 
-          %span{style: "font-size:10px;"} Programme + Time
+          %span{style: "font-size:10px;"}=t('pdf.programme_time')
           %br
           %span{style: "display: block; font-size: 18px; text-align: center;"}
             =OpendayProgramme.find(programme).programme.name
@@ -33,40 +33,38 @@
     
     
     %p
-      Dear
+      =t('pdf.heading')
       %b="#{@registrant.name} #{@registrant.surname},"
     
-    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, quod, deleniti iure quae soluta   distinctio vero rem nostrum molestias velit vel architecto accusamus cum dolore fugit id mollitia! Doloribus,   necessitatibus!
+    %p=t('pdf.body')
     
     %table{style: "width:100%; margin: 0 auto; font-size:12px; border-collapse:collapse;"}
       %tr
         %td{style: "padding-left: 4px; padding-right: 4px; width:40%; border: solid 1px #ccc;", rowspan: '2'} 
-          %b Free stuff
-          %p
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus eos quam quo voluptatum optio fuga a quibusdam dolorem. Mollitia eaque similique laudantium voluptas quod nostrum magni totam maiores atque pariatur.
+          %b=t('pdf.table_1.title')
+          %p=t('pdf.table_1.body')
+            
         %td{style: "padding-left: 4px; padding-right: 4px; width:40%; border: solid 1px #ccc;"} 
-          %b Theres more
-          %p
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, error nam reprehenderit facilis quas a sunt culpa doloremque ullam repudiandae aperiam dolores accusamus animi.
+          %b=t('pdf.table_2.title')
+          %p=t('pdf.table_2.body')
       %tr
         %td{style: "padding-left: 4px; padding-right: 4px; border: solid 1px #ccc;"} 
-          %b Run rabbit
-          %p 
-            More randomness for this all.  
+          %b=t('pdf.table_3.title')
+          %p=t('pdf.table_3.body')  
      
     %p
-      Warmest regards,
+      =t('pdf.regards_1')
       %br
-      Test University team 
+      =t('pdf.regards_2')
   
     %div{style: "height: 150px; width: 100%;"}
-      %div{style: "float:left; text-align: middle;"}
-        %span{style: "font-size: 12px;"} github.com
+      %div{style: "float:left; text-align: center;"}
+        %span{style: "font-size: 12px;"}=t('pdf.qr1')
         %br
         %img{src: "#{CONFIG['page_http_url']}/university/qr_1.png", style: "height: 120px;"}
   
       %div{style: "float: right; text-align: middle;"}
-        %span{style: "font-size: 12px;"} github.com/Anrijs
+        %span{style: "font-size: 12px;"}=t('pdf.qr2')
         %br
         %img{src: "#{CONFIG['page_http_url']}/university/qr_2.png", style: "height: 120px;"}
     
