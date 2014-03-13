@@ -22,6 +22,7 @@ gem 'pdfkit'
 gem 'cairo'
 gem 'barby'
 gem 'chunky_png'
+gem "highcharts-rails", "~> 3.0.0"
 
 group :development do
   gem "capistrano"
