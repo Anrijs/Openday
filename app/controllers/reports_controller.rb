@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  before_filter :authenticate_admin!
+
   def index
     @opendays = Openday.all
   end

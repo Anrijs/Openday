@@ -1,4 +1,6 @@
 class FacultiesController < ApplicationController
+  before_filter :authenticate_admin!
+
   def index
   	@faculties = Faculty.all
   end

@@ -1,4 +1,6 @@
 class ProgrammesController < ApplicationController
+  before_filter :authenticate_admin!
+
   def new
     @faculty = Faculty.find(params[:faculty_id])
   	@programme = @faculty.programmes.new
