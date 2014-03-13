@@ -3,6 +3,10 @@
 	padding: 8px;
 }
 
+.glyph-small {
+	font-size: 0.8em;
+}
+
 .error {
 	color: #cc4444;
 	margin-bottom: 12px;
@@ -56,6 +60,7 @@
 
 .list-group-head .glyphicon-chevron-down:hover,
 .list-group-head .glyphicon-chevron-right:hover,
+.list-group-head .glyphicon-eye-open:hover,
 .list-group-head .glyphicon-chevron-up:hover  {
 	color: #FF8800;
 	font-size: 0.8em;
@@ -170,7 +175,7 @@
 
 .programme-block {
 	margin-left: 18px;
-	margin-bottom: 18px;
+	margin-bottom: 32px;
 }
 
 .field_with_errors {
@@ -202,4 +207,13 @@ ul.error_list {
 
 li.lead.lead-left: {
 	margin-left: 8px;
+}
+
+a.unstyled {
+	color: #333333;
+}
+
+a.unstyled:hover {
+	text-decoration: none;
+	color: #FF8800;
 }
