@@ -14,6 +14,16 @@ en:
   university:
     name: "Test University"
   # openday
+  report:
+    for: "Report for %{name}"
+    total_registrations: "Total registrations for %{name}:"
+    total_registrants: "Total registrants for %{name}:"
+    registrants_chart: 
+      title: "Total registrations by day"
+      y_axis: "Registrants"
+    registrations_chart:
+      title: "Total registration per faculty"
+      y_axis: "Registrations"
   openday:
     register: "Register"
     name: "Name"
@@ -101,6 +111,8 @@ en:
     opendays: "Opendays"
     reports: "Reports"
     faculties: "Faculties"
+    reports: "Reports"
+    registration: "Registration"
   #validation messages
   validation:
     time_presence: "Time is required"

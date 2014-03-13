@@ -1,0 +1,114 @@
+%h1= t('report.for', name: @openday.name)
+
+%h4
+  %b=t('report.total_registrants', name: @openday.name )
+  =@openday.registrants.count
+
+%h4
+  %b=t('report.total_registrations', name: @openday.name )
+  =@openday.registrations.count
+
+%h3.page-header=t('report.registrants_chart.title')
+#container_chart_1{style: "min-width: 310px; height: 400px; margin: 0 auto"}
+
+%h3.page-header=t('report.registrations_chart.title')
+#container_chart_2{style: "min-width: 310px; height: 400px; margin: 0 auto"}
+
+
+- reg_timerange = ''
+- @openday_range.each do |val|
+  - reg_timerange += "'#{val}',"
+
+- reg_total = ''
+- total = 0
+- @openday_registrations.each do |val|
+  - unless val.nil?
+    - total = val+total
+    - reg_total += "#{total},"
+  - else
+    - reg_total += "null,"
+
+
+- registrations_list = ''
+- @faculty_registrations.each do |key, list|
+  - total = 0
+  - list_string = "{name: '#{OpendayFaculty.find(key).faculty.name}', data: ["
+  - list.each do |val|
+    - unless val.nil?
+      - total = val+total
+      - list_string += "#{total},"
+    - else
+      - list_string += "null,"
+  - list_string += ']},'
+  - registrations_list += list_string
+  
+:javascript
+  $(function () {
+    $('#container_chart_1').highcharts({
+      chart: {
+             type: 'spline',
+             zoomType: 'x',
+             spacingRight: 20
+            },
+      title: {
+        text: null,
+        x: -20 //center
+      },
+      xAxis: {
+        maxZoom: 10,
+        categories: [
+          #{reg_timerange}
+      ]},
+      yAxis: {
+        min: 0,
+        title: {
+          text: '#{t('report.registrants_chart.y_axis')}'
+        },
+      },
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle',
+        borderWidth: 0
+      },
+      series: [{
+        name: '#{@openday.name}',
+        data: [
+          #{reg_total}
+      ]}]
+    });
+  });
+
+  $(function () {
+    $('#container_chart_2').highcharts({
+      chart: {
+             type: 'spline',
+             zoomType: 'x',
+             spacingRight: 20
+            },
+      title: {
+        text: null,
+        x: -20 //center
+      },
+      xAxis: {
+        maxZoom: 10,
+        categories: [
+          #{reg_timerange}
+      ]},
+      yAxis: {
+        min: 0,
+        title: {
+          text: '#{t('report.registrations_chart.y_axis')}'
+        },
+      },
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle',
+        borderWidth: 0
+      },
+      series: [
+        #{registrations_list}
+      ]
+    });
+  });

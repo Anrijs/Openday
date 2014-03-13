@@ -1,0 +1,11 @@
+%h1= t('openday.panel')
+
+%ul.list-group#faculty_list
+  - @opendays.each do |openday|
+    %li.list-group-item
+      .list-group-head
+        = link_to report_path(openday.slug), class: 'unstyled' do
+          .list-group-child
+            %span.clickable.glyphicon-left.glyphicon.glyphicon-eye-open
+            %span
+              =openday.name  

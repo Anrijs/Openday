@@ -1,10 +1,14 @@
 Od::Application.routes.draw do
   devise_for :admins
+  
+  resources :reports do
+    get 'compare/:id' => 'reports#compare', as: :compare
+  end
+
   resources :opendays do
     #resources :openday_faculties
     #resources :openday_programmes
     #resources :openday_timeslots
-
     get 'faculties' => 'opendays#faculties'
     get 'programmes/:id/' => "opendays#programmes", as: :programmes
     get 'timeslots/:id' => "opendays#timeslots", as: :timeslots
