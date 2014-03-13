@@ -1,6 +1,7 @@
 class Programme < ActiveRecord::Base
   belongs_to :faculty
   has_many :openday_programmes
+  has_many :registrations
 
   validates_presence_of :name, message: I18n.t('validation.name_presence')
 

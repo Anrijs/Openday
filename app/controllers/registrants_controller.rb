@@ -39,8 +39,10 @@ class RegistrantsController < ApplicationController
       @registrant.openday_id = @openday.id
       if(@registrant.valid? and @programmes)
         @registrant.save
-        @programmes.each do |key, programme|
-          Registration.create(registrant_id: @registrant.id, openday_id: @openday.id, timeslot_id: programme)
+        @programmes.each do |programme, timeslot|
+          faculty = OpendayProgramme.find(programme).openday_faculty.faculty.id
+          Registration.create(registrant_id: @registrant.id, openday_id: @openday.id, 
+                              faculty_id: faculty, programme_id: programme, timeslot_id: timeslot)
         end
         @barcode = Barby::Code128B.new(@registrant.id)
         email = render_to_string  partial: '/email/index'
@@ -49,14 +51,24 @@ class RegistrantsController < ApplicationController
         # Get an inline PDF
         pdf = kit.to_pdf
 
-        Pony.mail(
-          :to => @registrant.email,
-          :subject => t('mail.subject'),
-          :body => 'test',
-          :html_body => email,
-          :attachments => {"foo.pdf" => pdf},
-          :body_part_header => { content_disposition: "inline" }
-        )
+        if Rails.env.development?
+          Pony.mail(
+            :from => 'tester@localhost',
+            :to => 'ajargans@gmail.com',
+            :subject => "[Test] "+t('mail.subject'),
+            :html_body => email,
+            :attachments => {"RegistrationCard.pdf" => pdf},
+            :body_part_header => { content_disposition: "inline" }
+          )
+        else
+          Pony.mail(
+            :to => @registrant.email,
+            :subject => t('mail.subject'),
+            :html_body => email,
+            :attachments => {"RegistrationCard.pdf" => pdf},
+            :body_part_header => { content_disposition: "inline" }
+          )
+        end
         render 'create'
       else
       @registrant.check_programmes @programmes
@@ -64,7 +76,6 @@ class RegistrantsController < ApplicationController
       end
     end
   end
-
 
   def to_pdf
    render :pdf  => 'file_name'      
