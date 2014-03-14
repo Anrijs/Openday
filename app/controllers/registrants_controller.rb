@@ -40,9 +40,10 @@ class RegistrantsController < ApplicationController
       if(@registrant.valid? and @programmes)
         @registrant.save
         @programmes.each do |programme, timeslot|
-          faculty = OpendayProgramme.find(programme).openday_faculty.faculty.id
+          prg = OpendayProgramme.find(programme)
+          faculty = prg.openday_faculty.faculty.id
           Registration.create(registrant_id: @registrant.id, openday_id: @openday.id, 
-                              faculty_id: faculty, programme_id: programme, timeslot_id: timeslot)
+                              faculty_id: faculty, programme_id: prg.programme.id, timeslot_id: timeslot)
         end
         @barcode = Barby::Code128B.new(@registrant.id)
         email = render_to_string  partial: '/email/index'
