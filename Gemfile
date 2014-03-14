@@ -54,4 +54,6 @@ group :development, :test do
   gem 'pry-nav'
   gem 'i18n_tools'
   gem 'i18n-tasks'
+  gem 'faker'
+  gem 'populator'
 end
