@@ -24,6 +24,7 @@ en:
     registrations_chart:
       title: "Total registration per faculty"
       y_axis: "Registrations"
+    other_countries: "Other"
   openday:
     register: "Register"
     name: "Name"

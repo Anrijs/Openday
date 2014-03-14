@@ -45,5 +45,12 @@ class ReportsController < ApplicationController
         @openday_registrations.push(nil)
       end
     end
+
+    @openday_countries = {}
+    Country.all.each do |country|
+      #arr = [country.first, registrants.where('country LIKE ?', country.last).count]
+      @openday_countries[country.last] = registrants.where('country LIKE ?', country.last).count
+    end
+    @openday_countries = (@openday_countries.sort_by { |name, count| count }).reverse
   end
 end
