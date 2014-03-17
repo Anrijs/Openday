@@ -163,7 +163,7 @@ en:
       paragraph: "Choose Open Day from list below and click Register"
     closed:
       title: "Registration has been closed"
-      paragraph: "Registration closed on:"
+      paragraph: "Registration closed"
     personal_information: 
       title: "Personal information"
       name: "Name"
