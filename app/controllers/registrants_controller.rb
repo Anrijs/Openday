@@ -3,8 +3,7 @@ class RegistrantsController < ApplicationController
     @registrant = Registrant.new
     unless params[:openday]
       @openday = Openday.find_active
-  
-      if @openday.nil?
+      if @openday.nil? or @openday.empty?
         render 'not_active'
       elsif @openday.length > 1
         render 'selection'
