@@ -1,2 +1,4 @@
 %h1=t('registration.closed.title')
 %p.lead=t('registration.closed.paragraph')
+- unless @next_openday.nil?
+  %p.lead=t('registration.closed.next_registration', date: @next_openday.registration_open.strftime(t('date.open_format')))

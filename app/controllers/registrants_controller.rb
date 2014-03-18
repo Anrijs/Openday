@@ -1,9 +1,11 @@
 class RegistrantsController < ApplicationController
   def index
     @registrant = Registrant.new
+
     unless params[:openday]
       @openday = Openday.find_active
       if @openday.nil? or @openday.empty?
+        @next_openday = Openday.where("registration_open >= ?", Time.now).order("registration_open ASC").first()
         render 'not_active'
       elsif @openday.length > 1
         render 'selection'
@@ -13,6 +15,7 @@ class RegistrantsController < ApplicationController
     else
       @openday = Openday.find_by_slug(params[:openday])
       unless @openday.active?
+        @next_openday = Openday.where("registration_open >= ?", Time.now).order("registration_open ASC").first()
         render 'not_active'
       end
     end
