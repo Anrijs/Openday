@@ -24,6 +24,8 @@ en:
     registrations_chart:
       title: "Total registration per faculty"
       y_axis: "Registrations"
+    registrations_pie:
+      title: "Total registration by country"
     other_countries: "Other"
   openday:
     register: "Register"
@@ -163,7 +165,8 @@ en:
       paragraph: "Choose Open Day from list below and click Register"
     closed:
       title: "Registration has been closed"
-      paragraph: "Registration closed"
+      paragraph: "There are no active registrations at the moment."
+      next_registration: "Next registration will start on %{date}"
     personal_information: 
       title: "Personal information"
       name: "Name"
@@ -229,3 +232,8 @@ en:
     regards_2: "Test university team"
     qr1: 'github.com'
     qr2: 'github.com/Anrijs'
+  date:
+    open_format: '%B %d, %Y' #http://www.foragoodstrftime.com/
+  footer:
+    copyright: 'Copyright © 2014 Test University'
+    lower: 'ODrms'

@@ -47,5 +47,9 @@
           = flash[:success]
       = yield
   
-    :javascript
-      $("#flash_success").delay(5000).animate({height: 0, margin:0, padding: 0}, 350, "linear", function() {$("#flash_success").hide();});
+      .footer
+        %p=t('footer.copyright')
+        %p.small=t('footer.lower')
+
+  :javascript
+     $("#flash_success").delay(5000).animate({height: 0, margin:0, padding: 0}, 350, "linear", function() {$("#flash_success").hide();});
