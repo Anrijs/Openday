@@ -21,7 +21,6 @@ Od::Application.routes.draw do
     post 'timeslots/update/:id' => "opendays#update_timeslots", as: :update_timeslots
     put 'timeslots/update/:id' => "opendays#update_timeslots"
     patch 'timeslots/update/:id' => "opendays#update_timeslots"
-
   end
 
   resources :faculties do
@@ -31,6 +30,7 @@ Od::Application.routes.draw do
   resources :registrants
 
   root 'registrants#index'
+  get  'terms' => 'registrants#terms'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

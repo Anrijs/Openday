@@ -88,6 +88,9 @@ class RegistrantsController < ApplicationController
     end
   end
 
+  def terms
+  end
+
   def to_pdf
    render :pdf  => 'file_name'      
   end
