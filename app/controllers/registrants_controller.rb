@@ -28,18 +28,23 @@ class RegistrantsController < ApplicationController
 
     @openday = Openday.find(params[:openday_id])
     @registrant = Registrant.find_by_openday_id_and_email(@openday, params[:registrant]['email'])
-    
     @recreated = false
-    
-    if @openday.active?
-      @programmes = params[:programme]
-      @registrant = Registrant.new(registrant_params)
-      @registrant.openday_id = @openday.id
-      if(@registrant.valid? and @programmes)
+
+    unless @registrant.nil?
+      if(@registrant.valid? and @programmes and params[:confirm_terms])
         if @registrant
           @registrant.destroy
           @recreated = true
         end
+      end
+    else
+      @registrant = Registrant.new(registrant_params)
+    end
+    
+    if @openday.active?
+      @`ogrammes = params[:programme]
+      @registrant.openday_id = @openday.id
+      if(@registrant.valid? and @programmes and params[:confirm_terms])
         @registrant.save
         @programmes.each do |programme, timeslot|
           prg = OpendayProgramme.find(programme)
@@ -74,7 +79,10 @@ class RegistrantsController < ApplicationController
         end
         render 'create'
       else
-      @registrant.check_programmes @programmes
+        unless params[:confirm_terms]
+          @registrant.errors.add(:confirmation, I18n.t('validation.confirmation_ressence'))
+        end
+        @registrant.check_programmes @programmes
         render 'index'  
       end
     end

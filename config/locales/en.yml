@@ -144,6 +144,7 @@ en:
     companions_presence: "Companion count is required"
     year_presence: "Study start year is required"
     missing_timeslot_for: "Missing timeslot for %{programme}"
+    confirmation_ressence: "You must agree with our terms and conditions"
     too_many: "Please select %{count} programmes at the most"
     not_enough:
       one: "Please select at least %{count} programme"
