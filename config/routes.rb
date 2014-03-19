@@ -3,6 +3,7 @@ Od::Application.routes.draw do
   
   resources :reports do
     get 'compare/:id' => 'reports#compare', as: :compare
+    get 'faculty/:id' => 'reports#faculty', as: :faculty
   end
 
   resources :opendays do

@@ -19,7 +19,7 @@ en:
     total_registrations: "Total registrations for %{name}:"
     total_registrants: "Total registrants for %{name}:"
     registrants_chart: 
-      title: "Total registrations by day"
+      title: "Unique registrants by day"
       y_axis: "Registrants"
     registrations_chart:
       title: "Total registration per faculty"
@@ -27,6 +27,9 @@ en:
     registrations_pie:
       title: "Total registration by country"
     other_countries: "Other"
+    faculty:
+      unique_registrants: "Unique registrants for faculty"
+      total_registrations: "Registrations by programme"
   openday:
     register: "Register"
     name: "Name"
