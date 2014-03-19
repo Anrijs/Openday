@@ -42,7 +42,7 @@ class RegistrantsController < ApplicationController
     end
     
     if @openday.active?
-      @`ogrammes = params[:programme]
+      @programmes = params[:programme]
       @registrant.openday_id = @openday.id
       if(@registrant.valid? and @programmes and params[:confirm_terms])
         @registrant.save
