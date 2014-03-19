@@ -30,16 +30,16 @@ class RegistrantsController < ApplicationController
     @registrant = Registrant.find_by_openday_id_and_email(@openday, params[:registrant]['email'])
     
     @recreated = false
-    if @registrant
-      @registrant.destroy
-      @recreated = true
-    end
     
     if @openday.active?
       @programmes = params[:programme]
       @registrant = Registrant.new(registrant_params)
       @registrant.openday_id = @openday.id
       if(@registrant.valid? and @programmes)
+        if @registrant
+          @registrant.destroy
+          @recreated = true
+        end
         @registrant.save
         @programmes.each do |programme, timeslot|
           prg = OpendayProgramme.find(programme)
