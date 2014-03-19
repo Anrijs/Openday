@@ -8,7 +8,7 @@
 
   %body
     - if admin_signed_in?
-      .navbar.navbar-default.navbar-static-top{role: "navigation"}
+      .navbar.navbar-default.navbar-static-top.shadows{role: "navigation"}
         .container
           .navbar-header
             %button{type: "button", class: "navbar-toggle", 'data-toggle' => "collapse"  , 'data-target' => ".navbar-collapse"}
@@ -33,8 +33,9 @@
 
             %ul.nav.navbar-nav.navbar-right
               %li=link_to t('sign_out'), destroy_admin_session_path, method: :delete
-
-    .container
+    - else
+      .space
+    .container.shadows
       %noscript
         .alert.alert-warning
           %strong= t('warning').html_safe
@@ -47,9 +48,15 @@
           = flash[:success]
       = yield
   
-      .footer
-        %p=t('footer.copyright')
-        %p.small=t('footer.lower')
+    .container.footer
+      %p=t('footer.copyright')
+      %p.small=t('footer.lower')
 
   :javascript
      $("#flash_success").delay(5000).animate({height: 0, margin:0, padding: 0}, 350, "linear", function() {$("#flash_success").hide();});
+
+     $(document).on 'page:fetch', ->
+       $('#content').fadeOut 'slow'
+ 
+     $(document).on 'page:restore', ->
+       $('#content').fadeIn 'slow'

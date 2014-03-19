@@ -1,5 +1,11 @@
 %h1= t('report.for', name: @openday.name)
-
+%ul.nav.nav-tabs.nav-justified
+  %li.active
+    %a{href: "#"}
+      =t('all')
+  - @openday.openday_faculties.each do |faculty|
+    %li
+      =link_to faculty.faculty.short_name, report_faculty_path(@openday.slug, faculty.faculty.slug)
 %h4
   %b=t('report.total_registrants', name: @openday.name )
   =@openday.registrants.count

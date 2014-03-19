@@ -1,3 +1,19 @@
+.shadows {
+	box-shadow: 0px 0px 15px #ccc;
+}
+
+.head-img {
+	margin-top: 16px;
+}
+
+.space {
+	height: 24px;
+}
+
+.container > a.btn {
+	margin-bottom: 16px;
+}
+
 .footer {
 	margin-bottom: 24px;
 	margin-top: 48px;
