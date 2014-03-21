@@ -44,6 +44,47 @@ class Openday < ActiveRecord::Base
     return true
   end
 
+  def report_registrants
+    return Registrant.find(:all, 
+      select: 'count(*) count, DAYOFYEAR(created_at) as date', 
+      group: "DAYOFYEAR(created_at)", 
+      conditions: ['openday_id = ?', self.id], 
+      order: 'DAYOFYEAR(created_at) DESC'
+    )
+  end
+
+  def report_registrations
+    faculties = {}
+    self.openday_faculties.each do |faculty|
+      faculties[faculty.faculty.name] = Registration.find(:all, 
+        select: 'count(*) count, DAYOFYEAR(created_at) as date', 
+        group: "DAYOFYEAR(created_at)", 
+        conditions: ['openday_id = ? AND faculty_id = ?', self.id, faculty.faculty.id], 
+        order: 'DAYOFYEAR(created_at) DESC'
+      )
+    end
+    return faculties
+  end
+
+
+  def report_countries
+    return Registrant.find(:all, 
+        select: 'count(*) count, country', 
+        group: 'country', 
+        conditions: ['openday_id = ?', self.id], 
+        order: 'count DESC'
+    )
+  end
+
+  def range_days
+    range = {}
+    ranges = Openday.find(14, 
+      select: 'DAYOFYEAR(registration_open) as day_open, DAYOFYEAR(registration_end) as day_end')
+    range[:start] = ranges.day_open
+    range[:end] = ranges.day_end
+    return range 
+  end
+
 private
   def create_slug
     self.slug = self.name.to_s.parameterize

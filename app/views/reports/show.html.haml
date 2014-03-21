@@ -1,8 +1,7 @@
 %h1= t('report.for', name: @openday.name)
 %ul.nav.nav-tabs.nav-justified
   %li.active
-    %a{href: "#"}
-      =t('all')
+    =link_to t('all'), reports_path(@openday)
   - @openday.openday_faculties.each do |faculty|
     %li
       =link_to faculty.faculty.short_name, report_faculty_path(@openday.slug, faculty.faculty.slug)
@@ -20,43 +19,34 @@
 %h3.page-header=t('report.registrations_chart.title')
 #container_chart_2{style: "min-width: 310px; height: 400px; margin: 0 auto"}
 
-- reg_timerange = ''
-- @openday_range.each do |val|
-  - reg_timerange += "'#{val}',"
+- reg_timerange = @openday.range_days
+- reg_total = '1000'
 
-- reg_total = ''
-- total = 0
-- @openday_registrations.each do |val|
-  - unless val.nil?
-    - total = val+total
-    - reg_total += "#{total},"
-  - else
-    - reg_total += "null,"
-
+- registrants_list = '{name: "'+@openday.name+'", data:['
+- registrants_count = 0
+- (reg_timerange[:start]-1..reg_timerange[:end]).each do |key|
+  - registrants_count += @openday_registrants[key].count unless @openday_registrants[key].nil?
+  - registrants_list += registrants_count.to_s + ','
+- registrants_list += ']},'
 
 - registrations_list = ''
 - @faculty_registrations.each do |key, list|
-  - total = 0
-  - list_string = "{name: '#{OpendayFaculty.find(key).faculty.name}', data: ["
-  - list.each do |val|
-    - unless val.nil?
-      - total = val+total
-      - list_string += "#{total},"
-    - else
-      - list_string += "null,"
-  - list_string += ']},'
-  - registrations_list += list_string
+  - registration_count = 0;
+  - registrations_list += '{name: "'+key+'", data:['
+  - (reg_timerange[:start]-1..reg_timerange[:end]).each do |key|
+    - registration_count += list[key].count unless list[key].nil?
+    - registrations_list += registration_count.to_s + ','
+  - registrations_list += ']},'
 
 - country_list = ""
 - country_count = 0
 - other_count = 0
-- @openday_countries.each do |country, counts, index|
-  - if counts.to_i>0
-    - unless country_count >= CONFIG['reports']['pie_countries']
-      - country_list += "[\"#{Country[country].name}\", #{counts}],"
-      - country_count +=1
-    - else
-      - other_count += counts
+- @openday_countries.each do |country|
+  - unless country_count >= CONFIG['reports']['pie_countries']
+    - country_list += "['"+Country[country.country].name + "'," + country.count.to_s+'],'
+    - country_count +=1
+  - else
+    - other_count += country.count
 
 
 - country_list += "['#{t('report.other_countries')}', #{other_count}]"
@@ -68,12 +58,12 @@
     %th=t('report.country_name')
     %th=t('report.country_count')
     %th=t('report.country_percent')
-  - @openday_countries.each do |country, count|
-    - unless count < 1
+  - @openday_countries.each do |country|
+    - unless country.count < 1
       %tr
-        %td=Country[country].name
-        %td=count.to_s
-        %td="#{((count.to_f/@openday.registrants.count.to_f)*100).round(2)}%"
+        %td=Country[country.country].name
+        %td=country.count.to_s
+        %td="#{((country.count.to_f/@openday.registrants.count.to_f)*100).round(2)}%"
 
   
 :javascript
@@ -90,7 +80,7 @@
       xAxis: {
         maxZoom: 10,
         categories: [
-          #{reg_timerange}
+          1,2,3,4,5,6,7,8,9,0,
       ]},
       yAxis: {
         min: 0,
@@ -111,11 +101,9 @@
           }
         }
       },
-      series: [{
-        name: '#{@openday.name}',
-        data: [
-          #{reg_total}
-      ]}]
+      series: [
+          #{registrants_list}
+      ]
     });
   });
 
@@ -132,7 +120,7 @@
       xAxis: {
         maxZoom: 10,
         categories: [
-          #{reg_timerange}
+          1,2,3,4,5,6,7,8,9,0
       ]},
       yAxis: {
         min: 0,

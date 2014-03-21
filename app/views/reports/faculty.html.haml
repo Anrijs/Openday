@@ -2,8 +2,7 @@
 - active_faculty = params[:id]
 %ul.nav.nav-tabs.nav-justified
   %li
-    %a{href: "#"}
-      =t('all')
+    =link_to t('all'), reports_path(@openday)
   - @openday.openday_faculties.each do |faculty|
     %li{class: ('active' if active_faculty.downcase == faculty.faculty.short_name.downcase)}
       =link_to faculty.faculty.short_name, report_faculty_path(@openday.slug, faculty.faculty.slug)
