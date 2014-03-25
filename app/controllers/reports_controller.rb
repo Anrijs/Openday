@@ -34,7 +34,7 @@ class ReportsController < ApplicationController
       @programme_registrations = @openday_faculty.report_registrations
       @faculty_registrants = @openday_faculty.report_registrants
 
-      @openday_countries = @openday.report_countries
+      @faculty_countries = @openday_faculty.report_countries
     end
   end
 end

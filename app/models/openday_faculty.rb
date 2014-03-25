@@ -42,4 +42,12 @@ class OpendayFaculty < ActiveRecord::Base
     return programmes
   end
 
+  def report_countries
+    return Registration.select('*, count(DISTINCT registrant_id) as count')
+          .group('registrants.country')
+          .joins('INNER JOIN registrants ON registrations.registrant_id = registrants.id')
+          .where('faculty_id = ?', self.faculty_id)
+          .order('count DESC')
+  end
+
 end

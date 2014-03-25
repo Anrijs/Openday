@@ -42,7 +42,7 @@
 - country_list = ""
 - country_count = 0
 - other_count = 0
-- @openday_countries.each do |country|
+- @faculty_countries.each do |country|
   - unless country_count >= CONFIG['reports']['pie_countries']
     - country_list += "['"+Country[country.country].name + "'," + country.count.to_s+'],'
     - country_count +=1
@@ -60,7 +60,7 @@
     %th=t('report.country_name')
     %th=t('report.country_count')
     %th=t('report.country_percent')
-  - @openday_countries.each do |country|
+  - @faculty_countries.each do |country|
     - unless country.count < 1
       %tr
         %td=Country[country.country].name
