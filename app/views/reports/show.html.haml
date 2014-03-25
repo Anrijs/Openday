@@ -1,7 +1,7 @@
 %h1= t('report.for', name: @openday.name)
 %ul.nav.nav-tabs.nav-justified
   %li.active
-    =link_to t('all'), reports_path(@openday)
+    =link_to t('all'), report_path(@openday.slug)
   - @openday.openday_faculties.each do |faculty|
     %li
       =link_to faculty.faculty.short_name, report_faculty_path(@openday.slug, faculty.faculty.slug)
