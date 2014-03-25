@@ -43,9 +43,21 @@ class ReportsController < ApplicationController
       redirect_to report_path(@openday)
     else
       @openday_faculty = @openday.openday_faculties.find_by_faculty_id(@faculty.id)
-      @programme_registrations = @openday_faculty.report_registrations
-      @faculty_registrants = @openday_faculty.report_registrants
+      
       binding.pry
+      @programme_registrations = {}
+      @openday_faculty.report_registrations.each do |name, registrations|
+        data = {}
+        registrations.each do |registration|
+          data[registration.date] = registration.count
+        end
+        @programme_registrations[name] = data
+      end
+
+      @faculty_registrants = {}
+      @openday_faculty.report_registrants.each do |registrant|
+        @faculty_registrants[registrant.date] = registrant.count
+      end
 
       @faculty_countries = @openday_faculty.report_countries
     end

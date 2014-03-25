@@ -26,7 +26,7 @@ class OpendayFaculty < ActiveRecord::Base
           .group('DAYOFYEAR(registrants.created_at)')
           .joins('INNER JOIN registrants ON registrations.registrant_id = registrants.id')
           .where('faculty_id = ?', self.faculty_id)
-          .order('DAYOFYEAR(registrants.created_at) DESC')
+          .order('DAYOFYEAR(registrants.created_at) ASC')
   end
 
   def report_registrations
@@ -36,7 +36,7 @@ class OpendayFaculty < ActiveRecord::Base
         select: 'count(*) count, DAYOFYEAR(created_at) as date', 
         group: "DAYOFYEAR(created_at)", 
         conditions: ['openday_id = ? AND programme_id = ?', self.openday_id, programme.programme_id], 
-        order: 'DAYOFYEAR(created_at) DESC'
+        order: 'DAYOFYEAR(created_at) ASC'
       )
     end
     return programmes
