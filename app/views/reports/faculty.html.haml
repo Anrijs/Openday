@@ -1,25 +1,3 @@
-%h1= t('report.for', name: @openday.name)
-- active_faculty = params[:id]
-%ul.nav.nav-tabs.nav-justified
-  %li
-    =link_to t('all'), report_path(@openday.slug)
-  - @openday.openday_faculties.each do |faculty|
-    %li{class: ('active' if active_faculty.downcase == faculty.faculty.short_name.downcase)}
-      =link_to faculty.faculty.short_name, report_faculty_path(@openday.slug, faculty.faculty.slug)
-%h4
-  %b=t('report.faculty.unique_registrants', name: @openday.name )
-  =@openday.registrants.count
-
-%h4
-  %b=t('report.faculty.total_registrations', name: @openday.name )
-  =@openday.registrations.count
-
-%h3.page-header=t('report.registrants_chart.title')
-#container_chart_1{style: "min-width: 310px; height: 400px; margin: 0 auto"}
-
-%h3.page-header=t('report.registrations_chart.title')
-#container_chart_2{style: "min-width: 310px; height: 400px; margin: 0 auto"}
-
 - reg_timerange = @openday.range_days
 
 - registrants_list = '{name: "'+@openday.name+'", data:['
@@ -30,11 +8,13 @@
 - registrants_list += ']},'
 
 - registrations_list = ''
+- total_registrations_count = 0
 - @programme_registrations.each do |name, list|
   - registration_count = 0;
   - registrations_list += '{name: "'+name+'", data:['
   - (reg_timerange[:start]..reg_timerange[:end]).each do |key|
     - registration_count += list[key] unless list[key].nil?
+    - total_registrations_count += list[key] unless list[key].nil?
     - registrations_list += registration_count.to_s + ','
   - registrations_list += ']},'
 
@@ -48,9 +28,35 @@
   - else
     - other_count += country.count
 
-
 - country_list += "['#{t('report.other_countries')}', #{other_count}]"
 
+- datestamp = ''
+- datestamp += @openday.registration_open.year.to_s + ','
+- datestamp += (@openday.registration_open.month-1).to_s + ','
+- datestamp += @openday.registration_open.day.to_s
+
+
+%h1= t('report.for', name: @openday.name)
+- active_faculty = params[:id]
+%ul.nav.nav-tabs.nav-justified
+  %li
+    =link_to t('all'), report_path(@openday.slug)
+  - @openday.openday_faculties.each do |faculty|
+    %li{class: ('active' if active_faculty.downcase == faculty.faculty.short_name.downcase)}
+      =link_to faculty.faculty.short_name, report_faculty_path(@openday.slug, faculty.faculty.slug)
+%h4
+  %b=t('report.faculty.unique_registrants', name: @openday.name )
+  =registrants_count
+
+%h4
+  %b=t('report.faculty.total_registrations', name: @openday.name )
+  =total_registrations_count
+
+%h3.page-header=t('report.registrants_chart.title')
+#container_chart_1{style: "min-width: 310px; height: 400px; margin: 0 auto"}
+
+%h3.page-header=t('report.registrations_chart.title')
+#container_chart_2{style: "min-width: 310px; height: 400px; margin: 0 auto"}
 
 %h3.page-header=t('report.registrations_pie.title')
 #container_pie_1{style: "min-width: 310px; height: 400px; margin: 0 auto"}
@@ -79,9 +85,9 @@
         text: null,
       },
       xAxis: {
-        maxZoom: 10,
-        categories: [
-      ]},
+         maxZoom: 604800000,
+        type: 'datetime'
+      },
       yAxis: {
         min: 0,
         title: {
@@ -98,7 +104,11 @@
         spline: {
           marker: {
             enabled: false
-          }
+          },
+          pointInterval: 86400000, // 1 day
+          pointStart: Date.UTC(
+            #{datestamp}
+          ),
         }
       },
       series: [
@@ -118,9 +128,9 @@
         text: null,
       },
       xAxis: {
-        maxZoom: 10,
-        categories: [
-      ]},
+         maxZoom: 604800000,
+        type: 'datetime'
+      },
       yAxis: {
         min: 0,
         title: {
@@ -137,7 +147,11 @@
         spline: {
           marker: {
             enabled: false
-          }
+          },
+          pointInterval: 86400000, // 1 day
+          pointStart: Date.UTC(
+            #{datestamp}
+          ),
         }
       },
       series: [
