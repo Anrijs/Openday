@@ -49,7 +49,7 @@ class Openday < ActiveRecord::Base
       select: 'count(*) count, DAYOFYEAR(created_at) as date', 
       group: "DAYOFYEAR(created_at)", 
       conditions: ['openday_id = ?', self.id], 
-      order: 'DAYOFYEAR(created_at) DESC'
+      order: 'DAYOFYEAR(created_at) ASC'
     )
   end
 
@@ -60,7 +60,7 @@ class Openday < ActiveRecord::Base
         select: 'count(*) count, DAYOFYEAR(created_at) as date', 
         group: "DAYOFYEAR(created_at)", 
         conditions: ['openday_id = ? AND faculty_id = ?', self.id, faculty.faculty.id], 
-        order: 'DAYOFYEAR(created_at) DESC'
+        order: 'DAYOFYEAR(created_at) ASC'
       )
     end
     return faculties
@@ -78,7 +78,7 @@ class Openday < ActiveRecord::Base
 
   def range_days
     range = {}
-    ranges = Openday.find(14, 
+    ranges = Openday.find(self.id, 
       select: 'DAYOFYEAR(registration_open) as day_open, DAYOFYEAR(registration_end) as day_end')
     range[:start] = ranges.day_open
     range[:end] = ranges.day_end
