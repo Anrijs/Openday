@@ -44,7 +44,6 @@ class ReportsController < ApplicationController
     else
       @openday_faculty = @openday.openday_faculties.find_by_faculty_id(@faculty.id)
       
-      binding.pry
       @programme_registrations = {}
       @openday_faculty.report_registrations.each do |name, registrations|
         data = {}

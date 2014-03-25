@@ -80,8 +80,8 @@ class Openday < ActiveRecord::Base
     range = {}
     ranges = Openday.find(self.id, 
       select: 'DAYOFYEAR(registration_open) as day_open, DAYOFYEAR(registration_end) as day_end')
-    range[:start] = ranges.day_open
-    range[:end] = ranges.day_end
+    range[:start] = ranges.day_open-1
+    range[:end] = ranges.day_end-1
     return range 
   end
 
