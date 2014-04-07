@@ -21,6 +21,7 @@ en:
     total_registrants: "Total registrants for %{name}:"
     registrants_chart: 
       title: "Unique registrants by day"
+      title_table: "Unique registrants by weeks and days"
       y_axis: "Registrants"
     registrations_chart:
       title: "Total registration per faculty"
