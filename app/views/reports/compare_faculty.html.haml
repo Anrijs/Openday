@@ -101,15 +101,15 @@
 
 %h2
   %span.col-sm-8=t('report.comparison', name_a: @openday_a.name, name_b: @openday_b.name)
-  %span.col-sm-4= select_tag 'team_id', options_from_collection_for_select(Openday.where('id != ?',@openday_a.id)+[Openday.new(slug: '0', name: t('report.compare_to_none'))], "slug", "name"),:onchange => "window.location.replace('/reports/#{@openday_a.slug}/compare/'+this.value);", :prompt => t('report.compare_with') , class: 'form-control'
+  %span.col-sm-4= select_tag 'team_id', options_from_collection_for_select(Openday.where('id != ?',@openday_a.id)+[Openday.new(slug: '0', name: t('report.compare_to_none'))], "slug", "name"),:onchange => "window.location.replace('/reports/#{@openday_a.slug}/compare/'+this.value+'/#{@faculty.slug}');", :prompt => t('report.compare_with') , class: 'form-control'
 
 - active_faculty = params[:id]
 %ul.nav.nav-tabs.nav-justified
   %li
-    =link_to t('all'), report_path(@openday_a.slug)
+    =link_to t('all'), report_compare_path(@openday_a.slug, @openday_b.slug)
   - @openday_a.openday_faculties.each do |faculty|
     %li{class: ('active' if active_faculty.downcase == faculty.faculty.short_name.downcase)}
-      =link_to faculty.faculty.short_name, report_faculty_path(@openday_a.slug, faculty.faculty.slug)
+      =link_to faculty.faculty.short_name, report_compare_faculty_path(@openday_a.slug, @openday_b.slug, faculty.faculty .slug)
 %h4
   %b=t('report.faculty.unique_registrants', name: @openday_a.name )
   =registrants_count_a

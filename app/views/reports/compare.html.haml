@@ -118,7 +118,8 @@
     =link_to t('all'), report_path(@openday_a.slug)
   - @openday_a.openday_faculties.each do |faculty|
     %li
-      =link_to faculty.faculty.short_name, report_faculty_path(@openday_a.slug, faculty.faculty.slug)
+      =link_to faculty.faculty.short_name, report_compare_faculty_path(@openday_a.slug, @openday_b.slug, faculty.faculty .slug)
+
 %h4
   %b=t('report.total_registrants', name: @openday_a.name )
   =registrants_count_a

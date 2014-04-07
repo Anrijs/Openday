@@ -121,6 +121,11 @@ class ReportsController < ApplicationController
   end
 
   def compare_faculty
+    if(params[:compare_id].to_s == "0")
+      redirect_to report_faculty_path(params[:report_id], params[:id])
+      return
+    end
+
     @openday_a = Openday.find_by_slug(params[:report_id])
     unless @openday_a
       @openday_a = Openday.find(params[:report_id])
