@@ -129,6 +129,7 @@
   %b=t('report.total_registrations', name: @openday_a.name )
   =total_registrations_count_a
 
+
 %h3.page-header=t('report.registrants_chart.title')
 #container_chart_1{style: "min-width: 310px; height: 400px; margin: 0 auto"}
 
@@ -147,21 +148,37 @@
     =t('report.registrations_pie.title')
     %br
     %span.small
-      = "#{@openday_b.name}"
+      = "#{@openday_b.name}"	
   #container_pie_2{style: "min-width: 310px; height: 400px; margin: 0 auto"}
 
 %table.table.table-hover
   %tr
     %th=t('report.country_name')
-    %th=t('report.country_count')
-    %th=t('report.country_percent')
-  - @openday_countries_a.each do |country|
+    %th=t('report.country_count')+" A"
+    %th=t('report.country_count')+" B"
+    %th=t('report.country_count_difference')
+    %th=t('report.country_count_percent')
+  - @openday_countries.each do |country|
     - unless country.count < 1
+      - country_a_count = @openday_countries_a.find {|s| s.country == country.country}
+      - unless country_a_count.nil? 
+        - country_a_count=country_a_count.count
+      - else country_a_count = 0 
+
+      - country_b_count = @openday_countries_b.find {|s| s.country == country.country}
+      - unless country_b_count.nil? 
+        - country_b_count=country_b_count.count
+      - else country_b_count = 0
+
       %tr
         %td=Country[country.country].name
-        %td=country.count.to_s
-        %td="#{((country.count.to_f/@openday_a.registrants.count.to_f)*100).round(2)}%"
-
+        %td=country_a_count
+        %td=country_b_count
+        %td=country_a_count-country_b_count
+        - unless country_a_count == 0 or country_b_count == 0
+          %td=(((100-(country_a_count.to_f/country_b_count.to_f)*100)*100).round / 100.0).to_s+" %"
+        - else 
+          %td= "- %"
   
 :javascript
   $(function () {

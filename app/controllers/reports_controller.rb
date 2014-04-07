@@ -107,6 +107,12 @@ class ReportsController < ApplicationController
 
     @openday_countries_b = @openday_b.report_countries
 
-    binding.pry
+    @openday_countries = Registrant.find(:all, 
+      select: 'count(*) count, country', 
+      group: 'country', 
+      conditions: ['openday_id = ? OR openday_id = ?', @openday_a.id, @openday_b.id], 
+      order: 'count DESC'
+    )
+
   end
 end

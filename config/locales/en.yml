@@ -30,6 +30,10 @@ en:
     faculty:
       unique_registrants: "Unique registrants for faculty"
       total_registrations: "Registrations by programme"
+    country_name: "Country"
+    country_count: "Count"
+    country_count_difference: "Difference"
+    country_count_percent: "Percent (%)"
   openday:
     register: "Register"
     name: "Name"
