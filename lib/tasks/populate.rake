@@ -4,84 +4,87 @@ namespace :db do
     require 'populator'
     require 'faker'
     
-     cycles = 120
+    cycles = 30
+    countries = ['lv', 'lt', 'ee', 'nl', 'de', 'gb', 'us', 'hk', 'dm']
 
     (1..cycles).each do |i|
-      puts "populating #{((100/250)*i).to_s}"
-      od = Openday.last
-tf = od.registration_open + 2.month + 1.week
+      puts "populating #{i.to_s}"
+      od = Openday.first
 
-e = Faker::Internet.email
-c = Country.all.sample.last.downcase
-t = Time.at(tf + rand * (Time.now.to_f - tf.to_f))
-n = Faker::Name.first_name
-s = Faker::Name.last_name
-
-u = Registrant.create(name: n, surname: s, email: e, address1: "a", address2: "b", city: "city", state: "state", country: c, postal_code: "LV1000", year: "2015", created_at: t, updated_at: t, openday_id: od.id, companions: 0)
-
-fa = od.openday_faculties.sample
-fid = fa.faculty.id
-pa = fa.openday_programmes.sample
-pid = pa.programme.id
-ta = pa.openday_timeslots.sample
-tid = ta.id
-Registration.create(registrant_id: u.id, timeslot_id: tid, created_at: t, updated_at: t, openday_id: 14, faculty_id: fid, programme_id: pid)
-
-fa = od.openday_faculties.sample
-fid = fa.faculty.id
-pa = fa.openday_programmes.sample
-pid = pa.programme.id
-ta = pa.openday_timeslots.sample
-tid = ta.id
-Registration.create(registrant_id: u.id, timeslot_id: tid, created_at: t, updated_at: t, openday_id: 14, faculty_id: fid, programme_id: pid)
-
-fa = od.openday_faculties.sample
-fid = fa.faculty.id
-pa = fa.openday_programmes.sample
-pid = pa.programme.id
-ta = pa.openday_timeslots.sample
-tid = ta.id
-Registration.create(registrant_id: u.id, timeslot_id: tid, created_at: t, updated_at: t, openday_id: 14, faculty_id: fid, programme_id: pid)
-
-
-od = Openday.last
-tf = od.registration_open
-
-e = Faker::Internet.email
-c = Country.all.sample.last.downcase
-t = Time.at(tf + rand * (Time.now.to_f - tf.to_f))
-n = Faker::Name.first_name
-s = Faker::Name.last_name
-
-u = Registrant.create(name: n, surname: s, email: e, address1: "a", address2: "b", city: "city", state: "state", country: c, postal_code: "LV1000", year: "2015", created_at: t, updated_at: t, openday_id: od.id, companions: 0)
-
-fa = od.openday_faculties.sample
-fid = fa.faculty.id
-pa = fa.openday_programmes.sample
-pid = pa.programme.id
-ta = pa.openday_timeslots.sample
-tid = ta.id
-Registration.create(registrant_id: u.id, timeslot_id: tid, created_at: t, updated_at: t, openday_id: 14, faculty_id: fid, programme_id: pid)
-
-fa = od.openday_faculties.sample
-fid = fa.faculty.id
-pa = fa.openday_programmes.sample
-pid = pa.programme.id
-ta = pa.openday_timeslots.sample
-tid = ta.id
-Registration.create(registrant_id: u.id, timeslot_id: tid, created_at: t, updated_at: t, openday_id: 14, faculty_id: fid, programme_id: pid)
-
-fa = od.openday_faculties.sample
-fid = fa.faculty.id
-pa = fa.openday_programmes.sample
-pid = pa.programme.id
-ta = pa.openday_timeslots.sample
-tid = ta.id
-Registration.create(registrant_id: u.id, timeslot_id: tid, created_at: t, updated_at: t, openday_id: 14, faculty_id: fid, programme_id: pid)
-
-
+      tf = od.registration_open
+      tt = od.registration_open+5.days
+      
+      e = Faker::Internet.email
+      c = countries.sample
+      t = Time.at(tf + rand * (tt.to_f - tf.to_f))
+      n = Faker::Name.first_name
+      s = Faker::Name.last_name
+      
+      u = Registrant.create!(name: n, surname: s, email: e, address1: "a", address2: "b", city: "city", state: "state", country: c, postal_code: "LV1000", year: "2015", created_at: t, updated_at: t, openday_id: od.id, companions: 0)
+      
+      fa = od.openday_faculties.sample
+      fid = fa.faculty.id
+      pa = fa.openday_programmes.sample
+      pid = pa.programme.id
+      ta = pa.openday_timeslots.sample
+      tid = ta.id
+      Registration.create!(registrant_id: u.id, timeslot_id: tid, created_at: t, updated_at: t, openday_id: od.id, faculty_id: fid, programme_id: pid)
+      
+      fa = od.openday_faculties.sample
+      fid = fa.faculty.id
+      pa = fa.openday_programmes.sample
+      pid = pa.programme.id
+      ta = pa.openday_timeslots.sample
+      tid = ta.id
+      Registration.create!(registrant_id: u.id, timeslot_id: tid, created_at: t, updated_at: t, openday_id: od.id, faculty_id: fid, programme_id: pid)
+      
+      fa = od.openday_faculties.sample
+      fid = fa.faculty.id
+      pa = fa.openday_programmes.sample
+      pid = pa.programme.id
+      ta = pa.openday_timeslots.sample
+      tid = ta.id
+      Registration.create!(registrant_id: u.id, timeslot_id: tid, created_at: t, updated_at: t, openday_id: od.id, faculty_id: fid, programme_id: pid)
     end
 
+    (1..cycles).each do |i|
+      puts "populating #{i.to_s}"
+      od = Openday.last
 
+      tf = od.registration_open
+      tt = od.registration_open+5.days
+      
+      e = Faker::Internet.email
+      c = countries.sample
+      t = Time.at(tf + rand * (tt.to_f - tf.to_f))
+      n = Faker::Name.first_name
+      s = Faker::Name.last_name
+      
+      u = Registrant.create!(name: n, surname: s, email: e, address1: "a", address2: "b", city: "city", state: "state", country: c, postal_code: "LV1000", year: "2015", created_at: t, updated_at: t, openday_id: od.id, companions: 0)
+      
+      fa = od.openday_faculties.sample
+      fid = fa.faculty.id
+      pa = fa.openday_programmes.sample
+      pid = pa.programme.id
+      ta = pa.openday_timeslots.sample
+      tid = ta.id
+      Registration.create!(registrant_id: u.id, timeslot_id: tid, created_at: t, updated_at: t, openday_id: od.id, faculty_id: fid, programme_id: pid)
+      
+      fa = od.openday_faculties.sample
+      fid = fa.faculty.id
+      pa = fa.openday_programmes.sample
+      pid = pa.programme.id
+      ta = pa.openday_timeslots.sample
+      tid = ta.id
+      Registration.create!(registrant_id: u.id, timeslot_id: tid, created_at: t, updated_at: t, openday_id: od.id, faculty_id: fid, programme_id: pid)
+      
+      fa = od.openday_faculties.sample
+      fid = fa.faculty.id
+      pa = fa.openday_programmes.sample
+      pid = pa.programme.id
+      ta = pa.openday_timeslots.sample
+      tid = ta.id
+      Registration.create!(registrant_id: u.id, timeslot_id: tid, created_at: t, updated_at: t, openday_id: od.id, faculty_id: fid, programme_id: pid)
+    end
   end
 end
