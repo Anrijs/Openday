@@ -1,9 +1,13 @@
 - reg_timerange = @openday.range_days
+- total_days = reg_timerange[:end]-reg_timerange[:start]
+
 - registrants_list = '{name: "'+@openday.name+'", data:['
+- registrants_array = []
 - registrants_count = 0
 - (reg_timerange[:start]..reg_timerange[:end]).each do |key|
   - registrants_count += @openday_registrants[key] unless @openday_registrants[key].nil?
   - registrants_list += registrants_count.to_s + ','
+  - registrants_array.push(registrants_count)
 - registrants_list += ']},'
 
 - registrations_list = ''
@@ -34,7 +38,6 @@
 - datestamp += (@openday.registration_open.month-1).to_s + ','
 - datestamp += @openday.registration_open.day.to_s
 
-
 %h2
   %span.col-sm-8= t('report.for', name: @openday.name)
   %span.col-sm-4= select_tag 'team_id', options_from_collection_for_select(Openday.where('id != ?',@openday.id)+[Openday.new(slug: '0', name: t('report.compare_to_none'))], "slug", "name"),:onchange => "window.location.replace('/reports/#{@openday.slug}/compare/'+this.value);", :prompt => t('report.compare_with') , class: 'form-control'
@@ -58,6 +61,37 @@
 
 %h3.page-header=t('report.registrations_chart.title')
 #container_chart_2{style: "min-width: 310px; height: 400px; margin: 0 auto"}
+
+%h3.page-header=t('report.registrants_chart.title_table')
+%table.table.table-hover
+  %tr
+    %th=t('report.day')
+    %th=t('report.registrations')
+
+
+  - day_num = total_days
+  - day_count = 0
+  - week_count = 1
+  - while day_num>0
+    - if (day_num > total_days-CONFIG['reports']['in_days']-1)
+      - registrants_array[day_num] = 0 if registrants_array[day_num].nil?
+      - registrants_count = registrants_array[day_num]
+      - day_num -= 1
+    - elsif (day_num == 0)
+      - day_num = total_days if day_num > total_days
+      - registrants_count = registrants_array[day_num]
+    - else
+      - registrants_count = registrants_array[day_num]
+      - day_num -= 7
+
+    %tr
+      - if (day_num > total_days-CONFIG['reports']['in_days']-1)
+        %td=t('report.days', count: day_count)
+        - day_count += 1
+      - else
+        %td=t('report.weeks', count: week_count)
+        - week_count += 1
+      %td=registrants_count
 
 %h3.page-header=t('report.registrations_pie.title')
 #container_pie_1{style: "min-width: 310px; height: 400px; margin: 0 auto"}
