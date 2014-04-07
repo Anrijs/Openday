@@ -1,0 +1,13 @@
+development:
+  od_site_title: "ODrms Demo"
+  emails:
+    admin:    admin@localhost
+    support:  support@localhost
+  registration:
+    limit_max: 3
+    limit_min: 1
+    companions_max: 10
+  page_http_url: "http://example.com"
+  reports:
+    pie_countries: 5
+    in_days: 7
