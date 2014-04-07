@@ -1,0 +1,319 @@
+- reg_timerange_a = @openday_a.range_days
+- reg_timerange_b = @openday_b.range_days
+
+- reg_length_a = reg_timerange_a[:end]-reg_timerange_a[:start]
+- reg_length_b = reg_timerange_b[:end]-reg_timerange_b[:start]
+
+- reg_difference_a = reg_length_b-reg_length_a
+- reg_difference_b = reg_length_a-reg_length_b
+
+- days_range = '['
+
+- (0..(reg_length_a > reg_length_b ? reg_length_a : reg_length_b)).reverse_each do |day_num|
+  - days_range += "'#{day_num.to_s}',"
+
+- days_range += '],'
+
+- registrants_list_a = '{name: "'+@openday_a.name+'", data:['
+- registrants_count_a = 0
+
+- while reg_difference_a > 0
+  - registrants_list_a += 'null,'
+  - reg_difference_a -= 1
+
+- (reg_timerange_a[:start]..reg_timerange_a[:end]).each do |key|
+  - registrants_count_a += @openday_registrants_a[key] unless @openday_registrants_a[key].nil?
+  - registrants_list_a += registrants_count_a.to_s + ','
+- registrants_list_a += ']},'
+
+- registrants_list_b = '{name: "'+@openday_b.name+'", data:['
+- registrants_count_b = 0
+
+- while reg_difference_b > 0
+  - registrants_list_b += 'null,'
+  - reg_difference_b -= 1
+
+- (reg_timerange_b[:start]..reg_timerange_b[:end]).each do |key|
+  - registrants_count_b += @openday_registrants_b[key] unless @openday_registrants_b[key].nil?
+  - registrants_list_b += registrants_count_b.to_s + ','
+- registrants_list_b += ']},'
+
+- reg_difference_a = reg_length_b-reg_length_a
+
+- registrations_list_a = ''
+- total_registrations_count_a = 0;
+
+
+- @faculty_registrations_a.each do |name, list|
+  - registration_count_a = 0;
+  - registrations_list_a += '{name: "'+name+' ('+@openday_a.date.strftime('%B %Y')+')", data:['
+
+  - reg_difference_a = reg_length_b-reg_length_a
+  - while reg_difference_a > 0
+    - registrations_list_a += 'null,'
+    - reg_difference_a -= 1
+
+  - (reg_timerange_a[:start]..reg_timerange_a[:end]).each do |key|
+    - registration_count_a += list[key] unless list[key].nil?
+    - total_registrations_count_a += list[key] unless list[key].nil?
+    - registrations_list_a += registration_count_a.to_s + ','
+  - registrations_list_a += ']},'
+
+- registrations_list_b = ''
+- total_registrations_count_b = 0;
+
+- @faculty_registrations_b.each do |name, list|
+  - registration_count_b = 0;
+  - registrations_list_b += '{name: "'+name+' ('+@openday_b.date.strftime('%B %Y')+')", data:['
+
+  - reg_difference_b = reg_length_a-reg_length_b
+  - while reg_difference_b > 0
+    - registrations_list_b += 'null,'
+    - reg_difference_b -= 1
+
+  - (reg_timerange_b[:start]..reg_timerange_b[:end]).each do |key|
+    - registration_count_b += list[key] unless list[key].nil?
+    - total_registrations_count_b += list[key] unless list[key].nil?
+    - registrations_list_b += registration_count_b.to_s + ','
+  - registrations_list_b += ']},'
+
+
+- country_list_a = ""
+- country_count_a = 0
+- other_count_a = 0
+- @openday_countries_a.each do |country|
+  - unless country_count_a >= CONFIG['reports']['pie_countries']
+    - country_list_a += "['"+Country[country.country].name + "'," + country.count.to_s+'],'
+    - country_count_a +=1
+  - else
+    - other_count_a += country.count
+
+- country_list_a += "['#{t('report.other_countries')}', #{other_count_a}]"
+
+- country_list_a = ""
+- country_count_a = 0
+- other_count_a = 0
+- @openday_countries_a.each do |country|
+  - unless country_count_a >= CONFIG['reports']['pie_countries']
+    - country_list_a += "['"+Country[country.country].name + "'," + country.count.to_s+'],'
+    - country_count_a +=1
+  - else
+    - other_count_a += country.count
+
+- country_list_a += "['#{t('report.other_countries')}', #{other_count_a}]"
+
+- country_list_b = ""
+- country_count_b = 0
+- other_count_b = 0
+- @openday_countries_b.each do |country|
+  - unless country_count_b >= CONFIG['reports']['pie_countries']
+    - country_list_b += "['"+Country[country.country].name + "'," + country.count.to_s+'],'
+    - country_count_b +=1
+  - else
+    - other_count_b += country.count
+
+- country_list_b += "['#{t('report.other_countries')}', #{other_count_a}]"
+
+%h1= t('report.for', name: @openday_a.name)
+%ul.nav.nav-tabs.nav-justified
+  %li.active
+    =link_to t('all'), report_path(@openday_a.slug)
+  - @openday_a.openday_faculties.each do |faculty|
+    %li
+      =link_to faculty.faculty.short_name, report_faculty_path(@openday_a.slug, faculty.faculty.slug)
+%h4
+  %b=t('report.total_registrants', name: @openday_a.name )
+  =registrants_count_a
+
+%h4
+  %b=t('report.total_registrations', name: @openday_a.name )
+  =total_registrations_count_a
+
+%h3.page-header=t('report.registrants_chart.title')
+#container_chart_1{style: "min-width: 310px; height: 400px; margin: 0 auto"}
+
+%h3.page-header=t('report.registrations_chart.title')
+#container_chart_2{style: "min-width: 310px; height: 400px; margin: 0 auto"}
+
+.col-md-6
+  %h3.page-header
+    =t('report.registrations_pie.title')
+    %br
+    %span.small
+      = "#{@openday_a.name}"
+  #container_pie_1{style: "min-width: 310px; height: 400px; margin: 0 auto"}
+.col-md-6  
+  %h3.page-header
+    =t('report.registrations_pie.title')
+    %br
+    %span.small
+      = "#{@openday_b.name}"
+  #container_pie_2{style: "min-width: 310px; height: 400px; margin: 0 auto"}
+
+%table.table.table-hover
+  %tr
+    %th=t('report.country_name')
+    %th=t('report.country_count')
+    %th=t('report.country_percent')
+  - @openday_countries_a.each do |country|
+    - unless country.count < 1
+      %tr
+        %td=Country[country.country].name
+        %td=country.count.to_s
+        %td="#{((country.count.to_f/@openday_a.registrants.count.to_f)*100).round(2)}%"
+
+  
+:javascript
+  $(function () {
+    $('#container_chart_1').highcharts({
+      chart: {
+             type: 'spline',
+             zoomType: 'x',
+             spacingRight: 20
+            },
+      title: {
+        text: null,
+      },
+      xAxis: {
+         categories: #{days_range}
+         maxZoom: 14,
+         minTickInterval: 4,
+         minorTickLength: 10,
+         labels: {
+           format: '{value} days',
+         }
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: '#{t('report.registrants_chart.y_axis')}'
+        },
+      },
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle',
+        borderWidth: 0
+      },
+      plotOptions: {
+        spline: {
+          marker: {
+            enabled: false
+          },
+        }
+      },
+      series: [
+          #{registrants_list_a}
+          #{registrants_list_b}
+      ]
+    });
+  });
+
+  $(function () {
+    $('#container_chart_2').highcharts({
+      chart: {
+             type: 'spline',
+             zoomType: 'x',
+             spacingRight: 20
+            },
+      title: {
+        text: null,
+      },
+      xAxis: {
+         categories: #{days_range}
+         maxZoom: 14,
+         minTickInterval: 4,
+         minorTickLength: 10,
+         labels: {
+           format: '{value} days',
+         }
+      },
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle',
+        borderWidth: 0
+      },
+      plotOptions: {
+        spline: {
+          marker: {
+            enabled: false
+          }
+        }
+      },
+      series: [
+        #{registrations_list_a}
+        #{registrations_list_b}
+      ]
+    });
+  });
+
+  $(function () {
+    $('#container_pie_1').highcharts({
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false
+      },
+      title: {
+        text: null
+      },
+      tooltip: {
+       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              color: '#000000',
+              connectorColor: '#000000',
+              format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+          }
+        },
+        series: [{
+          type: 'pie',
+          name: 'Browser share',
+          data: [
+                #{country_list_a}
+            ]
+        }]
+    });
+  });
+
+  $(function () {
+    $('#container_pie_2').highcharts({
+      chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false
+      },
+      title: {
+        text: null
+      },
+      tooltip: {
+       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              color: '#000000',
+              connectorColor: '#000000',
+              format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+            }
+          }
+        },
+        series: [{
+          type: 'pie',
+          name: 'Browser share',
+          data: [
+                #{country_list_b}
+            ]
+        }]
+    });
+  });

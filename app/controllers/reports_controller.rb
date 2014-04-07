@@ -61,4 +61,52 @@ class ReportsController < ApplicationController
       @faculty_countries = @openday_faculty.report_countries
     end
   end
+
+  def compare
+    @openday_a = Openday.find_by_slug(params[:report_id])
+    @openday_b = Openday.find_by_slug(params[:id])
+
+    unless @openday_a
+      @openday_a = Openday.find(params[:report_id])
+    end
+
+    unless @openday_b
+      @openday_b = Openday.find(params[:id])
+    end
+  
+    @faculty_registrations_a = {}
+    @openday_a.report_registrations.each do |name, registrations|
+      data = {}
+      registrations.each do |registration|
+        data[registration.date] = registration.count
+      end
+      @faculty_registrations_a[name] = data
+    end
+
+    @openday_registrants_a = {}
+    @openday_a.report_registrants.each do |registrant|
+      @openday_registrants_a[registrant.date] = registrant.count
+    end
+
+    @openday_countries_a = @openday_a.report_countries
+
+
+    @faculty_registrations_b = {}
+    @openday_b.report_registrations.each do |name, registrations|
+      data = {}
+      registrations.each do |registration|
+        data[registration.date] = registration.count
+      end
+      @faculty_registrations_b[name] = data
+    end
+
+    @openday_registrants_b = {}
+    @openday_b.report_registrants.each do |registrant|
+      @openday_registrants_b[registrant.date] = registrant.count
+    end
+
+    @openday_countries_b = @openday_b.report_countries
+
+    binding.pry
+  end
 end
