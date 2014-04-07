@@ -2,6 +2,7 @@ Od::Application.routes.draw do
   devise_for :admins
   
   resources :reports do
+    get 'compare/:compare_id/:id' => 'reports#compare_faculty', as: :compare_faculty
     get 'compare/:id' => 'reports#compare', as: :compare
     get 'faculty/:id' => 'reports#faculty', as: :faculty
   end
