@@ -30,8 +30,8 @@ en:
       title: "Total registration by country"
     other_countries: "Other"
     faculty:
-      unique_registrants: "Unique registrants for faculty"
-      total_registrations: "Registrations by programme"
+      unique_registrants: "Unique registrants for %{name}"
+      total_registrations: "Total refistrations for %{name}"
     country_name: "Country"
     count: "Count"
     difference: "Difference"

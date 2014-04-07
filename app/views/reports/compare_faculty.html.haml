@@ -119,6 +119,14 @@
   %b=t('report.faculty.total_registrations', name: @openday_a.name )
   =total_registrations_count_a
 
+%h4
+  %b=t('report.faculty.unique_registrants', name: @openday_b.name )
+  =registrants_count_b
+
+%h4
+  %b=t('report.faculty.total_registrations', name: @openday_b.name )
+  =total_registrations_count_b
+
 %h3.page-header=t('report.registrants_chart.title')
 #container_chart_1{style: "min-width: 310px; height: 400px; margin: 0 auto"}
 
