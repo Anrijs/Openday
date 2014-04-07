@@ -1,5 +1,4 @@
 - reg_timerange = @openday.range_days
-
 - registrants_list = '{name: "'+@openday.name+'", data:['
 - registrants_count = 0
 - (reg_timerange[:start]..reg_timerange[:end]).each do |key|
@@ -37,6 +36,9 @@
 
 
 %h1= t('report.for', name: @openday.name)
+= select_tag 'team_id', options_from_collection_for_select(Openday.where(:id != @openday.id), "slug", "name"),:onchange => "window.location.replace('/reports/#{@openday.id}/compare/'+this.value);", :include_blank => true, class: 'form-control'
+
+
 %ul.nav.nav-tabs.nav-justified
   %li.active
     =link_to t('all'), report_path(@openday.slug)
