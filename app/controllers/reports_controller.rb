@@ -63,6 +63,11 @@ class ReportsController < ApplicationController
   end
 
   def compare
+    if(params[:id].to_s == "0")
+      redirect_to report_path(params[:report_id])
+      return
+    end
+
     @openday_a = Openday.find_by_slug(params[:report_id])
     @openday_b = Openday.find_by_slug(params[:id])
 

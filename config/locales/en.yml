@@ -16,6 +16,7 @@ en:
   # openday
   report:
     for: "Report for %{name}"
+    comparison: "%{name_a} comparison to %{name_b}"
     total_registrations: "Total registrations for %{name}:"
     total_registrants: "Total registrants for %{name}:"
     registrants_chart: 
@@ -34,6 +35,8 @@ en:
     country_count: "Count"
     country_count_difference: "Difference"
     country_count_percent: "Percent (%)"
+    compare_with: "Compare with:"
+    compare_to_none: "None"
   openday:
     register: "Register"
     name: "Name"
