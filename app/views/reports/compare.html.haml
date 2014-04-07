@@ -7,17 +7,15 @@
 - reg_difference_a = reg_length_b-reg_length_a
 - reg_difference_b = reg_length_a-reg_length_b
 
+- registrants_array_a = []
+- registrants_array_b = []
+
 - total_days = (reg_length_a > reg_length_b ? reg_length_a : reg_length_b)
 
 - days_range = '['
-
 - (0..total_days).reverse_each do |day_num|
   - days_range += "'#{day_num.to_s}',"
-
 - days_range += '],'
-`
-- registrants_array_a = []
-- registrants_array_b = []
 
 - registrants_list_a = '{name: "'+@openday_a.name+'", data:['
 - registrants_count_a = 0
@@ -86,19 +84,6 @@
     - registrations_list_b += registration_count_b.to_s + ','
   - registrations_list_b += ']},'
 
-
-- country_list_a = ""
-- country_count_a = 0
-- other_count_a = 0
-- @openday_countries_a.each do |country|
-  - unless country_count_a >= CONFIG['reports']['pie_countries']
-    - country_list_a += "['"+Country[country.country].name + "'," + country.count.to_s+'],'
-    - country_count_a +=1
-  - else
-    - other_count_a += country.count
-
-- country_list_a += "['#{t('report.other_countries')}', #{other_count_a}]"
-
 - country_list_a = ""
 - country_count_a = 0
 - other_count_a = 0
@@ -161,7 +146,7 @@
   - day_count = 0
   - week_count = 1
   - while day_num>0
-    - if (day_num > total_days-CONFIG['reports']['in_days']-1)
+    - if (day_num > total_days-CONFIG['reports']['in_days'].to_i-1)
       - registrants_array_a[day_num] = 0 if registrants_array_a[day_num].nil?
       - registrants_array_b[day_num] = 0 if registrants_array_b[day_num].nil?
       - registrants_a = registrants_array_a[day_num]
@@ -177,7 +162,7 @@
       - day_num -= 7
 
     %tr
-      - if (day_num > total_days-CONFIG['reports']['in_days']-1)
+      - if (day_num > total_days-CONFIG['reports']['in_days'].to_i-1)
         %td=t('report.days', count: day_count)
         - day_count += 1
       - else

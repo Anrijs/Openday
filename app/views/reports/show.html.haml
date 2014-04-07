@@ -73,7 +73,7 @@
   - day_count = 0
   - week_count = 1
   - while day_num>0
-    - if (day_num > total_days-CONFIG['reports']['in_days']-1)
+    - if (day_num > total_days-CONFIG['reports']['in_days'].to_i-1)
       - registrants_array[day_num] = 0 if registrants_array[day_num].nil?
       - registrants_count = registrants_array[day_num]
       - day_num -= 1
@@ -85,7 +85,7 @@
       - day_num -= 7
 
     %tr
-      - if (day_num > total_days-CONFIG['reports']['in_days']-1)
+      - if (day_num > total_days-CONFIG['reports']['in_days'].to_i-1)
         %td=t('report.days', count: day_count)
         - day_count += 1
       - else
