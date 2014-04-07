@@ -38,9 +38,10 @@
 - datestamp += (@openday.registration_open.month-1).to_s + ','
 - datestamp += @openday.registration_open.day.to_s
 
-%h2
-  %span.col-sm-8= t('report.for', name: @openday.name)
-  %span.col-sm-4= select_tag 'team_id', options_from_collection_for_select(Openday.where('id != ?',@openday.id)+[Openday.new(slug: '0', name: t('report.compare_to_none'))], "slug", "name"),:onchange => "window.location.replace('/reports/#{@openday.slug}/compare/'+this.value);", :prompt => t('report.compare_with') , class: 'form-control'
+%h2.report-header
+  .row
+    %span.col-sm-8= t('report.for', name: @openday.name)
+    %span.col-sm-4= select_tag 'team_id', options_from_collection_for_select(Openday.where('id != ?',@openday.id)+[Openday.new(slug: '0', name: t('report.compare_to_none'))], "slug", "name"),:onchange => "window.location.replace('/reports/#{@openday.slug}/compare/'+this.value);", :prompt => t('report.compare_with') , class: 'form-control'
 
 %ul.nav.nav-tabs.nav-justified
   %li.active
