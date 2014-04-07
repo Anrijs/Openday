@@ -7,23 +7,30 @@
 - reg_difference_a = reg_length_b-reg_length_a
 - reg_difference_b = reg_length_a-reg_length_b
 
+- total_days = (reg_length_a > reg_length_b ? reg_length_a : reg_length_b)
+
 - days_range = '['
 
-- (0..(reg_length_a > reg_length_b ? reg_length_a : reg_length_b)).reverse_each do |day_num|
+- (0..total_days).reverse_each do |day_num|
   - days_range += "'#{day_num.to_s}',"
 
 - days_range += '],'
+`
+- registrants_array_a = []
+- registrants_array_b = []
 
 - registrants_list_a = '{name: "'+@openday_a.name+'", data:['
 - registrants_count_a = 0
 
 - while reg_difference_a > 0
   - registrants_list_a += 'null,'
+  - registrants_array_a.push(0)
   - reg_difference_a -= 1
 
 - (reg_timerange_a[:start]..reg_timerange_a[:end]).each do |key|
   - registrants_count_a += @openday_registrants_a[key] unless @openday_registrants_a[key].nil?
   - registrants_list_a += registrants_count_a.to_s + ','
+  - registrants_array_a.push(registrants_count_a)
 - registrants_list_a += ']},'
 
 - registrants_list_b = '{name: "'+@openday_b.name+'", data:['
@@ -31,11 +38,13 @@
 
 - while reg_difference_b > 0
   - registrants_list_b += 'null,'
+  - registrants_array_b.push(0)
   - reg_difference_b -= 1
 
 - (reg_timerange_b[:start]..reg_timerange_b[:end]).each do |key|
   - registrants_count_b += @openday_registrants_b[key] unless @openday_registrants_b[key].nil?
   - registrants_list_b += registrants_count_b.to_s + ','
+  - registrants_array_b.push(registrants_count_b)
 - registrants_list_b += ']},'
 
 - reg_difference_a = reg_length_b-reg_length_a
@@ -133,13 +142,58 @@
   %b=t('report.total_registrations', name: @openday_a.name )
   =total_registrations_count_a
 
-
 %h3.page-header=t('report.registrants_chart.title')
 #container_chart_1{style: "min-width: 310px; height: 400px; margin: 0 auto"}
 
 %h3.page-header=t('report.registrations_chart.title')
 #container_chart_2{style: "min-width: 310px; height: 400px; margin: 0 auto"}
 
+- reg_difference_a = reg_length_b-reg_length_a
+- reg_difference_b = reg_length_a-reg_length_b
+
+%h3.page-header=t('report.registrants_chart.title')
+%table.table.table-hover
+  %tr
+    %th=t('report.day')
+    %th=t('report.registrations')+" A"
+    %th=t('report.registrations')+" B"
+    %th=t('report.difference')
+    %th=t('report.percent')
+
+  - day_num = total_days
+  - day_count = 0
+  - week_count = 1
+  - while day_num>0
+    - if (day_num > total_days-CONFIG['reports']['in_days']-1)
+      - registrants_array_a[day_num] = 0 if registrants_array_a[day_num].nil?
+      - registrants_array_b[day_num] = 0 if registrants_array_b[day_num].nil?
+      - registrants_a = registrants_array_a[day_num]
+      - registrants_b = registrants_array_b[day_num]
+      - day_num -= 1
+    - elsif (day_num == 0)
+      - day_num = total_days if day_num > total_days
+      - registrants_a = registrants_array_a[day_num]
+      - registrants_b = registrants_array_b[day_num]
+    - else
+      - registrants_a = registrants_array_a[day_num]
+      - registrants_b = registrants_array_b[day_num]
+      - day_num -= 7
+
+    %tr
+      - if (day_num > total_days-CONFIG['reports']['in_days']-1)
+        %td=t('report.days', count: day_count)
+        - day_count += 1
+      - else
+        %td=t('report.weeks', count: week_count)
+        - week_count += 1
+      %td=registrants_a
+      %td=registrants_b
+      %td=registrants_a-registrants_b
+      - unless registrants_a == 0 or registrants_b == 0
+        %td=(((100-(registrants_a.to_f/registrants_b.to_f)*100)*100).round / 100.0).to_s+" %"
+      - else 
+        %td= "- %"
+      
 .col-md-6
   %h3.page-header
     =t('report.registrations_pie.title')
@@ -158,10 +212,10 @@
 %table.table.table-hover
   %tr
     %th=t('report.country_name')
-    %th=t('report.country_count')+" A"
-    %th=t('report.country_count')+" B"
-    %th=t('report.country_count_difference')
-    %th=t('report.country_count_percent')
+    %th=t('report.count')+" A"
+    %th=t('report.count')+" B"
+    %th=t('report.difference')
+    %th=t('report.percent')
   - @openday_countries.each do |country|
     - unless country.count < 1
       - country_a_count = @openday_countries_a.find {|s| s.country == country.country}
