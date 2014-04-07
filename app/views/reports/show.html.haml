@@ -36,7 +36,7 @@
 
 
 %h1= t('report.for', name: @openday.name)
-= select_tag 'team_id', options_from_collection_for_select(Openday.where(:id != @openday.id), "slug", "name"),:onchange => "window.location.replace('/reports/#{@openday.id}/compare/'+this.value);", :include_blank => true, class: 'form-control'
+= select_tag 'team_id', options_from_collection_for_select(Openday.where(:id != @openday.id), "slug", "name"),:onchange => "window.location.replace('/reports/#{@openday.slug}/compare/'+this.value);", :include_blank => true, class: 'form-control'
 
 
 %ul.nav.nav-tabs.nav-justified
