@@ -46,6 +46,14 @@ en:
     weeks:
       one: "%{count} week"
       other: "%{count} weeks"
+    timeslot_usage:
+      title: "Timeslot usage"
+      time_from: "From"
+      time_till: "Till"
+      timeslots_used: "Used"
+      timeslots_available: "Available"
+      timeslots_total: "Total"
+      timeslots_fill: "%"
   openday:
     register: "Register"
     name: "Name"

@@ -59,6 +59,8 @@ class ReportsController < ApplicationController
       end
 
       @faculty_countries = @openday_faculty.report_countries
+
+      @faculty_timeslots = @openday_faculty.report_timeslots
     end
   end
 

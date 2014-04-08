@@ -75,7 +75,41 @@
         %td=country.count.to_s
         %td="#{((country.count.to_f/@openday.registrants.count.to_f)*100).round(2)}%"
 
-  
+%h3.page-header=t('report.timeslot_usage.title')
+- @faculty_timeslots.each do |programme|
+  %h4=programme.first
+  %table.table.table-hover
+    %tr
+      %th.col-xs-1=t('report.timeslot_usage.time_from')
+      %th.col-xs-1=t('report.timeslot_usage.time_till')
+      %th.col-xs-1=t('report.timeslot_usage.timeslots_used')
+      %th.col-xs-1=t('report.timeslot_usage.timeslots_available')
+      %th.col-xs-1=t('report.timeslot_usage.timeslots_total')
+      %th.col-xs-1=t('report.timeslot_usage.timeslots_fill')
+      %th
+    - programme.last.each do |timeslot|
+      - unless timeslot.count == 0 or timeslot.capacity == 0
+        - percent = (timeslot.count.to_f/timeslot.capacity.to_f*100.0).round
+        - bar_class = "progress-bar-success"
+        - bar_class = "progress-bar-warning" if percent > 70
+        - bar_class = "progress-bar-danger" if percent > 90
+      - else 
+        - percent = " - "
+        - bar_class = "progress-bar-success"
+      - timeslot.count = 0 if timeslot.count.nil?
+      - timeslot.capacity = 0 if timeslot.count.nil?
+
+      %tr{id: "timeslot_#{timeslot.id}"}
+        %td=timeslot.time_from.strftime('%H:%m')
+        %td=timeslot.time_till.strftime('%H:%m')
+        %td=timeslot.count
+        %td=timeslot.capacity-timeslot.count
+        %td=timeslot.capacity
+        %td=percent.to_s+"%"
+        %td
+          .progress
+            .progress-bar{class: bar_class, role: "progressbar", 'aria-valuenow'=>"#{timeslot.count}", 'aria-valuemin'=>"0", 'aria-valuemax'=>"#{timeslot.capacity}", style: "width: #{percent.to_s}%"}
+
 :javascript
   $(function () {
     $('#container_chart_1').highcharts({

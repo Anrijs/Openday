@@ -50,4 +50,16 @@ class OpendayFaculty < ActiveRecord::Base
           .order('count DESC')
   end
 
+  def report_timeslots
+    timeslots = {}
+    self.openday_programmes.each do |programme|
+      query = (OpendayTimeslot.select('*, Count(registrations.timeslot_id) count')
+          .group('openday_timeslots.id')
+          .joins('LEFT JOIN registrations ON openday_timeslots.id = registrations.timeslot_id')
+          .where('openday_programme_id = ?', programme.id)
+          .order('count DESC'))
+      timeslots[programme.programme.name] = query
+    end
+    return timeslots
+  end
 end
