@@ -13,7 +13,7 @@ en:
   delete: "Delete"
   university:
     name: "Test University"
-  # openday
+  # Open Day
   report:
     for: "Report for %{name}"
     comparison: "%{name_a} comparison to %{name_b}"
@@ -54,28 +54,33 @@ en:
       timeslots_available: "Available"
       timeslots_total: "Total"
       timeslots_fill: "%"
+    unable_to_compare:
+      title: "%{faculty} hasn't registred for %{openday}"
+      paragraph_1: "Unable to compare selected faculty as it exists only for one of the selected Open Days."
+      paragraph_2: "If you want to view selected faculty data, please choose \"None\" option from compare list"
+    no_faculty_registred: "%{faculty} hasn't registred for theese Open Days"
   openday:
     register: "Register"
     name: "Name"
-    date: "Openday Date"
+    date: "Open Day Date"
     registration_open: "Registration starts at"
     registration_end: "Registration ends at"
-    list: "Openday List"
-    panel: "Openday Panel"
-    add: "Add new Openday"
-    edit: "Edit Openday"
+    list: "Open Day List"
+    panel: "Open Day Panel"
+    add: "Add new Open Day"
+    edit: "Edit Open Day"
     select_programmes: "Select programmes"
     select_faculties: "Select faculties"
     add_timeslots: "Add timeslots"
     timeslots: "Time slots"
     # Flash
     flash:
-      create_success: "Openday created"
-      create_error: "Could not create new openday"
-      edit_success: "Openday updated"
-      edit_error: "Could not update openday"
-      delete_success: "Openday deleted successfully"
-      delete_error: "Could delete openday"
+      create_success: "Open Day created"
+      create_error: "Could not create new Open Day"
+      edit_success: "Open Day updated"
+      edit_error: "Could not update Open Day"
+      delete_success: "Open Day deleted successfully"
+      delete_error: "Could delete Open Day"
     # Errors
     errors:
       not_complete:
@@ -138,7 +143,7 @@ en:
     register: "Register"
   # navbar
   nav:
-    opendays: "Opendays"
+    Open Days: "Open Days"
     reports: "Reports"
     faculties: "Faculties"
     reports: "Reports"
@@ -235,7 +240,7 @@ en:
     download_card_1: "Please download your registration cards from attachemts." 
     download_card_2: "Don’t forget to print it and bring it with you to the Bachelor’s Open Day."
     body_1: "Random info - Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, animi, a, eligendi, nemo modi mollitia eos possimus incidunt ipsam esse voluptas omnis quia optio voluptatibus sequi error architecto quam adipisci."
-    body_2: "More random info about Openday. Like info links, suggestions or other."
+    body_2: "More random info about Open Day. Like info links, suggestions or other."
     meetup: "We're looking forward to meeting you on %{date} and hope you enjoy your day at Test university"
     regards_1: "Warm regards,"
     regards_2: "Test university team"
@@ -265,3 +270,4 @@ en:
   footer:
     copyright: 'Copyright © 2014 Test University'
     lower: 'ODrms'
+  error: "An unknown error occured"

@@ -149,6 +149,11 @@ class ReportsController < ApplicationController
       @openday_faculty_a = @openday_a.openday_faculties.find_by_faculty_id(@faculty.id)
       @openday_faculty_b = @openday_b.openday_faculties.find_by_faculty_id(@faculty.id)
 
+      if (@openday_faculty_b.nil? or @openday_faculty_a.nil?)
+        render 'compare_faculty_error'
+        return
+      end
+
       @programme_registrations_a = {}
       @openday_faculty_a.report_registrations.each do |name, registrations|
         data = {}
