@@ -4,15 +4,15 @@ namespace :db do
     require 'populator'
     require 'faker'
     
-    cycles = 30
+    cycles = 1000
     countries = ['lv', 'lt', 'ee', 'nl', 'de', 'gb', 'us', 'hk', 'dm']
 
     (1..cycles).each do |i|
-      puts "populating #{i.to_s}"
+      puts "populating cycle 1: #{(i/10).to_s}%"
       od = Openday.first
 
       tf = od.registration_open
-      tt = od.registration_open+5.days
+      tt = od.registration_end
       
       e = Faker::Internet.email
       c = countries.sample
@@ -48,11 +48,11 @@ namespace :db do
     end
 
     (1..cycles).each do |i|
-      puts "populating #{i.to_s}"
+      puts "populating cycle 2: #{(i/10).to_s}%"
       od = Openday.last
 
       tf = od.registration_open
-      tt = od.registration_open+5.days
+      tt = od.registration_end
       
       e = Faker::Internet.email
       c = countries.sample
