@@ -1,3 +1,20 @@
+.terms {
+	margin: 10px 20px 20px 30px;
+}
+
+.terms > .btn {
+	margin-top: 20px;
+}
+
+.terms-spacer {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.center_contents {
+	text-align:center;
+}
+
 .report-header {
 	margin-bottom: 8px;
 }

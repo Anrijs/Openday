@@ -271,3 +271,11 @@ en:
     copyright: 'Copyright © 2014 Test University'
     lower: 'ODrms'
   error: "An unknown error occured"
+  terms_and_conditions:
+    title: "Terms and Conditions of submitting information to Test University Web forms"
+    points:
+      p1: "The information provided is used for registration for the Open Day."
+      p2: "The information provided is treated confidentially and according to some law and is used for information purposes and anonymous statistical purposes."
+      p3: "The information provided is stored in a secure environment using encrypted web technology."
+    email: "The information provided can be consulted and altered by sending an email to %{email}"
+    close: "Close this window"

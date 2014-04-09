@@ -1,1 +1,15 @@
-%h2 Terms and %conditions
+.terms
+  %h2.page-header=t('terms_and_conditions.title')
+  
+  %ul
+  - t('terms_and_conditions.points').each do |t|
+    %li=t.last
+  %li=t('terms_and_conditions.email', email: 'aa@aa.lv')
+  
+  %span#closewindow.btn.btn-md.btn-success{onclick: 'CloseWindow();'}=t('terms_and_conditions.close')
+
+:javascript
+  function CloseWindow()
+  {
+    window.close();
+  }
