@@ -36,6 +36,13 @@
     - else
       .space
     .container.shadows
+      %div.right_contents
+        - len = CONFIG['locales'].length
+        - CONFIG['locales'].each do |lang|
+          %a{href: '?lang='+lang.first}
+            = lang.last
+          = ' | ' unless len == 1
+          - len -= 1
       %noscript
         .alert.alert-warning
           %strong= t('warning').html_safe
