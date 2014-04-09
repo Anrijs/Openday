@@ -57,7 +57,7 @@
         = f.text_field :postal_code, class: 'form-custom col-sm-6 col-xs-12'
       
       %h2.page-header=t('registration.companions.title')
-      %p.lead=t('registration.companions.description')  
+      %p.lead=t('registration.companions.description', count: CONFIG['registration']['companions_session'])  
       .form-group.row
         = f.label :companions, t('registration.companions.title'), class: 'col-sm-2 col-xs-12'
         = f.select :companions, options_for_select((0..(CONFIG['registration']['companions_max'])).step(1).to_a.map{|s| ["#{s}", s]},  :selected => (params['registrant']['companions'] unless params['registrant'].nil?)), { include_blank: false }, class: 'form-custom col-sm-6 col-xs-12'    

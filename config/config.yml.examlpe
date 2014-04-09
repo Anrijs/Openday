@@ -11,6 +11,7 @@ development:
     limit_max: 3
     limit_min: 1
     companions_max: 10
+    companions_session: 1
   page_http_url: "http://rails.lv"
   reports:
     pie_countries: 5

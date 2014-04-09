@@ -146,7 +146,6 @@ en:
     Open Days: "Open Days"
     reports: "Reports"
     faculties: "Faculties"
-    reports: "Reports"
     registration: "Registration"
   #validation messages
   validation:
@@ -217,7 +216,7 @@ en:
       postal_code: "Postal code"
     companions: 
       title: "Companions"
-      description: "Family members or friends are welcome to join you to the Open Day. Please note that during busy sessions, only one of those accompanying you will be allowed to attend."
+      description: "Family members or friends are welcome to join you to the Open Day. Please note that during busy sessions, only %{count} of those accompanying you will be allowed to attend."
     register: 
       title: "Registration"
       description: "I wish to register for the following programmes:"

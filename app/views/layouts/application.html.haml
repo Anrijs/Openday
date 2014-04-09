@@ -32,17 +32,23 @@
                 =link_to t('nav.faculties'), faculties_path
 
             %ul.nav.navbar-nav.navbar-right
+              - len = CONFIG['locales'].length
+              - CONFIG['locales'].each do |lang|
+                %li
+                  %a{href: '?locale='+lang.first}
+                    = lang.first
               %li=link_to t('sign_out'), destroy_admin_session_path, method: :delete
     - else
       .space
     .container.shadows
       %div.right_contents
-        - len = CONFIG['locales'].length
-        - CONFIG['locales'].each do |lang|
-          %a{href: '?lang='+lang.first}
-            = lang.last
-          = ' | ' unless len == 1
-          - len -= 1
+        - unless admin_signed_in?
+          - len = CONFIG['locales'].length
+          - CONFIG['locales'].each do |lang|
+            %a{href: '?locale='+lang.first}
+              = lang.last
+            = ' | ' unless len == 1
+            - len -= 1
       %noscript
         .alert.alert-warning
           %strong= t('warning').html_safe
