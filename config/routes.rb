@@ -1,5 +1,6 @@
 Od::Application.routes.draw do
   devise_for :admins
+  devise_scope :admin do get "/admins/sign_out" => 'devise/sessions#destroy' end
   
   resources :reports do
     get 'compare/:compare_id/:id' => 'reports#compare_faculty', as: :compare_faculty
