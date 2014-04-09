@@ -1,7 +1,3 @@
-#     I18n.t 'hello'#
-#     <%= t('hello') %>
-#     I18n.locale = :es
-
 lv:
   password: "Parole"
   username: "Lietotājvārds"
@@ -161,7 +157,6 @@ lv:
     slug_uniqueness: "Līdzīgs vai tāds pats nosaukums jau ir izmantots"
     email_format: "Epasta formāts nav pareizs"
     email_name: "Epasts ir obligāts"
-    name_presence: "Vārds īr obligāts"
     surname_presence: "Uzvārds is obligāts"
     address1_presence: "Adrese ir obligāta"
     address2_presence: "Adrese ir obligāta"
