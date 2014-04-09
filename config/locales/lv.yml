@@ -1,0 +1,280 @@
+#     I18n.t 'hello'#
+#     <%= t('hello') %>
+#     I18n.locale = :es
+
+lv:
+  password: "Parole"
+  username: "Lietotājvārds"
+  sign_in: "Ieiet"
+  sign_out: "Iziet"
+  select_all: "Izvēlēties visu"
+  optional: "Neobligāts"
+  confirm_delete: "vai tīešām vēlies dzēst?"
+  delete: "Dzēst"
+  university:
+    name: "Testa Universitāte"
+  # Open Day
+  report:
+    for: "%{name} Pārskats"
+    comparison: "%{name_a} salīdzinājums ar %{name_b}"
+    total_registrations: "Kopējais reģistrāciju skaits %{name}:"
+    total_registrants: "Kopējais reģistrantu skaits %{name}:"
+    registrants_chart: 
+      title: "Unikālālās reģistrācijas pa dienām"
+      title_table: "Unikālās reģistrācijas pa dienām un nedēļām"
+      y_axis: "Reģistranti"
+    registrations_chart:
+      title: "Reģistrācijas fakultātei"
+      y_axis: "Reģistrācijas"
+    registrations_pie:
+      title: "Reģistrācijas pa valstīm"
+    other_countries: "Citas"
+    faculty:
+      unique_registrants: "Kopējais reģistrantu skaits %{name}"
+      total_registrations: "Kopējais reģistrāciju skaits %{name}"
+    country_name: "Valsts"
+    count: "Skaits"
+    difference: "Starpība"
+    percent: "Procenti (%)"
+    compare_with: "Salīdzināt ar:"
+    compare_to_none: "Neviens"
+    registrations: "Reģistrācijas"
+    days:
+      one: "%{count} diena"
+      other: "%{count} dienas"
+    day: "Dienas"
+    weeks:
+      one: "%{count} nedēļa"
+      other: "%{count} nedēļas"
+    timeslot_usage:
+      title: "Laika posmu izmantojums"
+      time_from: "No"
+      time_till: "Līdz"
+      timeslots_used: "Aizņemts"
+      timeslots_available: "Pieejams"
+      timeslots_total: "Kopā"
+      timeslots_fill: "%"
+    unable_to_compare:
+      title: "%{faculty} nav reģistrēta uz %{openday}"
+      paragraph_1: "Nevar salīdzināt izvēleto fakultāti, jo tā ir pievienota tikai vienai no atvērto durvju dienām."
+      paragraph_2: "Ja vēlaties apskatīt fakultātes datus, izvēlieties \"Neviens\" no salīdzināju saraksta"
+    no_faculty_registred: "%{faculty} nav pievienota šīm atvērto durvju dienām"
+  openday:
+    register: "Reģistrēt"
+    name: "Nosaukums"
+    date: "Datums"
+    registration_open: "Reģistrācija sākas"
+    registration_end: "Reģistrācija beidzas"
+    list: "Atvērto durvju dienu saraksts"
+    panel: "Atvēto durvju dienu pārvaldība"
+    add: "Pievienot atvērto durvju dienas"
+    edit: "labot atvērto durvju dienas"
+    select_programmes: "Izvēlēties programmas"
+    select_faculties: "Izvēlēties fakultātes"
+    add_timeslots: "Pievienot laika posmus"
+    timeslots: "Laika posmi"
+    # Flash
+    flash:
+      create_success: "Atvērto durvju dienas izveidotas"
+      create_error: "Neizdevās izveidot atvērto durvju dienas"
+      edit_success: "Atvērto durvju dienas atjaunotas"
+      edit_error: "Neizdevās atjaunot atvērto durvju dienas"
+      delete_success: "Atvērto durvju dienas izdzēstas"
+      delete_error: "Neizdevās izdzēst atvērto durvju dienas"
+    # Errors
+    errors:
+      not_complete:
+        title: "Izskatās ka kāds nav izdarījis savu darbu."
+        reason: "Reģistrācijas forma nav pabeigta vai tā satur kļūdas."
+        contact: "Lūdzu sazinieties ar mums: %{email}"
+      missing_data: "Trūkst datu"
+      missing_timeslots: "Trūkst laika posmu"
+  # faculty
+  faculty:
+    select: "Izvēlēties fakultātes"
+    name: "Pilns nosaukums"
+    short: "Saīsināts nosaukums"
+    panel: "Fakultāšu un programmu pārvaldība"
+    list: "Faculty saraksts"
+    description: "Apraksts"
+    url: "Fakultātes mājaslapa"
+    add: "Pievienot jaunu fakultāti"
+    edit: "Labot fakultāti"
+    programmes:
+      count:
+        one: 'programma'
+        other: 'programmas'
+    ## Flash
+    flash:
+      create_success: "Fakultāte izveidota"
+      create_error: "Neizdevās izveidot fakultāti"
+      edit_success: "Fakultāte atjaunota"
+      edit_error: "Neizdevās atjaunot fakultāti"
+  # programme
+  programme:
+    name: "Nosaukums"
+    description: "Apraksts"
+    url: "Programmas mājaslapa"
+    add: "Pievienot jaunu programmu"
+    edit: "Rediģēt programmu"
+    select: "Izvēlēties progammas"
+    # Flash
+    flash:
+      create_success: "Fakultāte izveidota"
+      create_error: "Neizdevās izveidot fakultāti"
+      edit_success: "Fakultāte atjaunota"
+      edit_error: "Neizdevās atjaunot fakultāti"
+  # IM HERE
+  #timeslot
+  timeslot:
+    new: "Pievienot laika posmu"
+    edit: "Labot laika posmu"
+    till: "Llīdz"
+    from: "No"
+    capacity: "Vietu skaits"
+  # buttons
+  btn:
+    cancel: "Atcelt"
+    submit: "Nosūtīt"
+    submiting: "Sūta..."
+    delete: "Dzēst"
+    deleteing: "Dzēš..."
+    save: "Saglabāt"
+    saving: "Saglabā..."
+    register: "Reģistrēties"
+  # navbar
+  nav:
+    Open Days: "Atvērto durvju dienas"
+    reports: "Atskaites"
+    faculties: "Fakultātes"
+    registration: "Reģistrācija"
+  #validation messages
+  validation:
+    registration_end_early: "Reģistrācija nevar beigties pirms tā ir sākusies"
+    date_too_early: "Datums nevar būt pirms sākuma datuma"
+    date_format: "Pareizs datuma formāts: yyyy-mm-dd"
+    datetime_format: "Pareizs datuma un laika formāts: yyyy-mm-dd HH:mm"
+    name_presence: "Nosaukums ir obligāts"
+    name_uniqueness: "Nosaukumam ir jābūt unikālam"
+    short_name_presence: "Saīsinātais nosaukums ir obligāts"
+    short_name_uniqueness: "Saīsinātajam nosaukumam ir jābūt unikālam"
+    slug_uniqueness: "Līdzīgs vai tāds pats nosaukums jau ir izmantots"
+    email_format: "Epasta formāts nav pareizs"
+    email_name: "Epasts ir obligāts"
+    name_presence: "Vārds īr obligāts"
+    surname_presence: "Uzvārds is obligāts"
+    address1_presence: "Adrese ir obligāta"
+    address2_presence: "Adrese ir obligāta"
+    city_presence: "Pilsēta ir obligāta"
+    state_presence: "Novads ir obligāts"
+    country_presence: "Valsts ir obligāta"
+    postal_code_presence: "Pasta indekss ir obligāts"
+    companions_presence: "Pavadošo personuu skaitsir obligāts"
+    year_presence: "Studiju sākuma gads ir obligāts"
+    missing_timeslot_for: "Trūkst laika posmu programmai %{programme}"
+    confirmation_ressence: "Jums ir jāpiekrīt mūsu noteikumiem"
+    too_many: "Lūdzu izvēlieties ne vairāk kā %{count} programmas"
+    not_enough:
+      one: "Lūdzu izvēlieties vismaz %{count} programmu"
+      other: "Lūdzu izvēlieties vismaz %{count} programmas"
+  # warnings
+  warning: "Uzmanību!"
+  javascript_warning: "Lai šī lapa strādātu pareizi, ir nepieciešams JavaScript"
+  registration:
+    for: "Reģistrēties uz "
+    success:
+      title: "Jūs esiet veiksmīgi reģistrējies(usies) uz %{name}"
+      registred_for:
+        one: "Jūs esiet reģistrējies(usies) uz %{count} programmu:"
+        other: "Jūs esiet veiksmīgi reģistrējies(usies) %{count} programmām::"
+      register_change: "Ja Jūs vēlaties mainīt savu reģistrācijsa informāciju, aizpildiet reģistrācijas formu ar jauno informāciju un to pašu epastu."
+      email_sent: "Uz jūsu e-pastu %{email} tika nosūtītas reģistrācijas kartes. Lūdzu izprintējiet tās, kad mūs apmeklēsiet."
+      changed: "Jūsu iepriekšējā reģistrācija tika atjaunota."
+    selection:
+      title: 
+        one: "Šobrīd ir aktīva %{count} reģistrācija."
+        other: "Šobrīd ir aktīvas %{count} reģistrācijas."
+      paragraph: "Izvēlieties atvērto durvju dienas no saraksta zemāk uz zpiediet \"Reģistrēties\""
+    closed:
+      title: "Reģistrācija ir slēgta"
+      paragraph: "Šobrīd nav nevienas aktīvas reģistrācijas"
+      next_registration: "Nākošā reģistrācija sāksies %{date}"
+    personal_information: 
+      title: "Personīgā informācija"
+      name: "Vārds"
+      surname: "Uzvārds"
+      prefix: "Starpvārds"
+    contact_information: 
+      title: "Kontaktinformācija"
+      address1: "Adrese 1"
+      address2: "Adrese 2"
+      city: "Pilsēta"
+      country: "Valsts"
+      email: "E-pasts"
+      state: "Novads"
+      year: "Gads"
+      postal_code: "Pasta indekss"
+    companions: 
+      title: "Pavadošās personas"
+      description: "Tava ģimene un draugi ir laipni lūgti pievienoties atvērto durvju dienām. Lūdzu atcerieties ka sesiju laikā līdzi varēs nākt tikai %{count} no pavadošajām personām."
+    register: 
+      title: "Reģistrācija"
+      description: "Es vēlos reģistrēties uz sekojošām programmām:"
+      limit: "(Lūdzu izvēlieties vismaz %{min} un ne vairāk par %{max} programmām)"
+      notice: "Lūdzu atcerieties: Kad laika posmā visas vietas ir aizņemtas, jūs uz to vairs nevariet reģistrēties. Izvēlieties citu laika posmu"
+      year: "Es sākšu studēt:"
+      contains_errors: "Reģistrācija satur %{count} kļūdas:"
+      terms_1: "Esmu izlasījis Testa universitātes "
+      terms_2: "noteikumus un nosacījumus "
+      terms_3: "un piekrītu saņemt informāciju par studēšanu Testa Universitātē"
+      full: "Pilns"
+      availability:
+        one: "%{count} pieejama"
+        other: "%{count} Pieejamas"
+  mail:
+    subject: "Apstiprinājums reģistrācijai uz atvērto durvju dienām, Testa Universitāte"
+    heading: "Dārgais %{name},"
+    thanks:  "Paldies ka reģistrējies uz mūsu atvērto durvju dienām, kas norisinās %{date}!"
+    registred_for: "Tu esi reģistrējies uz šādām programmām:"
+    download_card_1: "Lūdzu lejupielādē reģistrācijas karti, kas atrodas šī e-pasta pielikumā." 
+    download_card_2: "Neaizmirsti to izprintēt un paņemt līdzi, kad apmeklēsi atvērto durvju dienas"
+    body_1: "Random informācija - Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, animi, a, eligendi, nemo modi mollitia eos possimus incidunt ipsam esse voluptas omnis quia optio voluptatibus sequi error architecto quam adipisci."
+    body_2: "Vēl cita random informācija par atvērto durvju dienām."
+    meetup: "Ceram Jūs satikt %{date} un ceram ka Jūs izbaudīsiet dienu Testa Universitātē"
+    regards_1: "Ar cieņu,"
+    regards_2: "Testa univeristāte"
+    ps1: "P.S. Lūzu pārliecinaties ka ierodaties laicīgi."
+    ps2: "Ģimenes biedriem un draugiem man jāreģistrējas."
+  pdf:
+    event: "Pasākums"
+    date: "Datuma"
+    programme_time: "Programma + laiks"
+    heading: 'Dārgais'
+    body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo placeat numquam natus beatae voluptate rem? Maiores, quisquam, dolore, laborum, a odio molestiae natus impedit blanditiis amet ipsum quo aliquid alias.'
+    table_1:
+      title: 'Bezmaksas ēdiens'
+      body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus eos quam quo voluptatum optio fuga a quibusdam dolorem. Mollitia eaque similique laudantium voluptas quod nostrum magni totam maiores atque pariatur.'
+    table_2:
+      title: '.. bet mums ir vēl'
+      body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, error nam reprehenderit facilis quas a sunt culpa doloremque ullam repudiandae aperiam dolores accusamus animi.'
+    table_3:
+      title: 'Run rabbit'
+      body: 'More randomness!.'
+    regards_1: "Ar cieņu,"
+    regards_2: "Testa Universitāte"
+    qr1: 'github.com'
+    qr2: 'github.com/Anrijs'
+  date:
+    open_format: '%B %d, %Y' #http://www.foragoodstrftime.com/
+  footer:
+    copyright: '© 2014 Testa Universitāte'
+    lower: 'ODrms'
+  error: "Nezināma kļūda"
+  terms_and_conditions:
+    title: "Noteikumi un nosacījumi informācijas nosūtīšanai uz Testa Universitāti"
+    points:
+      p1: "Ievadītā informācija tiek lietota reģistrācijai uz atvērto durvju dienām."
+      p2: "Ievadītā informācija tiek lietota saskaņā ar kaut kādu likumu un tiek lietota anonīmas statistikas veidošanai."
+      p3: "Ievadītā informācija tiek glabāta drošā vidē."
+    email: "Ievadītā informācija var tikt konsultēta un brīdināta nosūtot uzepastu uz %{email}"
+    close: "Aizvērt šo logu"
