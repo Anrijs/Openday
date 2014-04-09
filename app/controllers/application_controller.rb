@@ -8,7 +8,15 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
    
   def set_locale
-    I18n.locale = 'en'
+
+    if params[:locale].nil? and cookies[:locale].nil?
+      I18n.locale = 'en'
+    elsif !params[:locale].nil?
+      cookies[:locale] = params[:locale].to_s
+      I18n.locale = params[:locale].to_s
+    else
+      I18n.locale = cookies[:locale]
+    end
   end
 
   protected
