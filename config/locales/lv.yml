@@ -273,3 +273,10 @@ lv:
       p3: "Ievadītā informācija tiek glabāta drošā vidē."
     email: "Ievadītā informācija var tikt konsultēta un brīdināta nosūtot uzepastu uz %{email}"
     close: "Aizvērt šo logu"
+  page:
+    not_found:
+      title: "Lapa netika atrasta!"
+      lead: "Lapa ko Jūs meklējāt netika atrasta.."
+      paragraph_1a: "Dodieties uz "
+      paragraph_1b: "reģistrācijas lapu"
+      paragraph_2: "Apmeklējiet mūs: "
