@@ -34,6 +34,10 @@ Od::Application.routes.draw do
   root 'registrants#index'
   get  'terms' => 'registrants#terms'
 
+  unless ENV["RAILS_ENV"] == 'development'
+    get '*a', :to => 'application#not_found'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

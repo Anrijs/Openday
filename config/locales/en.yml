@@ -273,3 +273,10 @@ en:
       p3: "The information provided is stored in a secure environment using encrypted web technology."
     email: "The information provided can be consulted and altered by sending an email to %{email}"
     close: "Close this window"
+  page:
+    not_found:
+      title: "Page not found!"
+      lead: "The page You were looking for was not found."
+      paragraph_1a: "Go to "
+      paragraph_1b: "registration page"
+      paragraph_2: "Visit us at: "

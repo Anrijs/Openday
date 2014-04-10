@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def not_found
+    render '404'
+  end
+
   protected
 
   def configure_permitted_parameters
