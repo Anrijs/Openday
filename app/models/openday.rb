@@ -1,4 +1,5 @@
 class Openday < ActiveRecord::Base
+
   # Relations
   has_many :openday_faculties, dependent: :destroy
   has_many :registrants
@@ -17,9 +18,12 @@ class Openday < ActiveRecord::Base
 
   before_validation :create_slug
 
+  # Delece cached
+  after_save :expire_opendays_cache
+
   # Find all active opendays
   def self.find_active
-    Openday.where('registration_open <= :time AND registration_end >= :time', {:time =>  DateTime.now})
+    Openday.where('registration_open <= :time AND registration_end >= :time', {:time =>  DateTime.now}).includes(:openday_faculties)
   end
 
   # Check if selected openday is active

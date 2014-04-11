@@ -22,7 +22,6 @@ class ApplicationController < ActionController::Base
 
   # Process all unmatched routes with this 404
   def not_found
-    render '404'
   end
 
   protected

@@ -1,10 +1,19 @@
 class OpendaysController < ApplicationController
   # Require admin status to access this controlelr
-  before_filter :authenticate_admin!
+  #before_filter :authenticate_admin!
+  caches_page :index, :new
 
   # Show openday list
   def index
-    @opendays = Openday.all.order('date DESC')
+    @opendays = {}.to_json
+    @opendays = Openday.includes({:openday_faculties => :openday_programmes}).order('date DESC')
+    @opendays.each do |openday|
+      openday.openday_faculties.each do |faculty|
+        faculty.openday_programmes.each do |programme|
+          programme.openday_timeslots = programme.openday_timeslots
+        end
+      end
+    end
     @faculties = Faculty.all
   end
 
@@ -161,7 +170,6 @@ class OpendaysController < ApplicationController
     end
   end
 
-
 private
   def openday_params
     params.require(:openday).permit(:name, :date, :registration_open, :registration_end)
@@ -170,5 +178,4 @@ private
   def timeslot_params
     params.require(:openday_timeslot).permit(:time_from, :time_till, :capacity)
   end
-
 end

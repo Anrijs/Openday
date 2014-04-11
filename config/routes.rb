@@ -37,7 +37,7 @@ Od::Application.routes.draw do
   root 'registrants#index'
 
   # Route matcher for 404
-  unless ENV["RAILS_ENV"] == 'development'
-    get '*a', :to => 'application#not_found'
-  end
+  #unless ENV["RAILS_ENV"] == 'development'
+  #  get '*a', :to => 'application#not_found'
+  #end
 end

@@ -23,6 +23,7 @@ gem 'cairo'
 gem 'barby'
 gem 'chunky_png'
 gem "highcharts-rails", "~> 3.0.0"
+gem 'actionpack-page_caching'
 
 group :development do
   gem "capistrano"

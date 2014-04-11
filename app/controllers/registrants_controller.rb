@@ -1,4 +1,5 @@
 class RegistrantsController < ApplicationController
+  caches_page :index
   # Prepare registration forms
   def index
     @registrant = Registrant.new

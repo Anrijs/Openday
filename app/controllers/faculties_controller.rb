@@ -1,7 +1,7 @@
 class FacultiesController < ApplicationController
   # Require admin status to access this controlelr
-  before_filter :authenticate_admin!
-
+  #before_filter :authenticate_admin!
+  caches_page :index
   # List all faculties
   def index
   	@faculties = Faculty.all

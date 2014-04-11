@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305145408) do
+ActiveRecord::Schema.define(version: 20140411092014) do
 
   create_table "admins", force: true do |t|
     t.string   "username",               default: "", null: false
@@ -42,22 +42,21 @@ ActiveRecord::Schema.define(version: 20140305145408) do
     t.string   "url"
   end
 
-  create_table "images", force: true do |t|
-    t.string   "image_uid"
-    t.string   "image_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "faculties", ["id"], name: "index_faculties_on_id", using: :btree
 
   create_table "openday_faculties", force: true do |t|
     t.integer "openday_id"
     t.integer "faculty_id"
   end
 
+  add_index "openday_faculties", ["id"], name: "index_openday_faculties_on_id", using: :btree
+
   create_table "openday_programmes", force: true do |t|
     t.integer "openday_faculty_id"
     t.integer "programme_id"
   end
+
+  add_index "openday_programmes", ["id"], name: "index_openday_programmes_on_id", using: :btree
 
   create_table "openday_timeslots", force: true do |t|
     t.integer "openday_programme_id"
@@ -65,6 +64,8 @@ ActiveRecord::Schema.define(version: 20140305145408) do
     t.time    "time_till"
     t.integer "capacity"
   end
+
+  add_index "openday_timeslots", ["id"], name: "index_openday_timeslots_on_id", using: :btree
 
   create_table "opendays", force: true do |t|
     t.string   "name"
@@ -77,6 +78,8 @@ ActiveRecord::Schema.define(version: 20140305145408) do
     t.string   "slug"
   end
 
+  add_index "opendays", ["id"], name: "index_opendays_on_id", using: :btree
+
   create_table "programmes", force: true do |t|
     t.string   "name"
     t.integer  "faculty_id"
@@ -86,6 +89,8 @@ ActiveRecord::Schema.define(version: 20140305145408) do
     t.text     "description"
     t.string   "url"
   end
+
+  add_index "programmes", ["id"], name: "index_programmes_on_id", using: :btree
 
   create_table "registrants", force: true do |t|
     t.string   "name"
@@ -102,7 +107,11 @@ ActiveRecord::Schema.define(version: 20140305145408) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "openday_id"
+    t.integer  "companions"
+    t.boolean  "visited"
   end
+
+  add_index "registrants", ["id"], name: "index_registrants_on_id", using: :btree
 
   create_table "registrations", force: true do |t|
     t.integer  "registrant_id"
@@ -110,14 +119,10 @@ ActiveRecord::Schema.define(version: 20140305145408) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "openday_id"
+    t.integer  "faculty_id"
+    t.integer  "programme_id"
   end
 
-  create_table "settings", force: true do |t|
-    t.string   "name"
-    t.string   "value"
-    t.string   "image"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "registrations", ["id"], name: "index_registrations_on_id", using: :btree
 
 end

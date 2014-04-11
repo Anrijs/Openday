@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
   # Require admin status to access this controlelr
-  before_filter :authenticate_admin!
+  #before_filter :authenticate_admin!
 
   # Show all openday reports
   def index
