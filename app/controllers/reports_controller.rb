@@ -1,16 +1,20 @@
 class ReportsController < ApplicationController
+  # Require admin status to access this controlelr
   before_filter :authenticate_admin!
 
+  # Show all openday reports
   def index
     @opendays = Openday.all
   end
 
+  #Show report
   def show
     @openday = Openday.find_by_slug(params[:id])
     unless @openday
       @openday = Openday.find(params[:id])
     end
-  
+    
+    # Get report data for openday overview
     @faculty_registrations = {}
     @openday.report_registrations.each do |name, registrations|
       data = {}
@@ -28,6 +32,7 @@ class ReportsController < ApplicationController
     @openday_countries = @openday.report_countries
   end
 
+  # Show faculty report
   def faculty
     @openday = Openday.find_by_slug(params[:report_id])
     unless @openday
@@ -39,9 +44,11 @@ class ReportsController < ApplicationController
       @faculty = Faculty.find_by_id(params[:id])
     end
 
+    # Check if faculy exists
     if @faculty.nil?
       redirect_to report_path(@openday)
     else
+      # If exists, get all report data for faculty
       @openday_faculty = @openday.openday_faculties.find_by_faculty_id(@faculty.id)
       
       @programme_registrations = {}
@@ -64,6 +71,7 @@ class ReportsController < ApplicationController
     end
   end
 
+  # Similar to show, only used to compare twir different opendays
   def compare
     if(params[:id].to_s == "0")
       redirect_to report_path(params[:report_id])
@@ -81,6 +89,7 @@ class ReportsController < ApplicationController
       @openday_b = Openday.find(params[:id])
     end
   
+    # Get all data for booth of the opendays
     @faculty_registrations_a = {}
     @openday_a.report_registrations.each do |name, registrations|
       data = {}
@@ -122,6 +131,7 @@ class ReportsController < ApplicationController
     )
   end
 
+  # Similar to compare, only used to compare same faculty for two differrent opendays
   def compare_faculty
     if(params[:compare_id].to_s == "0")
       redirect_to report_faculty_path(params[:report_id], params[:id])
@@ -146,6 +156,7 @@ class ReportsController < ApplicationController
     if @faculty.nil?
       redirect_to report_path(@openday_a)
     else
+      # Get all data for booth of the opendays
       @openday_faculty_a = @openday_a.openday_faculties.find_by_faculty_id(@faculty.id)
       @openday_faculty_b = @openday_b.openday_faculties.find_by_faculty_id(@faculty.id)
 

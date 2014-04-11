@@ -1,7 +1,9 @@
 class Registrant < ActiveRecord::Base
+  # Relations
   has_many :registrations, dependent: :destroy
   belongs_to :openday
 
+  # Validations
   validates :name, presence: {message: I18n.t('validation.name_presence')}
   validates :surname, presence: {message: I18n.t('validation.surname_presence')}
   validates :email, :email_format => {:message => I18n.t('validation.email_format')}
@@ -14,7 +16,7 @@ class Registrant < ActiveRecord::Base
   validates :companions, presence: {message: I18n.t('validation.companions_presence')}
   validates :year, presence: {message: I18n.t('validation.year_presence')}
   
-
+  # Check if registrant programmes are selected correctly
   def check_programmes programmes
     if programmes.nil?
       errors.add("registration", I18n.t('validation.not_enough', count: CONFIG['registration']['limit_min']))

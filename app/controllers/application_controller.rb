@@ -7,8 +7,9 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
    
+  # Set page language based by cookies
   def set_locale
-
+    # Create/update/use cookie and detect language from it
     if params[:locale].nil? and cookies[:locale].nil?
       I18n.locale = 'en'
     elsif !params[:locale].nil?
@@ -19,6 +20,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Process all unmatched routes with this 404
   def not_found
     render '404'
   end

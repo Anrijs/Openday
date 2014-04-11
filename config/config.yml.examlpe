@@ -1,18 +1,60 @@
 development:
-  locales: 
+  locales:  # Add all avaible locales here
     en: 'English'
     lv: 'Latvian'
-  od_site_title: "ODrms Demo"
-  emails:
+  od_site_title: "ODrms Demo" # Name you will see as window/tab name
+  university_homepage: "http://github.com/Anrijs" # University home page
+  emails: # Emails used in page
     admin:    admin@localhost
     support:  support@localhost
     terms:  terms@localhost
-  registration:
+  registration: # Registration configuration
     limit_max: 3
     limit_min: 1
     companions_max: 10
     companions_session: 1
-  page_http_url: "http://rails.lv"
-  reports:
+  page_http_url: "http://rails.lv" # Important! This is same address where you can see registration form
+  reports: # Report configuration
+    pie_countries: 5
+    in_days: 7
+
+test:
+  locales:  # Add all avaible locales here
+    en: 'English'
+    lv: 'Latvian'
+  od_site_title: "ODrms Demo" # Name you will see as window/tab name
+  university_homepage: "http://github.com/Anrijs" # University home page
+  emails: # Emails used in page
+    admin:    admin@localhost
+    support:  support@localhost
+    terms:  terms@localhost
+  registration: # Registration configuration
+    limit_max: 3
+    limit_min: 1
+    companions_max: 10
+    companions_session: 1
+  page_http_url: "http://rails.lv" # Important! This is same address where you can see registration form
+  reports: # Report configuration
+    pie_countries: 5
+    in_days: 7
+
+
+production:
+  locales:  # Add all avaible locales here
+    en: 'English'
+    lv: 'Latvian'
+  od_site_title: "ODrms Demo" # Name you will see as window/tab name
+  university_homepage: "http://github.com/Anrijs" # University home page
+  emails: # Emails used in page
+    admin:    admin@localhost
+    support:  support@localhost
+    terms:  terms@localhost
+  registration: # Registration configuration
+    limit_max: 3
+    limit_min: 1
+    companions_max: 10
+    companions_session: 1
+  page_http_url: "http://rails.lv" # Important! This is same address where you can see registration form
+  reports: # Report configuration
     pie_countries: 5
     in_days: 7

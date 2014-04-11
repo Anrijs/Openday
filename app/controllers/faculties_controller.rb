@@ -1,14 +1,18 @@
 class FacultiesController < ApplicationController
+  # Require admin status to access this controlelr
   before_filter :authenticate_admin!
 
+  # List all faculties
   def index
   	@faculties = Faculty.all
   end
 
+  # Prepare new faculty
   def new
   	@faculty = Faculty.new
   end
 
+  # Add new faculty
   def create
     @faculty = Faculty.new(faculty_params)
     if @faculty.save
@@ -20,11 +24,13 @@ class FacultiesController < ApplicationController
     end
   end
 
+  # Prepare faculty edit
   def edit
     @faculty = Faculty.find_by_slug(params[:id])
     @faculty = Faculty.find(params[:id]) if @faculty.nil?
   end
 
+  # Update faculty
   def update
     @faculty = Faculty.find_by_slug(params[:id])
     @faculty = Faculty.find(params[:id]) if @faculty.nil?
@@ -39,6 +45,7 @@ class FacultiesController < ApplicationController
     end
   end
 
+  # Delete faculty
   def destroy
   	@faculty = Faculty.find_by_slug(params[:id])
     @faculty = Faculty.find(params[:id]) if @faculty.nil?

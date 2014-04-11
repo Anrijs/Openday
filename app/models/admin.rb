@@ -5,6 +5,7 @@ class Admin < ActiveRecord::Base
   validates :email, :presence => false, :email => false
   validates :username, :presence => true, :uniqueness => true
 
+  # Auth and register by username not email
   def email_required?
     false
   end

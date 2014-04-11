@@ -1,4 +1,5 @@
 class RegistrantsController < ApplicationController
+  # Prepare registration forms
   def index
     @registrant = Registrant.new
 
@@ -21,11 +22,14 @@ class RegistrantsController < ApplicationController
     end
   end
 
+  # Process registration
   def create
+    # Include barcode libraries
     require 'barby'
     require 'barby/barcode/code_128'
     require 'barby/outputter/svg_outputter'
 
+    # Check if registrant already registred before
     @openday = Openday.find(params[:openday_id])
     @registrant = Registrant.find_by_openday_id_and_email(@openday, params[:registrant]['email'])
     @recreated = false
@@ -52,6 +56,7 @@ class RegistrantsController < ApplicationController
           Registration.create(registrant_id: @registrant.id, openday_id: @openday.id, 
                               faculty_id: faculty, programme_id: prg.programme.id, timeslot_id: timeslot)
         end
+        # Generate barcode for registration card
         @barcode = Barby::Code128B.new(@registrant.id)
         email = render_to_string  partial: '/email/index'
         pdf_text = render_to_string  partial: '/email/pdf'
@@ -59,6 +64,7 @@ class RegistrantsController < ApplicationController
         # Get an inline PDF
         pdf = kit.to_pdf
 
+        # Prepare and send confirmation email
         if Rails.env.development?
           Pony.mail(
             :from => 'tester@localhost',
@@ -88,9 +94,11 @@ class RegistrantsController < ApplicationController
     end
   end
 
+  # Terms page (no data procesing required)
   def terms
   end
 
+  # Create pdf file
   def to_pdf
    render :pdf  => 'file_name'      
   end

@@ -1,12 +1,15 @@
 class ProgrammesController < ApplicationController
+  # Require admin status to access this controlelr
   before_filter :authenticate_admin!
 
+  # Prepare new programme
   def new
     @faculty = Faculty.find(params[:faculty_id])
   	@programme = @faculty.programmes.new
   end
 
-   def create
+  # Add new programme
+  def create
     @programme = Programme.new(programme_params)
     if @programme.save
       flash[:success] = I18n.t('programme.flash.create_success')
@@ -17,11 +20,13 @@ class ProgrammesController < ApplicationController
     end
   end
 
+  # Prepare programme edit
   def edit   
     @programme = Programme.find_by_slug(params[:id])
     @programme = Programme.find(params[:id]) if @programme.nil?
   end
 
+  # Update new programme
   def update
     @programme = Programme.find_by_slug(params[:id])
     @programme = Programme.find(params[:id]) if @programme.nil?
@@ -36,6 +41,7 @@ class ProgrammesController < ApplicationController
     end
   end
 
+  # Delete programme
   def destroy
     @programme = Programme.find_by_slug(params[:id])
     @programme = Programme.find(params[:id]) if @programme.nil?

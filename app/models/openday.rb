@@ -1,9 +1,10 @@
 class Openday < ActiveRecord::Base
-
+  # Relations
   has_many :openday_faculties, dependent: :destroy
   has_many :registrants
   has_many :registrations
   
+  # Validations
   validates_datetime :registration_open
   validates_datetime :registration_end
   validates_datetime :registration_open, :before => :registration_end
@@ -14,13 +15,14 @@ class Openday < ActiveRecord::Base
   validates_uniqueness_of :name, message: I18n.t('validation.name_uniqueness')
   validates_uniqueness_of :slug, message: I18n.t('validation.name_uniqueness')
 
-
   before_validation :create_slug
 
+  # Find all active opendays
   def self.find_active
     Openday.where('registration_open <= :time AND registration_end >= :time', {:time =>  DateTime.now})
   end
 
+  # Check if selected openday is active
   def active?
     time = DateTime.now
     if (self.registration_open <= time && self.registration_end >= time)
@@ -30,6 +32,7 @@ class Openday < ActiveRecord::Base
     end
   end
 
+  # Check if selected openday configuration is completed
   def ready?
     self.openday_faculties.each do |faculty|
       if faculty.openday_programmes.count < 1
@@ -44,6 +47,7 @@ class Openday < ActiveRecord::Base
     return true
   end
 
+  # Get all openday registrants
   def report_registrants
     return Registrant.find(:all, 
       select: 'count(*) count, DAYOFYEAR(created_at) as date', 
@@ -53,6 +57,7 @@ class Openday < ActiveRecord::Base
     )
   end
 
+  # Get all openday registrants
   def report_registrations
     faculties = {}
     self.openday_faculties.each do |faculty|
@@ -66,7 +71,7 @@ class Openday < ActiveRecord::Base
     return faculties
   end
 
-
+  # get all openday countries
   def report_countries
     return Registrant.find(:all, 
         select: 'count(*) count, country', 
@@ -76,6 +81,7 @@ class Openday < ActiveRecord::Base
     )
   end
 
+  # Get openday range in days of year
   def range_days
     range = {}
     ranges = Openday.find(self.id, 

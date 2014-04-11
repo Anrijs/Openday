@@ -1,6 +1,8 @@
+# Configure mail to send out registration confirmations and registration cards
 Pony.options = { 
-  :from => 'support@yourdomain.com',
+  :from => 'support@yourdomain.com', 
   :via => :smtp, 
+  # Contact your email provider to get theese settings or google it
   :via_options => {
     :address              => 'smtp.server.com',
     :port                 => '25',

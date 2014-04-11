@@ -1,15 +1,19 @@
 class OpendaysController < ApplicationController
+  # Require admin status to access this controlelr
   before_filter :authenticate_admin!
 
+  # Show openday list
   def index
     @opendays = Openday.all.order('date DESC')
     @faculties = Faculty.all
   end
 
+  # Prepare new openday
   def new
     @openday = Openday.new
   end
 
+  # Add new openday
   def create
     @openday = Openday.new openday_params
     if @openday.save
@@ -21,11 +25,13 @@ class OpendaysController < ApplicationController
     end
   end
 
+  # Prepare openday edit
   def edit
     @openday = Openday.find_by_slug(params[:id])
     @openday = Openday.find(params[:id]) if @openday.nil?
   end
 
+  # Update programme
   def update
     @openday = Openday.find_by_slug(params[:id])
     @openday = Openday.find(params[:id]) if @openday.nil?
@@ -38,9 +44,9 @@ class OpendaysController < ApplicationController
       flash[:error] = I18n.t('openday.flash.edit_error')
       render 'edit'
     end
-
   end
 
+  # Delete programme
   def destroy
     @openday = Openday.find_by_slug(params[:id])
     @openday = Openday.find(params[:id]) if @openday.nil?
@@ -54,6 +60,7 @@ class OpendaysController < ApplicationController
     end
   end
 
+  # Get all faculties of openday
   def faculties
     @faculties = Faculty.all
     @active_faculties = {}
@@ -62,12 +69,14 @@ class OpendaysController < ApplicationController
     end
   end
 
+  # Add programmes to openday
   def add_faculties
     faculties = Faculty.all
     openday = Openday.find(params[:openday_id])
     get_faculties = {}
     get_faculties = params[:faculty] unless params[:faculty].nil?
 
+    # Process post data and add or remove selected faculties
     faculties.each do |faculty|
       if get_faculties.has_key?(faculty.id.to_s)
         unless OpendayFaculty.exists?(faculty_id: faculty.id, openday_id: openday.id)
@@ -84,6 +93,7 @@ class OpendaysController < ApplicationController
     redirect_to opendays_path
   end
 
+  # Get all openday faculty programmes
   def programmes
     faculty = Openday.find(params[:openday_id]).openday_faculties.find(params[:id])
     @programmes = Faculty.find(faculty.faculty_id).programmes
@@ -93,6 +103,7 @@ class OpendaysController < ApplicationController
     end
   end
 
+  # Process post data and add or remove selected programmes
   def add_programmes
     openday = Openday.find(params[:openday_id])
     faculty = openday.openday_faculties.find(params[:faculty_id])
@@ -117,11 +128,13 @@ class OpendaysController < ApplicationController
     redirect_to opendays_path
   end
 
+  # Get all openday programme timeslots
   def timeslots 
     programme = OpendayProgramme.find(params[:id])
     @timeslot = programme.openday_timeslots.new
   end
 
+  # Add timeslot to openday programme
   def add_timeslots 
     programme = OpendayProgramme.find(params[:id])
     @timeslot = programme.openday_timeslots.new(timeslot_params)
@@ -132,10 +145,12 @@ class OpendaysController < ApplicationController
     end
   end
 
+  # Prepare openday programme timeslot edit
   def edit_timeslots
     @timeslot = OpendayTimeslot.find(params[:id])
   end
 
+  # Update openday programme timeslot
   def update_timeslots
     @timeslot = OpendayTimeslot.find(params[:id])
     @timeslot.update_attributes(timeslot_params)
