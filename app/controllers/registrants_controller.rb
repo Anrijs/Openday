@@ -25,7 +25,7 @@ class RegistrantsController < ApplicationController
       end
     end
 
-    filename = Registrant::CACHE_DIR+@openday.slug
+    filename = Registrant::CACHE_DIR+@openday.slug+'_'+I18n.locale.to_s
     view_contents = ""
     unless File.exist?(filename)
       view_contents = render_to_string 'index'

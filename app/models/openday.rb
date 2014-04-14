@@ -45,6 +45,7 @@ class Openday < ActiveRecord::Base
     if self.openday_faculties.count < 1
       return false
     end
+    
     self.openday_faculties.each do |faculty|
       if faculty.openday_programmes.count < 1
         return false
@@ -114,14 +115,18 @@ private
   end
 
   def expire_opendays_cache
-    if(File.exists?(INDEX_CAHCE))
-      File.delete(INDEX_CAHCE)
+    CONFIG['locales'].each do |locale|
+      if(File.exists?(Openday::INDEX_CAHCE+'_'+locale.first))
+        File.delete(Openday::INDEX_CAHCE+'_'+locale.first)
+      end
     end
   end
 
   def expire_registration_cache
-    if(File.exists?(Registrant::CACHE_DIR+self.slug))
-      File.delete(Registrant::CACHE_DIR+self.slug)
+    CONFIG['locales'].each do |locale|
+      if(File.exists?(Registrant::CACHE_DIR+self.slug+'_'+locale.first))
+        File.delete(Registrant::CACHE_DIR+self.slug+'_'+locale.first)
+      end
     end
   end
 end

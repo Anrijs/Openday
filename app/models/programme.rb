@@ -25,8 +25,10 @@ private
   end
 
   def expire_opendays_cache
-    if(File.exists?(Openday::INDEX_CAHCE))
-      File.delete(Openday::INDEX_CAHCE)
+    CONFIG['locales'].each do |locale|
+      if(File.exists?(Openday::INDEX_CAHCE+'_'+locale.first))
+        File.delete(Openday::INDEX_CAHCE+'_'+locale.first)
+      end
     end
   end
 

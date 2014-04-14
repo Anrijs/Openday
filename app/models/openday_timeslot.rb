@@ -15,14 +15,18 @@ class OpendayTimeslot < ActiveRecord::Base
 
 private
   def expire_opendays_cache
-    if(File.exists?(Openday::INDEX_CAHCE))
-      File.delete(Openday::INDEX_CAHCE)
+    CONFIG['locales'].each do |locale|
+      if(File.exists?(Openday::INDEX_CAHCE+'_'+locale.first))
+        File.delete(Openday::INDEX_CAHCE+'_'+locale.first)
+      end
     end
   end
 
   def expire_registration_cache 
-    if(File.exists?(Registrant::CACHE_DIR+self.openday_programme.openday_faculty.openday.slug))
-      File.delete(Registrant::CACHE_DIR+self.openday_programme.openday_faculty.openday.slug)
+    CONFIG['locales'].each do |locale|
+      if(File.exists?(Registrant::CACHE_DIR+self.openday_programme.openday_faculty.openday.slug+'_'+locale.first))
+        File.delete(Registrant::CACHE_DIR+self.openday_programme.openday_faculty.openday.slug+'_'+locale.first)
+      end
     end
   end
 end

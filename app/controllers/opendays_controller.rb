@@ -5,7 +5,7 @@ class OpendaysController < ApplicationController
 
   # Show openday list
   def index
-    filename = Openday::INDEX_CAHCE
+    filename = Openday::INDEX_CAHCE+'_'+I18n.locale.to_s
     view_contents = ""
     unless File.exist?(filename)
       @opendays = Openday.includes({:openday_faculties => :openday_programmes}).order('date DESC')
