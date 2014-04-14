@@ -6,7 +6,9 @@ class OpendayProgramme < ActiveRecord::Base
 
   # Delete cached
   after_save :expire_opendays_cache
+  after_save :expire_registration_cache
   after_destroy :expire_opendays_cache
+  after_destroy :expire_registration_cache
 
   # Check if openday programme is configured
   def ready?
@@ -20,6 +22,12 @@ private
   def expire_opendays_cache
     if(File.exists?(Openday::INDEX_CAHCE))
       File.delete(Openday::INDEX_CAHCE)
+    end
+  end
+
+  def expire_registration_cache
+    if(File.exists?(Registrant::CACHE_DIR+self.openday_faculty.openday.slug))
+      File.delete(Registrant::CACHE_DIR+self.openday_faculty.openday.slug)
     end
   end
 end

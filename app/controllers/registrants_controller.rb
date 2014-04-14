@@ -9,8 +9,10 @@ class RegistrantsController < ApplicationController
       if @openday.nil? or @openday.empty?
         @next_openday = Openday.where("registration_open >= ?", Time.now).order("registration_open ASC").first()
         render 'not_active'
+        return
       elsif @openday.length > 1
         render 'selection'
+        return
       else
         @openday = @openday.first
       end
@@ -19,7 +21,22 @@ class RegistrantsController < ApplicationController
       unless @openday.active?
         @next_openday = Openday.where("registration_open >= ?", Time.now).order("registration_open ASC").first()
         render 'not_active'
+        return
       end
+    end
+
+    filename = Registrant::CACHE_DIR+@openday.slug
+    view_contents = ""
+    unless File.exist?(filename)
+      view_contents = render_to_string 'index'
+      
+      File.open(filename, "w+") do |f|
+        f.write(view_contents)
+      end
+      render :text => view_contents
+    else
+      view_contents = File.read(filename)
+      render :text => view_contents
     end
   end
 

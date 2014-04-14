@@ -1,6 +1,6 @@
 class Openday < ActiveRecord::Base
 
-  INDEX_CAHCE = "public/cache/opendays.html"
+  INDEX_CAHCE = "public/deploy/opendays.html"
   # Relations
   has_many :openday_faculties, dependent: :destroy
   has_many :registrants
@@ -21,7 +21,9 @@ class Openday < ActiveRecord::Base
 
   # Delete cached
   after_save :expire_opendays_cache
+  after_save :expire_registration_cache
   after_destroy :expire_opendays_cache
+  after_destroy :expire_registration_cache
 
   # Find all active opendays
   def self.find_active
@@ -114,6 +116,12 @@ private
   def expire_opendays_cache
     if(File.exists?(INDEX_CAHCE))
       File.delete(INDEX_CAHCE)
+    end
+  end
+
+  def expire_registration_cache
+    if(File.exists?(Registrant::CACHE_DIR+self.slug))
+      File.delete(Registrant::CACHE_DIR+self.slug)
     end
   end
 end

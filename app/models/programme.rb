@@ -11,8 +11,9 @@ class Programme < ActiveRecord::Base
 
   # Delete cached
   after_save :expire_opendays_cache
+  after_save :expire_registration_cache
   after_destroy :expire_opendays_cache
-
+  after_destroy :expire_registration_cache
 private
   def create_slug
     self.slug = self.name.to_s.parameterize
@@ -29,4 +30,7 @@ private
     end
   end
 
+  def expire_registration_cache
+    FileUtils.rm_rf(Registrant::CACHE_DIR)
+  end
 end

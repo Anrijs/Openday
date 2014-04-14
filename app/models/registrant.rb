@@ -1,6 +1,6 @@
 class Registrant < ActiveRecord::Base
 
-  CACHE_DIR = "public/cache/registrations/"
+  CACHE_DIR = "public/deploy/registrations/"
 
   # Relations
   has_many :registrations, dependent: :destroy
