@@ -30,6 +30,8 @@
   
               %li{class: ("active" if  params[:controller] == 'faculties')}
                 =link_to t('nav.faculties'), faculties_path
+              %li
+                =link_to "Sidekiq", sidekiq_web_path
 
             %ul.nav.navbar-nav.navbar-right
               - len = CONFIG['locales'].length
