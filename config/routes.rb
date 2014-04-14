@@ -1,8 +1,11 @@
+require 'sidekiq/web'
 Od::Application.routes.draw do
   # For user managment
+
   devise_for :admins
   devise_scope :admin do get "/admins/sign_out" => 'devise/sessions#destroy' end
-  
+  mount Sidekiq::Web, at: '/sidekiq'
+
   # Report pages
   resources :reports do
     get 'compare/:compare_id/:id' => 'reports#compare_faculty', as: :compare_faculty

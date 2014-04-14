@@ -36,5 +36,6 @@ explicit.pdf
 /public/locations.json
 /public/coverage
 /public/assets
+/public/deploy
 barcode.png
 bfg.jar

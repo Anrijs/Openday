@@ -25,11 +25,10 @@ class RegistrantsController < ApplicationController
 
   # Process registration
   def create
-    # Include barcode libraries
     require 'barby'
     require 'barby/barcode/code_128'
     require 'barby/outputter/svg_outputter'
-
+    
     # Check if registrant already registred before
     @openday = Openday.find(params[:openday_id])
     @registrant = Registrant.find_by_openday_id_and_email(@openday, params[:registrant]['email'])
@@ -57,33 +56,14 @@ class RegistrantsController < ApplicationController
           Registration.create(registrant_id: @registrant.id, openday_id: @openday.id, 
                               faculty_id: faculty, programme_id: prg.programme.id, timeslot_id: timeslot)
         end
+
         # Generate barcode for registration card
         @barcode = Barby::Code128B.new(@registrant.id)
         email = render_to_string  partial: '/email/index'
         pdf_text = render_to_string  partial: '/email/pdf'
-        kit = PDFKit.new(pdf_text)
-        # Get an inline PDF
-        pdf = kit.to_pdf
+        MailWorker.perform_async(pdf_text, email, @registrant.email, I18n.t('mail.subject'))
 
         # Prepare and send confirmation email
-        if Rails.env.development?
-          Pony.mail(
-            :from => 'tester@localhost',
-            :to => 'ajargans@gmail.com',
-            :subject => "[Test] "+t('mail.subject'),
-            :html_body => email,
-            :attachments => {"RegistrationCard.pdf" => pdf},
-            :body_part_header => { content_disposition: "inline" }
-          )
-        else
-          Pony.mail(
-            :to => @registrant.email,
-            :subject => t('mail.subject'),
-            :html_body => email,
-            :attachments => {"RegistrationCard.pdf" => pdf},
-            :body_part_header => { content_disposition: "inline" }
-          )
-        end
         render 'create'
       else
         unless params[:confirm_terms]

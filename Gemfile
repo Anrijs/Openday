@@ -24,6 +24,9 @@ gem 'barby'
 gem 'chunky_png'
 gem "highcharts-rails", "~> 3.0.0"
 gem 'actionpack-page_caching'
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
 
 group :development do
   gem "capistrano"
