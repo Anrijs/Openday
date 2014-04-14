@@ -1,5 +1,6 @@
 class Openday < ActiveRecord::Base
 
+  INDEX_CAHCE = "public/cache/opendays.html"
   # Relations
   has_many :openday_faculties, dependent: :destroy
   has_many :registrants
@@ -18,8 +19,9 @@ class Openday < ActiveRecord::Base
 
   before_validation :create_slug
 
-  # Delece cached
+  # Delete cached
   after_save :expire_opendays_cache
+  after_destroy :expire_opendays_cache
 
   # Find all active opendays
   def self.find_active
@@ -38,6 +40,9 @@ class Openday < ActiveRecord::Base
 
   # Check if selected openday configuration is completed
   def ready?
+    if self.openday_faculties.count < 1
+      return false
+    end
     self.openday_faculties.each do |faculty|
       if faculty.openday_programmes.count < 1
         return false
@@ -95,8 +100,20 @@ class Openday < ActiveRecord::Base
     return range 
   end
 
+  def self.expire_opendays_cache
+    if(File.exists?(INDEX_CAHCE))
+      File.delete(INDEX_CAHCE)
+    end
+  end
+
 private
   def create_slug
     self.slug = self.name.to_s.parameterize
+  end
+
+  def expire_opendays_cache
+    if(File.exists?(INDEX_CAHCE))
+      File.delete(INDEX_CAHCE)
+    end
   end
 end

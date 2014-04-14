@@ -3,6 +3,10 @@ class OpendayFaculty < ActiveRecord::Base
   belongs_to :faculty
   has_many :openday_programmes, dependent: :destroy
 
+  # Delete cached
+  after_save :expire_opendays_cache
+  after_destroy :expire_opendays_cache
+
   def ready?
   	unless @ready
       self.openday_programmes.each do |programme|
@@ -61,5 +65,12 @@ class OpendayFaculty < ActiveRecord::Base
       timeslots[programme.programme.name] = query
     end
     return timeslots
+  end
+
+private
+  def expire_opendays_cache
+    if(File.exists?(Openday::INDEX_CAHCE))
+      File.delete(Openday::INDEX_CAHCE)
+    end
   end
 end

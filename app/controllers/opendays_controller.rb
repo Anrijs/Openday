@@ -5,16 +5,33 @@ class OpendaysController < ApplicationController
 
   # Show openday list
   def index
-    @opendays = {}.to_json
-    @opendays = Openday.includes({:openday_faculties => :openday_programmes}).order('date DESC')
-    @opendays.each do |openday|
-      openday.openday_faculties.each do |faculty|
-        faculty.openday_programmes.each do |programme|
-          programme.openday_timeslots = programme.openday_timeslots
+    filename = Openday::INDEX_CAHCE
+    view_contents = ""
+    unless File.exist?(filename)
+      @opendays = Openday.includes({:openday_faculties => :openday_programmes}).order('date DESC')
+      @opendays.each do |openday|
+        openday.openday_faculties.each do |faculty|
+          faculty.openday_programmes.each do |programme|
+            programme.openday_timeslots = programme.openday_timeslots
+          end
         end
       end
+      @faculties = Faculty.all
+      view_contents = render_to_string 'index'
+
+      flash[:error] = nil
+      flash[:success] = nil
+      view_contents_f = render_to_string 'index'
+      
+      File.open(filename, "w+") do |f|
+        f.write(view_contents_f)
+      end
+      render :text => view_contents
+      # flash[:notice] = 'message'
+    else
+      view_contents = File.read(filename)
+      render :text => view_contents
     end
-    @faculties = Faculty.all
   end
 
   # Prepare new openday

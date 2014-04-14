@@ -9,6 +9,10 @@ class Programme < ActiveRecord::Base
   validate :validate_name
   before_validation :create_slug
 
+  # Delete cached
+  after_save :expire_opendays_cache
+  after_destroy :expire_opendays_cache
+
 private
   def create_slug
     self.slug = self.name.to_s.parameterize
@@ -18,4 +22,11 @@ private
   	#if name fount for faculty
     #errors.add I18n.t('validation.name_uniqueness')
   end
+
+  def expire_opendays_cache
+    if(File.exists?(Openday::INDEX_CAHCE))
+      File.delete(Openday::INDEX_CAHCE)
+    end
+  end
+
 end

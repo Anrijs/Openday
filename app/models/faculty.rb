@@ -13,11 +13,20 @@ class Faculty < ActiveRecord::Base
   
   validates_uniqueness_of :slug, message: I18n.t('validation.slug_uniqueness')
 
-
   before_validation :create_slug
+
+  # Delete cached
+  after_save :expire_opendays_cache
+  after_destroy :expire_opendays_cache
 
 private
   def create_slug
     self.slug = self.short_name.to_s.parameterize
+  end
+
+  def expire_opendays_cache
+    if(File.exists?(Openday::INDEX_CAHCE))
+      File.delete(Openday::INDEX_CAHCE)
+    end
   end
 end

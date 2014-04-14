@@ -1,4 +1,7 @@
 class Registrant < ActiveRecord::Base
+
+  CACHE_DIR = "public/cache/registrations/"
+
   # Relations
   has_many :registrations, dependent: :destroy
   belongs_to :openday

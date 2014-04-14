@@ -27,6 +27,7 @@ gem 'actionpack-page_caching'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
+gem 'redis-rails'
 
 group :development do
   gem "capistrano"

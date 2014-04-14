@@ -19,6 +19,7 @@ module Od
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
      config.i18n.default_locale = :en
-     config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/deploy"
+     config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/cache"
+     config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
   end
 end

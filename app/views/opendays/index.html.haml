@@ -2,7 +2,7 @@
 
 %ul.list-group#faculty_list
   - @opendays.each do |openday|
-    = render partial: 'list', :locals => {:openday => openday }
+    = render partial: 'list', :locals => {:openday => openday }, cache: true
 
 = link_to t('openday.add'), new_openday_path, remote: true, class: 'btn btn-success pull-right', onclick: "$('#myModal').modal('toggle');"
 #res
