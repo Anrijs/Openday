@@ -1,7 +1,4 @@
 class RegistrantsController < ApplicationController
-  caches_page :index
-  skip_before_filter :verify_authenticity_token, :only => [:index]
-
   # Prepare registration forms
   def index
     @registrant = Registrant.new
@@ -35,10 +32,9 @@ class RegistrantsController < ApplicationController
       File.open(filename, "w+") do |f|
         f.write(view_contents)
       end
-      render file: filename, layout: true
+      render text: File.read(filename), layout: true
     else
-      view_contents = File.read(filename)
-      render file: filename, layout: true
+      render text: File.read(filename), layout: true
     end
   end
 

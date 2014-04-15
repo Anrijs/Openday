@@ -1,6 +1,6 @@
 class ProgrammesController < ApplicationController
   # Require admin status to access this controlelr
-  #before_filter :authenticate_admin!
+  before_filter :authenticate_admin!
 
   # Prepare new programme
   def new
