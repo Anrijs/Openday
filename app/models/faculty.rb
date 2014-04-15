@@ -25,6 +25,6 @@ private
   end
 
   def expire_registration_cache
-    FileUtils.rm_rf(Registrant::CACHE_DIR)
+    FileUtils.rm_rf(Dir.glob(Registrant::CACHE_DIR+'*'))
   end
 end
