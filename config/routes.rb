@@ -38,7 +38,6 @@ Od::Application.routes.draw do
   get  'terms' => 'registrants#terms'
 
   root 'registrants#index'
-  get  '/:openday' => 'registrants#index'
 
   # Route matcher for 404
   #unless ENV["RAILS_ENV"] == 'development'
