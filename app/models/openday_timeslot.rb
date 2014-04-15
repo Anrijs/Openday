@@ -8,20 +8,10 @@ class OpendayTimeslot < ActiveRecord::Base
   validates_time :time_from, :before => :time_till
 
   # Delete cached
-  after_save :expire_opendays_cache
   after_save :expire_registration_cache
-  after_destroy :expire_opendays_cache
   after_destroy :expire_registration_cache
 
 private
-  def expire_opendays_cache
-    CONFIG['locales'].each do |locale|
-      if(File.exists?(Openday::INDEX_CAHCE+'_'+locale.first))
-        File.delete(Openday::INDEX_CAHCE+'_'+locale.first)
-      end
-    end
-  end
-
   def expire_registration_cache 
     CONFIG['locales'].each do |locale|
       if(File.exists?(Registrant::CACHE_DIR+self.openday_programme.openday_faculty.openday.slug+'_'+locale.first))

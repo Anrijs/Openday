@@ -1,7 +1,6 @@
 class OpendaysController < ApplicationController
   # Require admin status to access this controlelr
-  #before_filter :authenticate_admin!
-  caches_page :index, :new
+  before_filter :authenticate_admin!
 
   # Show openday list
   def index
@@ -17,21 +16,13 @@ class OpendaysController < ApplicationController
         end
       end
       @faculties = Faculty.all
-      view_contents = render_to_string :partial => 'index'
 
-      flash[:error] = nil
-      flash[:success] = nil
-      view_contents_f = render_to_string :partial => 'index'
-      
+      view_contents = render_to_string :partial => 'index'
       File.open(filename, "w+") do |f|
-        f.write(view_contents_f)
+        f.write(view_contents)
       end
-      render file: filename
-      # flash[:notice] = 'message'
-    else
-      view_contents = File.read(filename)
-      render file: filename
     end
+    render text: File.read(filename), layout: true
   end
 
   # Prepare new openday
@@ -49,6 +40,8 @@ class OpendaysController < ApplicationController
       flash[:error] = I18n.t('openday.flash.create_error')
       render 'new'
     end
+    Openday.expire_cache
+    redirect_to opendays_path
   end
 
   # Prepare openday edit
@@ -65,6 +58,7 @@ class OpendaysController < ApplicationController
     @openday.update_attributes(openday_params)
     if @openday.save
       flash[:success] = I18n.t('openday.flash.edit_success')
+      Openday.expire_cache
       redirect_to opendays_path
     else
       flash[:error] = I18n.t('openday.flash.edit_error')
@@ -79,6 +73,7 @@ class OpendaysController < ApplicationController
 
     if @openday.destroy
       flash[:success] = I18n.t('openday.flash.delete_success')
+      Openday.expire_cache
       redirect_to opendays_path
     else
       flash[:error] = I18n.t('openday.flash.delete_error')
@@ -116,6 +111,7 @@ class OpendaysController < ApplicationController
         end
       end
     end
+    Openday.expire_cache
     redirect_to opendays_path
   end
 
@@ -151,6 +147,7 @@ class OpendaysController < ApplicationController
         end
       end
     end
+    Openday.expire_cache
     redirect_to opendays_path
   end
 
@@ -165,6 +162,7 @@ class OpendaysController < ApplicationController
     programme = OpendayProgramme.find(params[:id])
     @timeslot = programme.openday_timeslots.new(timeslot_params)
     if @timeslot.save
+      Openday.expire_cache
       redirect_to opendays_path
     else 
       raise ArgumentError
@@ -181,6 +179,7 @@ class OpendaysController < ApplicationController
     @timeslot = OpendayTimeslot.find(params[:id])
     @timeslot.update_attributes(timeslot_params)
     if @timeslot.save
+      Openday.expire_cache
       redirect_to opendays_path
     else 
       raise ArgumentError

@@ -4,9 +4,7 @@ class OpendayFaculty < ActiveRecord::Base
   has_many :openday_programmes, dependent: :destroy
 
   # Delete cached
-  after_save :expire_opendays_cache
   after_save :expire_registration_cache
-  after_destroy :expire_opendays_cache
   after_destroy :expire_registration_cache
 
   def ready?
@@ -70,14 +68,6 @@ class OpendayFaculty < ActiveRecord::Base
   end
 
 private
-  def expire_opendays_cache
-    CONFIG['locales'].each do |locale|
-      if(File.exists?(Openday::INDEX_CAHCE+'_'+locale.first))
-        File.delete(Openday::INDEX_CAHCE+'_'+locale.first)
-      end
-    end
-  end
-
   def expire_registration_cache
     CONFIG['locales'].each do |locale|
       if(File.exists?(Registrant::CACHE_DIR+self.openday.slug+'_'+locale.first))

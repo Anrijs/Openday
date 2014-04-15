@@ -1,6 +1,6 @@
 class Openday < ActiveRecord::Base
 
-  INDEX_CAHCE = "public/deploy/opendays.html"
+  INDEX_CAHCE = "public/deploy/opendays"
   # Relations
   has_many :openday_faculties, dependent: :destroy
   has_many :registrants
@@ -20,9 +20,7 @@ class Openday < ActiveRecord::Base
   before_validation :create_slug
 
   # Delete cached
-  after_save :expire_opendays_cache
   after_save :expire_registration_cache
-  after_destroy :expire_opendays_cache
   after_destroy :expire_registration_cache
 
   # Find all active opendays
@@ -103,23 +101,17 @@ class Openday < ActiveRecord::Base
     return range 
   end
 
-  def self.expire_opendays_cache
-    if(File.exists?(INDEX_CAHCE))
-      File.delete(INDEX_CAHCE)
+  def self.expire_cache
+    CONFIG['locales'].each do |locale|
+      if(File.exists?(Openday::INDEX_CAHCE+'_'+locale.first))
+        File.delete(Openday::INDEX_CAHCE+'_'+locale.first)
+      end
     end
   end
 
 private
   def create_slug
     self.slug = self.name.to_s.parameterize
-  end
-
-  def expire_opendays_cache
-    CONFIG['locales'].each do |locale|
-      if(File.exists?(Openday::INDEX_CAHCE+'_'+locale.first))
-        File.delete(Openday::INDEX_CAHCE+'_'+locale.first)
-      end
-    end
   end
 
   def expire_registration_cache
