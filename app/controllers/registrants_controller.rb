@@ -23,19 +23,6 @@ class RegistrantsController < ApplicationController
         return
       end
     end
-
-    filename = Registrant::CACHE_DIR+@openday.slug+'_'+I18n.locale.to_s
-    view_contents = ""
-    unless File.exist?(filename)
-      view_contents = render_to_string :partial => 'index'
-      
-      File.open(filename, "w+") do |f|
-        f.write(view_contents)
-      end
-      render text: File.read(filename), layout: true
-    else
-      render text: File.read(filename), layout: true
-    end
   end
 
   # Process registration
