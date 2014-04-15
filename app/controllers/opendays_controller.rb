@@ -17,20 +17,20 @@ class OpendaysController < ApplicationController
         end
       end
       @faculties = Faculty.all
-      view_contents = render_to_string 'index'
+      view_contents = render_to_string :partial => 'index'
 
       flash[:error] = nil
       flash[:success] = nil
-      view_contents_f = render_to_string 'index'
+      view_contents_f = render_to_string :partial => 'index'
       
       File.open(filename, "w+") do |f|
         f.write(view_contents_f)
       end
-      render :text => view_contents
+      render file: filename
       # flash[:notice] = 'message'
     else
       view_contents = File.read(filename)
-      render :text => view_contents
+      render file: filename
     end
   end
 
