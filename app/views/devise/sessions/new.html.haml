@@ -9,7 +9,7 @@
         = f.label :password, t('password')
         = f.input :password, :label => false, :input_html => {:class => ' form-control col-sm-6'}
 
-        = f.input :remember_me, :as => :boolean
+        = f.input :remember_me, t('remember_me'), :as => :boolean
 
         = f.submit t('btn.submit'),remote: true, disable_with: t('btn.submiting'), class: 'btn btn-primary pull-right'
 

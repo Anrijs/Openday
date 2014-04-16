@@ -1,5 +1,6 @@
 # Main translations for site (lv)
 lv:
+  remember_me: "Atcerēties mani"
   password: "Parole"
   username: "Lietotājvārds"
   sign_in: "Ieiet"

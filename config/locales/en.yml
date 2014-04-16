@@ -1,5 +1,6 @@
 # Main translations for site (en)
 en:
+  remember_me: "Remember me"
   password: "Password"
   username: "Username"
   sign_in: "Sign in"
