@@ -11,7 +11,7 @@
     - Admin: *db/seeds.rb*
  3. Prepare application:
     - `bundle install`
-    - `rake db:prepare`
+    - `rake db:setup`
     - `rake db:migrate`
 
 ## Starting application
