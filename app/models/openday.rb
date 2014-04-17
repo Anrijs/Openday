@@ -109,6 +109,14 @@ class Openday < ActiveRecord::Base
     end
   end
 
+  def expire_registration_page_cache
+    CONFIG['locales'].each do |locale|
+      if(File.exists?(Registrant::CACHE_DIR+self.slug+'_'+locale.first))
+        File.delete(Registrant::CACHE_DIR+self.slug+'_'+locale.first)
+      end
+    end
+  end
+
 private
   def create_slug
     self.slug = self.name.to_s.parameterize

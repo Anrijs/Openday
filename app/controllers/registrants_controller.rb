@@ -23,6 +23,19 @@ class RegistrantsController < ApplicationController
         return
       end
     end
+
+    filename = Registrant::CACHE_DIR+@openday.slug+'_'+I18n.locale.to_s
+    view_contents = ""
+    unless File.exist?(filename)
+      view_contents = render_to_string :partial => 'index'
+      
+      File.open(filename, "w+") do |f|
+        f.write(view_contents)
+      end
+      render text: File.read(filename), layout: true
+    else
+      render text: File.read(filename), layout: true
+    end
   end
 
   # Process registration
@@ -58,6 +71,8 @@ class RegistrantsController < ApplicationController
           Registration.create(registrant_id: @registrant.id, openday_id: @openday.id, 
                               faculty_id: faculty, programme_id: prg.programme.id, timeslot_id: timeslot)
         end
+        Openday.expire_cache
+        @openday.expire_registration_page_cache
 
         # Generate barcode for registration card
         @barcode = Barby::Code128B.new(@registrant.id)
